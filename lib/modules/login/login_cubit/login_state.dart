@@ -14,4 +14,4 @@ class LoginFailState extends LoginStates {
   LoginFailState(this.error);
 }
 
-class IsPassword extends LoginStates{}
+class IsPasswordShowState extends LoginStates{}

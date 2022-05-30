@@ -36,7 +36,6 @@ Widget textFormField({
 }) {
   return TextFormField(
     keyboardType: textInputType,
-    maxLength: maxLen,
     style: const TextStyle(color: Colors.white),
     controller: controller,
     autofocus: autoFocus,
@@ -58,6 +57,7 @@ Widget textFormField({
       labelStyle: const TextStyle(color: Colors.white),
       prefixIcon: Icon(prefix, color: Colors.white),
       suffix: suffix,
+      suffixIconColor: Colors.white,
     ),
     textDirection: textDirection,
     validator: (value) {

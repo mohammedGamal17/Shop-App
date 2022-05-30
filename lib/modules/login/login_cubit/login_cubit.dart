@@ -10,7 +10,7 @@ class LoginCubit extends Cubit<LoginStates> {
 
   static LoginCubit get(context) => BlocProvider.of(context);
   DioHelper dio = DioHelper();
-  bool isShow = true;
+  bool isShowPassword = true;
 
   void userLogin({
     required String email,
@@ -37,7 +37,7 @@ class LoginCubit extends Cubit<LoginStates> {
   }
 
   void showPassword(){
-    isShow = !isShow;
-    emit(IsPassword());
+    isShowPassword = !isShowPassword;
+    emit(IsPasswordShowState());
   }
 }

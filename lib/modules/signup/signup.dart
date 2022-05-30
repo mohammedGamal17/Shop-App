@@ -33,42 +33,49 @@ class SignUp extends StatelessWidget {
                   ),
                   const SizedBox(height: 30.0),
                   textFormField(
-                      controller: name,
-                      validate: (value) {
-                        if (value.isEmpty ||
-                            value.length < 4 ||
-                            value.length > 50) {
-                          return 'Please Enter Yor Name';
-                        }
-                        return null;
-                      },
-                      labelText: 'Name',
-                      prefix: Icons.man_outlined,
-                      borderRadius: 20.0,
-                      autoFocus: true,
-                      textInputType: TextInputType.emailAddress),
+                    controller: name,
+                    validate: (value) {
+                      if (value.isEmpty ||
+                          value.length < 4 ||
+                          value.length > 50) {
+                        return 'Please Enter Yor Name';
+                      }
+                      return null;
+                    },
+                    labelText: 'Name',
+                    prefix: Icons.man_outlined,
+                    borderRadius: 20.0,
+                    autoFocus: true,
+                    textInputType: TextInputType.name,
+                  ),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
                   textFormField(
-                      controller: email,
-                      validate: (value) {
-                        if (value.isEmpty ||
-                            value.length < 14 ||
-                            value.length > 50) {
-                          return 'Please Enter Valid Email';
-                        }
-                        return null;
-                      },
-                      labelText: 'Email',
-                      prefix: Icons.email_outlined,
-                      borderRadius: 20.0,
-                      autoFocus: true,
-                      textInputType: TextInputType.emailAddress),
+                    controller: email,
+                    validate: (value) {
+                      if (value.isEmpty ||
+                          value.length < 14 ||
+                          value.length > 50) {
+                        return 'Please Enter Valid Email';
+                      }
+                      return null;
+                    },
+                    labelText: 'Email',
+                    prefix: Icons.email_outlined,
+                    borderRadius: 20.0,
+                    autoFocus: true,
+                    textInputType: TextInputType.emailAddress,
+                  ),
                   const SizedBox(
                     height: 10.0,
                   ),
                   textFormField(
                     controller: password,
                     validate: (value) {
-                      if (value.isEmpty || value.length < 8 || value.length > 50) {
+                      if (value.isEmpty ||
+                          value.length < 8 ||
+                          value.length > 50) {
                         return 'Please Enter Valid Password';
                       }
                       return null;
@@ -78,6 +85,9 @@ class SignUp extends StatelessWidget {
                     borderRadius: 15.0,
                     textInputType: TextInputType.visiblePassword,
                     isPassword: true,
+                  ),
+                  const SizedBox(
+                    height: 10.0,
                   ),
                   InkWell(
                     onTap: () {

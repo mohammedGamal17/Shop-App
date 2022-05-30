@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:shop_app/modules/signup/signup.dart';
 
 import 'package:shop_app/shared/components/components.dart';
 
@@ -13,7 +14,6 @@ class Login extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  final isPassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +23,7 @@ class Login extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           var cubit = LoginCubit.get(context);
+          var isPassword = cubit.isShowPassword;
           return Scaffold(
             appBar: AppBar(),
             body: Center(
@@ -104,12 +105,27 @@ class Login extends StatelessWidget {
                                       ),
                                     ),
                                     child: Text('Login',
-                                        style:
-                                            Theme.of(context).textTheme.bodyText1),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1),
                                   ),
                                 ),
                               )
                             : Center(child: circularProgressIndicator()),
+                        Row(
+                          children: [
+                            const Text("If You Don't have an Account "),
+                            Center(
+                              child: TextButton(
+                                onPressed: () {
+                                  return navigateTo(context, SignUp());
+                                },
+                                child: Text('Register Now!',
+                                    style: Theme.of(context).textTheme.bodyText1),
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),

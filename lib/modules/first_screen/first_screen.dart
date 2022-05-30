@@ -36,7 +36,7 @@ class FirstScreen extends StatelessWidget {
             decorationButton(
               context,
               pageRoute: SignUp(),
-              text: 'Sign Up',
+              text: 'Continue as a Guest',
             ),
           ],
         ),
