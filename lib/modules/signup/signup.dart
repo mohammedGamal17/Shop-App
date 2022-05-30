@@ -51,7 +51,7 @@ class SignUp extends StatelessWidget {
                       controller: email,
                       validate: (value) {
                         if (value.isEmpty ||
-                            value.length < 4 ||
+                            value.length < 14 ||
                             value.length > 50) {
                           return 'Please Enter Valid Email';
                         }
