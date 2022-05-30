@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../shared/network/endpoint/end_point.dart';
@@ -10,7 +11,8 @@ class LoginCubit extends Cubit<LoginStates> {
 
   static LoginCubit get(context) => BlocProvider.of(context);
   DioHelper dio = DioHelper();
-  bool isShowPassword = true;
+  bool isPassword = true;
+  IconData suffix = Icons.visibility_outlined;
 
   void userLogin({
     required String email,
@@ -36,8 +38,11 @@ class LoginCubit extends Cubit<LoginStates> {
     });
   }
 
-  void showPassword(){
-    isShowPassword = !isShowPassword;
+  void changePasswordVisibility() {
+    isPassword = !isPassword;
+    suffix = isPassword
+        ? Icons.visibility_off_outlined
+        : Icons.visibility_outlined;
     emit(IsPasswordShowState());
   }
 }

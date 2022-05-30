@@ -27,10 +27,11 @@ Widget textFormField({
   double borderRadius = 10.0,
   bool autoFocus = false,
   bool isPassword = false,
-  IconButton? suffix,
-  IconData? suffixIcon,
+  IconData? suffix,
+  Function? suffixOnTap,
   Function? onTap,
   Function? onChange,
+  Function? onSubmit,
   TextDirection? textDirection,
   int maxLen = 75,
 }) {
@@ -56,7 +57,13 @@ Widget textFormField({
       filled: true,
       labelStyle: const TextStyle(color: Colors.white),
       prefixIcon: Icon(prefix, color: Colors.white),
-      suffix: suffix,
+      suffixIcon: suffix != null
+          ? IconButton(
+              onPressed: () {
+                suffixOnTap!();
+              },
+              icon: Icon(suffix))
+          : null,
       suffixIconColor: Colors.white,
     ),
     textDirection: textDirection,
@@ -69,6 +76,9 @@ Widget textFormField({
     },
     onChanged: (String value) {
       onChange!(value);
+    },
+    onFieldSubmitted: (value){
+      onSubmit!(value);
     },
   );
 }
