@@ -15,7 +15,7 @@ class ShopLoginModel {
     );
   }
 
-  Map<String, dynamic> toJson() {
+  /*Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['message'] = message;
     data['status'] = status;
@@ -23,7 +23,7 @@ class ShopLoginModel {
       data['data'] = this.data?.toJson();
     }
     return data;
-  }
+  }*/
 }
 
 

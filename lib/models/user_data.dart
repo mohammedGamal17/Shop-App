@@ -31,7 +31,7 @@ class UserData {
     );
   }
 
-  Map<String, dynamic> toJson() {
+  /*Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['credit'] = credit;
     data['email'] = email;
@@ -42,5 +42,5 @@ class UserData {
     data['points'] = points;
     data['token'] = token;
     return data;
-  }
+  }*/
 }
