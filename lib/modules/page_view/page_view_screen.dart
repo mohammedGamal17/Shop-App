@@ -39,13 +39,7 @@ class _PageViewScreenState extends State<PageViewScreen> {
   ];
 
   late bool isLast = false;
-void navigateAndSave(){
-  CacheHelper.saveData(key: 'navigateAndSave', value: true).then((value) {
-    if(value){
-      navigateToAndReplace(context, const FirstScreen());
-    }
-  });
-}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,12 +47,9 @@ void navigateAndSave(){
         actions: [
           TextButton(
             onPressed: () {
-              navigateAndSave();
+              navigateToAndReplace(context, const FirstScreen());
             },
-            child: Text(
-              'SKIP',
-              style: Theme.of(context).textTheme.caption
-            ),
+            child: Text('SKIP', style: Theme.of(context).textTheme.caption),
           )
         ],
       ),
@@ -67,8 +58,7 @@ void navigateAndSave(){
           Expanded(
             child: PageView.builder(
               controller: pageController,
-              itemBuilder: (context, index) =>
-                  pageViewBuilder(boarding[index]),
+              itemBuilder: (context, index) => pageViewBuilder(boarding[index]),
               physics: const BouncingScrollPhysics(),
               itemCount: boarding.length,
               onPageChanged: (int index) {
@@ -115,7 +105,7 @@ void navigateAndSave(){
               IconButton(
                 onPressed: () {
                   if (isLast) {
-                    navigateAndSave();
+                    navigateToAndReplace(context, const FirstScreen());
                   } else {
                     pageController.nextPage(
                       duration: const Duration(milliseconds: 750),
@@ -185,6 +175,4 @@ void navigateAndSave(){
       ),
     );
   }
-
-
 }

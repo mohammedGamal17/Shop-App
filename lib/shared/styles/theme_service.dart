@@ -50,7 +50,6 @@ class ThemeService {
         color: HexColor('FFFFFF'),
         fontFamily: 'Changa',
       ),
-
     ),
   );
   final ThemeData dark = ThemeData(
