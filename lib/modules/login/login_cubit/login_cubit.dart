@@ -31,9 +31,6 @@ class LoginCubit extends Cubit<LoginStates> {
 
       if (kDebugMode) {
         loginModel = ShopLoginModel.fromJson(value.data);
-        print(loginModel?.message);
-        print(loginModel?.data?.name);
-        print(loginModel?.status);
         //print(value.data);
       }
       emit(LoginSuccessState(loginModel!));
