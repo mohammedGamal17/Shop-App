@@ -21,7 +21,19 @@ class Login extends StatelessWidget {
     return BlocProvider(
       create: (context) => LoginCubit(),
       child: BlocConsumer<LoginCubit, LoginStates>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is LoginSuccessState) {
+            if (state.shopLoginModel.status!) {
+              snack(context, content: '${state.shopLoginModel.message}');
+            } else {
+              snack(
+                context,
+                content: '${state.shopLoginModel.message}',
+                bgColor: Colors.red,
+              );
+            }
+          }
+        },
         builder: (context, state) {
           var cubit = LoginCubit.get(context);
           return Scaffold(
@@ -58,34 +70,33 @@ class Login extends StatelessWidget {
                           height: 10.0,
                         ),
                         textFormField(
-                          controller: passwordController,
-                          validate: (value) {
-                            if (value.isEmpty ||
-                                value.length < 8 ||
-                                value.length > 50) {
-                              return 'Please Enter Valid Password';
-                            }
-                            return null;
-                          },
-                          labelText: 'Password',
-                          prefix: Icons.lock_outline,
-                          borderRadius: 20.0,
-                          textInputType: TextInputType.visiblePassword,
-                          isPassword: cubit.isPassword,
-                          suffix: cubit.suffix,
-                          suffixOnTap: (){
-                            cubit.changePasswordVisibility();
-                          },
-                          onSubmit: (value){
-                            if (formKey.currentState!.validate()) {
-                              cubit.userLogin(
-                                email: emailController.text,
-                                password: passwordController.text,
-                              );
-                              // return navigateToAndReplace(context, Login());
-                            }
-                          }
-                        ),
+                            controller: passwordController,
+                            validate: (value) {
+                              if (value.isEmpty ||
+                                  value.length < 8 ||
+                                  value.length > 50) {
+                                return 'Please Enter Valid Password';
+                              }
+                              return null;
+                            },
+                            labelText: 'Password',
+                            prefix: Icons.lock_outline,
+                            borderRadius: 20.0,
+                            textInputType: TextInputType.visiblePassword,
+                            isPassword: cubit.isPassword,
+                            suffix: cubit.suffix,
+                            suffixOnTap: () {
+                              cubit.changePasswordVisibility();
+                            },
+                            onSubmit: (value) {
+                              if (formKey.currentState!.validate()) {
+                                cubit.userLogin(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                );
+                                // return navigateToAndReplace(context, Login());
+                              }
+                            }),
                         const SizedBox(
                           height: 10.0,
                         ),

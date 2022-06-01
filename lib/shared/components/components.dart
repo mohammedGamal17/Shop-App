@@ -77,7 +77,7 @@ Widget textFormField({
     onChanged: (String value) {
       onChange!(value);
     },
-    onFieldSubmitted: (value){
+    onFieldSubmitted: (value) {
       onSubmit!(value);
     },
   );
@@ -137,11 +137,18 @@ Widget decorationButton(
 ScaffoldFeatureController<SnackBar, SnackBarClosedReason> snack(
   context, {
   required String content,
+  Color? bgColor = Colors.green,
 }) {
   return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    content: Text(content),
-    duration: const Duration(milliseconds: 700),
+    content: Text(
+      content,
+      style: Theme.of(context).textTheme.bodyText1,
+      textAlign: TextAlign.center,
+    ),
+    duration: const Duration(milliseconds: 4000),
     padding: const EdgeInsets.all(8),
-    backgroundColor: HexColor('023E8A'),
+    backgroundColor: bgColor,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+    behavior: SnackBarBehavior.fixed,
   ));
 }

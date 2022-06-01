@@ -28,7 +28,7 @@ class LoginCubit extends Cubit<LoginStates> {
         'password': password,
       },
     ).then((value) {
-      emit(LoginSuccessState());
+
       if (kDebugMode) {
         loginModel = ShopLoginModel.fromJson(value.data);
         print(loginModel?.message);
@@ -36,6 +36,7 @@ class LoginCubit extends Cubit<LoginStates> {
         print(loginModel?.status);
         //print(value.data);
       }
+      emit(LoginSuccessState(loginModel!));
     }).catchError((onError) {
       emit(LoginFailState(onError.toString()));
       if (kDebugMode) {
