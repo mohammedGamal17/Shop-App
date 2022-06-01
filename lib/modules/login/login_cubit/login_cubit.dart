@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../models/shop_login_model.dart';
 import '../../../shared/network/endpoint/end_point.dart';
 import '../../../shared/network/remote/dio_helper.dart';
 import 'login_state.dart';
@@ -13,6 +14,7 @@ class LoginCubit extends Cubit<LoginStates> {
   DioHelper dio = DioHelper();
   bool isPassword = true;
   IconData suffix = Icons.visibility_outlined;
+  ShopLoginModel? loginModel;
 
   void userLogin({
     required String email,
@@ -28,7 +30,11 @@ class LoginCubit extends Cubit<LoginStates> {
     ).then((value) {
       emit(LoginSuccessState());
       if (kDebugMode) {
-        print(value.data);
+        loginModel = ShopLoginModel.fromJson(value.data);
+        print(loginModel?.message);
+        print(loginModel?.data?.name);
+        print(loginModel?.status);
+        //print(value.data);
       }
     }).catchError((onError) {
       emit(LoginFailState(onError.toString()));
@@ -40,9 +46,8 @@ class LoginCubit extends Cubit<LoginStates> {
 
   void changePasswordVisibility() {
     isPassword = !isPassword;
-    suffix = isPassword
-        ? Icons.visibility_off_outlined
-        : Icons.visibility_outlined;
+    suffix =
+        isPassword ? Icons.visibility_off_outlined : Icons.visibility_outlined;
     emit(IsPasswordShowState());
   }
 }
