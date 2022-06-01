@@ -7,6 +7,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../models/boarding_model.dart';
 import '../../shared/components/components.dart';
+import '../../shared/network/local/cache_helper.dart';
 import '../../shared/styles/colors.dart';
 
 class PageViewScreen extends StatefulWidget {
@@ -38,7 +39,13 @@ class _PageViewScreenState extends State<PageViewScreen> {
   ];
 
   late bool isLast = false;
-
+void navigateAndSave(){
+  CacheHelper.saveData(key: 'navigateAndSave', value: true).then((value) {
+    if(value){
+      navigateToAndReplace(context, const FirstScreen());
+    }
+  });
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +53,7 @@ class _PageViewScreenState extends State<PageViewScreen> {
         actions: [
           TextButton(
             onPressed: () {
-              navigateToAndReplace(context, const FirstScreen());
+              navigateAndSave();
             },
             child: Text(
               'SKIP',
@@ -108,7 +115,7 @@ class _PageViewScreenState extends State<PageViewScreen> {
               IconButton(
                 onPressed: () {
                   if (isLast) {
-                    navigateToAndReplace(context, const FirstScreen());
+                    navigateAndSave();
                   } else {
                     pageController.nextPage(
                       duration: const Duration(milliseconds: 750),
@@ -178,4 +185,6 @@ class _PageViewScreenState extends State<PageViewScreen> {
       ),
     );
   }
+
+
 }
