@@ -16,11 +16,6 @@ void main() {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
       await GetStorage.init();
-      await CacheHelper.init();
-      bool navigateAndSave = CacheHelper.getData(key: 'navigateAndSave');
-      if (kDebugMode) {
-        print(navigateAndSave);
-      }
       runApp(const MyApp());
     },
     blocObserver: MyBlocObserver(),
