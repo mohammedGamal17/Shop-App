@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:shop_app/main.dart';
 import 'package:shop_app/shared/components/components.dart';
 
@@ -21,7 +22,11 @@ class Home extends StatelessWidget {
               );
             },
             icon: const Icon(Icons.logout_outlined)),
-        IconButton(onPressed: () {ThemeService().changeTheme();},icon: const Icon(Icons.dark_mode)),
+        IconButton(
+            onPressed: () {
+              ThemeService().changeTheme();
+            },
+            icon: const Icon(Icons.dark_mode)),
       ]),
       body: Center(
         child: SingleChildScrollView(
