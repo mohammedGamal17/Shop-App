@@ -9,7 +9,7 @@ class ThemeService {
   final ThemeData light = ThemeData(
     scaffoldBackgroundColor: lightBackground,
     appBarTheme: AppBarTheme(
-      backgroundColor: appBarLightColor,
+      backgroundColor: lightBackground,
       actionsIconTheme: const IconThemeData(
         color: Colors.white,
         size: 20.0,
@@ -27,7 +27,7 @@ class ThemeService {
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       elevation: 0.0,
-      backgroundColor: bottomNavigationBarLightColor,
+      backgroundColor: lightBackground,
       selectedIconTheme: IconThemeData(color: HexColor('212529'), size: 20.0),
       showUnselectedLabels: false,
       unselectedIconTheme: IconThemeData(
