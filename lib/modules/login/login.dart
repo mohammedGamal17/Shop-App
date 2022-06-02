@@ -1,6 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shop_app/layout/home.dart';
 import 'package:shop_app/main.dart';
@@ -26,12 +26,16 @@ class Login extends StatelessWidget {
         listener: (context, state) {
           if (state is LoginSuccessState) {
             if (state.shopLoginModel.status!) {
-              sharedPreferences.setString('token', '${state.shopLoginModel.data?.token}');
-              sharedPreferences.setString('name', '${state.shopLoginModel.data?.name}');
-              sharedPreferences.setString('email', '${state.shopLoginModel.data?.email}');
-              sharedPreferences.setString('phone', '${state.shopLoginModel.data?.phone}');
+              sharedPreferences
+                  .setString('token', '${state.shopLoginModel.data?.token}')
+                  .then((value) {
+                navigateToAndReplace(context, const Home());
+              }).catchError((onError){
+                if (kDebugMode) {
+                  print(onError.toString());
+                }
+              });
               snack(context, content: '${state.shopLoginModel.message}');
-              navigateToAndReplace(context,const Home());
             } else {
               snack(
                 context,

@@ -2,12 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:shop_app/main.dart';
 import 'package:shop_app/modules/first_screen/first_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../models/boarding_model.dart';
 import '../../shared/components/components.dart';
-import '../../shared/network/local/cache_helper.dart';
+
 import '../../shared/styles/colors.dart';
 
 class PageViewScreen extends StatefulWidget {
@@ -40,6 +41,18 @@ class _PageViewScreenState extends State<PageViewScreen> {
 
   late bool isLast = false;
 
+  void submit() {
+    sharedPreferences.setBool('onBoarding', true).then((value) {
+      if (value) {
+        navigateToAndReplace(context, FirstScreen());
+      }
+    }).catchError((onError) {
+      if (kDebugMode) {
+        print(onError.toString());
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +60,7 @@ class _PageViewScreenState extends State<PageViewScreen> {
         actions: [
           TextButton(
             onPressed: () {
-              navigateToAndReplace(context, const FirstScreen());
+              submit();
             },
             child: Text('SKIP', style: Theme.of(context).textTheme.caption),
           )
@@ -105,7 +118,7 @@ class _PageViewScreenState extends State<PageViewScreen> {
               IconButton(
                 onPressed: () {
                   if (isLast) {
-                    navigateToAndReplace(context, const FirstScreen());
+                    submit();
                   } else {
                     pageController.nextPage(
                       duration: const Duration(milliseconds: 750),

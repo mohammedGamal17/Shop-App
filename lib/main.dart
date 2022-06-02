@@ -5,13 +5,26 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop_app/layout/home.dart';
+import 'package:shop_app/modules/first_screen/first_screen.dart';
 import 'package:shop_app/shared/cubit/bloc_observer.dart';
 import 'package:shop_app/shared/styles/theme_service.dart';
 
 import 'modules/page_view/page_view_screen.dart';
 
 late SharedPreferences sharedPreferences;
-
+bool? onBoarding = sharedPreferences.getBool('onBoarding');
+String? token = sharedPreferences.getString('token');
+Widget ?func(){
+  if(onBoarding!=null){
+    if(token!=null){
+      return const Home();
+    }else{
+      return FirstScreen();
+    }
+  }else{
+    return const PageViewScreen();
+  }
+}
 void main() {
   BlocOverrides.runZoned(
     () async {
@@ -34,18 +47,16 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeService().dark,
       themeMode: ThemeService().getThemeMode(),
       debugShowCheckedModeBanner: false,
-      initialRoute: sharedPreferences.getString('token') == null
+      /*initialRoute: onBoarding == null || token == null
           ? "PageViewScreen"
-          : "Home",
+          : "FirstScreen",
       routes: {
         "PageViewScreen": (BuildContext context) => const PageViewScreen(),
         "Home": (BuildContext context) => const Home(),
         "isGuest": (BuildContext context) => const Home(),
-      },
-      //home: const PageViewScreen(),
+        "FirstScreen": (BuildContext context) => FirstScreen(),
+      },*/
+      home:func(),
     );
   }
 }
-//sharedPreferences.getString('token') == null
-//           ? "PageViewScreen"
-//           : "Home",

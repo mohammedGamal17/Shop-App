@@ -3,9 +3,11 @@ import 'package:shop_app/layout/home.dart';
 import 'package:shop_app/modules/Login/login.dart';
 import 'package:shop_app/shared/components/components.dart';
 
-class FirstScreen extends StatelessWidget {
-  const FirstScreen({Key? key}) : super(key: key);
+import '../../main.dart';
 
+class FirstScreen extends StatelessWidget {
+   FirstScreen({Key? key}) : super(key: key);
+ final String? token = sharedPreferences.getString('token');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +31,7 @@ class FirstScreen extends StatelessWidget {
             const SizedBox(height: 10.0),
             decorationButton(
               context,
-              pageRoute: Login(),
+              pageRoute:Login(),
               text: 'Log in',
             ),
             const SizedBox(height: 10.0),

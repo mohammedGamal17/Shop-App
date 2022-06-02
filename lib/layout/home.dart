@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shop_app/main.dart';
+import 'package:shop_app/modules/first_screen/first_screen.dart';
 import 'package:shop_app/shared/components/components.dart';
 
 import '../modules/page_view/page_view_screen.dart';
@@ -18,7 +19,7 @@ class Home extends StatelessWidget {
               sharedPreferences.clear();
               navigateToAndReplace(
                 context,
-                const PageViewScreen(),
+                FirstScreen(),
               );
             },
             icon: const Icon(Icons.logout_outlined)),
