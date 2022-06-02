@@ -22,11 +22,11 @@ class Home extends StatelessWidget {
               );
             },
             icon: const Icon(Icons.logout_outlined)),
-        IconButton(
+        /*IconButton(
             onPressed: () {
               ThemeService().changeTheme();
             },
-            icon: const Icon(Icons.dark_mode)),
+            icon: const Icon(Icons.dark_mode)),*/
       ]),
       body: Center(
         child: SingleChildScrollView(
