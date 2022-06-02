@@ -7,6 +7,7 @@ class UserData {
   String? phone;
   int? points;
   String? token;
+  String? password;
 
   UserData(
       {this.credit,
@@ -16,7 +17,8 @@ class UserData {
       this.name,
       this.phone,
       this.points,
-      this.token});
+      this.token,
+      this.password});
 
   factory UserData.fromJson(Map<String, dynamic> json) {
     return UserData(
@@ -28,10 +30,11 @@ class UserData {
       phone: json['phone'],
       points: json['points'],
       token: json['token'],
+      password: json['password'],
     );
   }
 
-  /*Map<String, dynamic> toJson() {
+/*Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['credit'] = credit;
     data['email'] = email;

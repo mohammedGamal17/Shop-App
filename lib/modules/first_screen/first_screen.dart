@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/layout/home.dart';
 import 'package:shop_app/modules/Login/login.dart';
-import 'package:shop_app/modules/signup/signup.dart';
 import 'package:shop_app/shared/components/components.dart';
 
 class FirstScreen extends StatelessWidget {
@@ -35,7 +35,7 @@ class FirstScreen extends StatelessWidget {
             const SizedBox(height: 10.0),
             decorationButton(
               context,
-              pageRoute: SignUp(),
+              pageRoute:const Home(),
               text: 'Continue as a Guest',
             ),
           ],
@@ -44,4 +44,4 @@ class FirstScreen extends StatelessWidget {
     );
   }
 }
-/*IconButton(onPressed: () {ThemeService().changeTheme();},icon: const Icon(Icons.dark_mode)),*/
+/**/

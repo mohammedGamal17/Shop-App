@@ -10,8 +10,8 @@ class ThemeService {
     scaffoldBackgroundColor: lightBackground,
     appBarTheme: AppBarTheme(
       backgroundColor: appBarLightColor,
-      actionsIconTheme: IconThemeData(
-        color: HexColor('03045E'),
+      actionsIconTheme: const IconThemeData(
+        color: Colors.white,
         size: 20.0,
       ),
       titleTextStyle: TextStyle(
@@ -55,7 +55,7 @@ class ThemeService {
   final ThemeData dark = ThemeData(
     scaffoldBackgroundColor: darkBackground,
     appBarTheme: AppBarTheme(
-        backgroundColor: HexColor('212529'),
+        backgroundColor: darkBackground,
         actionsIconTheme: const IconThemeData(
           color: Colors.white,
           size: 20.0,
@@ -64,7 +64,13 @@ class ThemeService {
             color: HexColor('F8F9FA'),
             fontSize: 18.0,
             fontWeight: FontWeight.bold),
-        titleSpacing: 10.0),
+        titleSpacing: 10.0,
+      elevation: 0.0,
+      iconTheme: IconThemeData(
+        color: HexColor('F8F9FA'),
+        size: 20.0,
+      ),
+    ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: HexColor('212529'),
       selectedIconTheme: IconThemeData(color: HexColor('f8f9fa'), size: 20.0),
@@ -80,14 +86,17 @@ class ThemeService {
       circularTrackColor: HexColor('dee2e6'),
     ),
     textTheme: TextTheme(
-      headline6: TextStyle(
-        color: HexColor('F8F9FA'),
+      headline5: TextStyle(
+        color: HexColor('FFFFFF'),
+        fontFamily: 'Changa',
       ),
       bodyText1: TextStyle(
-        color: HexColor('F8F9FA'),
+        color: HexColor('FFFFFF'),
+        fontFamily: 'Changa',
       ),
       caption: TextStyle(
-        color: HexColor('ADB5BD'),
+        color: HexColor('FFFFFF'),
+        fontFamily: 'Changa',
       ),
     ),
   );
