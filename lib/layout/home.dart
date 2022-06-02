@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
+
 import 'package:shop_app/main.dart';
 import 'package:shop_app/modules/first_screen/first_screen.dart';
 import 'package:shop_app/shared/components/components.dart';
 
-import '../modules/page_view/page_view_screen.dart';
-import '../shared/styles/theme_service.dart';
+
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -16,10 +15,10 @@ class Home extends StatelessWidget {
       appBar: AppBar(actions: [
         IconButton(
             onPressed: () {
-              sharedPreferences.clear();
+              sharedPreferences.remove('token');
               navigateToAndReplace(
                 context,
-                FirstScreen(),
+                const FirstScreen(),
               );
             },
             icon: const Icon(Icons.logout_outlined)),
@@ -32,7 +31,7 @@ class Home extends StatelessWidget {
       body: Center(
         child: SingleChildScrollView(
           child: Column(
-            children: [
+            children: const [
               Text('data'),
             ],
           ),

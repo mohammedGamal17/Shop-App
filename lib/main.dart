@@ -14,23 +14,22 @@ import 'modules/page_view/page_view_screen.dart';
 late SharedPreferences sharedPreferences;
 bool? onBoarding = sharedPreferences.getBool('onBoarding');
 String? token = sharedPreferences.getString('token');
-Widget ?func(){
-  if(onBoarding!=null){
-    if(token!=null){
-      return const Home();
-    }else{
-      return FirstScreen();
-    }
-  }else{
-    return const PageViewScreen();
-  }
-}
+Widget ?widget;
 void main() {
   BlocOverrides.runZoned(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
       sharedPreferences = await SharedPreferences.getInstance();
       await GetStorage.init();
+      if(onBoarding!=null){
+        if(token!=null){
+          widget= const Home();
+        }else{
+          widget= const FirstScreen();
+        }
+      }else{
+        widget= const PageViewScreen();
+      }
       runApp(const MyApp());
     },
     blocObserver: MyBlocObserver(),
@@ -56,7 +55,7 @@ class MyApp extends StatelessWidget {
         "isGuest": (BuildContext context) => const Home(),
         "FirstScreen": (BuildContext context) => FirstScreen(),
       },*/
-      home:func(),
+      home:widget,
     );
   }
 }

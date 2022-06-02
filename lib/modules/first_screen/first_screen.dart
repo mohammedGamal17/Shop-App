@@ -6,8 +6,7 @@ import 'package:shop_app/shared/components/components.dart';
 import '../../main.dart';
 
 class FirstScreen extends StatelessWidget {
-   FirstScreen({Key? key}) : super(key: key);
- final String? token = sharedPreferences.getString('token');
+   const FirstScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -44,7 +44,7 @@ class _PageViewScreenState extends State<PageViewScreen> {
   void submit() {
     sharedPreferences.setBool('onBoarding', true).then((value) {
       if (value) {
-        navigateToAndReplace(context, FirstScreen());
+        navigateToAndReplace(context, const FirstScreen());
       }
     }).catchError((onError) {
       if (kDebugMode) {
