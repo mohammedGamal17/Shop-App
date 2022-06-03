@@ -14,6 +14,7 @@ import 'modules/page_view/page_view_screen.dart';
 late SharedPreferences sharedPreferences;
 bool? onBoarding = sharedPreferences.getBool('onBoarding');
 String? token = sharedPreferences.getString('token');
+int? fakeId = sharedPreferences.getInt('fakeId');
 Widget ?widget;
 void main() {
   BlocOverrides.runZoned(
@@ -22,7 +23,7 @@ void main() {
       sharedPreferences = await SharedPreferences.getInstance();
       await GetStorage.init();
       if(onBoarding!=null){
-        if(token!=null){
+        if(token!=null||fakeId!=null){
           widget= const Home();
         }else{
           widget= const FirstScreen();
@@ -46,15 +47,6 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeService().dark,
       themeMode: ThemeService().getThemeMode(),
       debugShowCheckedModeBanner: false,
-      /*initialRoute: onBoarding == null || token == null
-          ? "PageViewScreen"
-          : "FirstScreen",
-      routes: {
-        "PageViewScreen": (BuildContext context) => const PageViewScreen(),
-        "Home": (BuildContext context) => const Home(),
-        "isGuest": (BuildContext context) => const Home(),
-        "FirstScreen": (BuildContext context) => FirstScreen(),
-      },*/
       home:widget,
     );
   }

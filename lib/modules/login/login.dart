@@ -30,7 +30,7 @@ class Login extends StatelessWidget {
                   .setString('token', '${state.shopLoginModel.data?.token}')
                   .then((value) {
                 navigateToAndReplace(context, const Home());
-              }).catchError((onError){
+              }).catchError((onError) {
                 if (kDebugMode) {
                   print(onError.toString());
                 }
@@ -149,7 +149,8 @@ class Login extends StatelessWidget {
                             : Center(child: circularProgressIndicator()),
                         Row(
                           children: [
-                            const Text("If You Don't have an Account "),
+                            Text("If You Don't have an Account ",
+                                style: Theme.of(context).textTheme.bodyText2),
                             Center(
                               child: TextButton(
                                 onPressed: () {

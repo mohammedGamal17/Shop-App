@@ -10,18 +10,18 @@ class ThemeService {
     scaffoldBackgroundColor: lightBackground,
     appBarTheme: AppBarTheme(
       backgroundColor: lightBackground,
-      actionsIconTheme: const IconThemeData(
-        color: Colors.white,
+      actionsIconTheme:IconThemeData(
+        color: HexColor('FFFFFF'),
         size: 20.0,
       ),
       titleTextStyle: TextStyle(
-          color: HexColor('212529'),
+          color: HexColor('FFFFFF'),
           fontSize: 18.0,
           fontWeight: FontWeight.bold),
       titleSpacing: 10.0,
       elevation: 0.0,
       iconTheme: IconThemeData(
-        color: HexColor('03045E'),
+        color: HexColor('FFFFFF'),
         size: 20.0,
       ),
     ),
@@ -44,6 +44,10 @@ class ThemeService {
       ),
       bodyText1: TextStyle(
         color: HexColor('FFFFFF'),
+        fontFamily: 'Changa',
+      ),
+      bodyText2: TextStyle(
+        color: HexColor('00B4D8'),
         fontFamily: 'Changa',
       ),
       caption: TextStyle(
@@ -92,6 +96,10 @@ class ThemeService {
       ),
       bodyText1: TextStyle(
         color: HexColor('FFFFFF'),
+        fontFamily: 'Changa',
+      ),
+      bodyText2: TextStyle(
+        color: HexColor('00B4D8'),
         fontFamily: 'Changa',
       ),
       caption: TextStyle(
