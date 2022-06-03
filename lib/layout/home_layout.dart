@@ -25,8 +25,8 @@ class Home extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               actions: [
-                IconButton(onPressed: (){navigateTo(context, const CartScreen(),);}, icon: const Icon(Icons.add_shopping_cart_outlined)),
                 IconButton(onPressed: (){navigateTo(context, const SearchScreen(),);}, icon: const Icon(Icons.search_outlined)),
+                IconButton(onPressed: (){navigateTo(context, const CartScreen(),);}, icon: const Icon(Icons.add_shopping_cart_outlined)),
               ],
               title: Text(cubit.title[cubit.currentIndex]),
             ),
