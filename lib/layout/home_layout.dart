@@ -4,9 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:shop_app/main.dart';
 import 'package:shop_app/modules/first_screen/first_screen.dart';
+import 'package:shop_app/modules/home_screens/cart/cart_screen.dart';
 import 'package:shop_app/shared/components/components.dart';
 import 'package:shop_app/shared/cubit/cubit.dart';
 
+import '../modules/home_screens/search/search_screen.dart';
 import '../shared/cubit/states.dart';
 
 class Home extends StatelessWidget {
@@ -21,23 +23,13 @@ class Home extends StatelessWidget {
         builder: (context, state) {
           var cubit = AppCubit.get(context);
           return Scaffold(
-            appBar: AppBar(actions: [
-              IconButton(
-                  onPressed: () {
-                    sharedPreferences.remove('token').then((value) {
-                      sharedPreferences.remove('fakeId');
-                      navigateToAndReplace(
-                        context,
-                        const FirstScreen(),
-                      );
-                    }).catchError((onError) {
-                      if (kDebugMode) {
-                        print(onError.toString());
-                      }
-                    });
-                  },
-                  icon: const Icon(Icons.logout_outlined)),
-            ], title: Text(cubit.title[cubit.currentIndex])),
+            appBar: AppBar(
+              actions: [
+                IconButton(onPressed: (){navigateTo(context, const CartScreen(),);}, icon: const Icon(Icons.add_shopping_cart_outlined)),
+                IconButton(onPressed: (){navigateTo(context, const SearchScreen(),);}, icon: const Icon(Icons.search_outlined)),
+              ],
+              title: Text(cubit.title[cubit.currentIndex]),
+            ),
             body: cubit.screen[cubit.currentIndex],
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: cubit.currentIndex,
