@@ -1,9 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:shop_app/main.dart';
-import 'package:shop_app/modules/first_screen/first_screen.dart';
 import 'package:shop_app/modules/home_screens/cart/cart_screen.dart';
 import 'package:shop_app/shared/components/components.dart';
 import 'package:shop_app/shared/cubit/cubit.dart';
