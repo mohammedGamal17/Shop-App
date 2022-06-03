@@ -16,7 +16,7 @@ class HelpScreen extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             body: Center(
-              child: Text('Help Screen'),
+              child: Text('Help Screen',style: Theme.of(context).textTheme.bodyText1),
             ),
           );
         },

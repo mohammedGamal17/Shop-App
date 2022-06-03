@@ -16,7 +16,7 @@ class CategoryScreen extends StatelessWidget{
         builder: (context, state) {
           return Scaffold(
             body: Center(
-              child: Text('Category Screen'),
+              child: Text('Category Screen',style: Theme.of(context).textTheme.bodyText1),
             ),
           );
         },

@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             body: Center(
-              child: Text('Home Screen'),
+              child: Text('Home Screen',style: Theme.of(context).textTheme.bodyText1),
             ),
           );
         },

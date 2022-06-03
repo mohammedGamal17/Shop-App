@@ -16,7 +16,7 @@ class FavouriteScreen extends StatelessWidget{
         builder: (context, state) {
           return Scaffold(
             body: Center(
-              child: Text('Favourite Screen'),
+              child: Text('Favourite Screen',style: Theme.of(context).textTheme.bodyText1),
             ),
           );
         },

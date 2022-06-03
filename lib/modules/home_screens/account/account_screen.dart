@@ -23,7 +23,7 @@ class AccountScreen extends StatelessWidget{
             body: Center(
               child: Column(
                 children: [
-                  const Text('Account Screen'),
+                  Text('Account Screen',style: Theme.of(context).textTheme.bodyText1),
                   IconButton(
                       onPressed: () {
                         sharedPreferences.remove('token').then((value) {
