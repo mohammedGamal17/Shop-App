@@ -28,13 +28,13 @@ class ThemeService {
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       elevation: 0.0,
       backgroundColor: lightBackground,
-      selectedIconTheme: IconThemeData(color: HexColor('212529'), size: 20.0),
+      selectedIconTheme: IconThemeData(color: HexColor('FFFFFF'), size: 24.0),
       showUnselectedLabels: false,
       unselectedIconTheme: IconThemeData(
         size: 16.0,
-        color: HexColor('ADB5BD'),
+        color: HexColor('00B4D8'),
       ),
-      selectedItemColor: HexColor('212529'),
+      selectedItemColor: HexColor('FFFFFF'),
       selectedLabelStyle: const TextStyle(fontSize: 11.0),
     ),
     textTheme: TextTheme(
