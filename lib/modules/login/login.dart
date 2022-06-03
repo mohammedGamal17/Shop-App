@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:shop_app/layout/home.dart';
+import 'package:shop_app/layout/home_layout.dart';
 import 'package:shop_app/main.dart';
 import 'package:shop_app/modules/signup/signup.dart';
 

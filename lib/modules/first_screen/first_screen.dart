@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:shop_app/layout/home.dart';
+import 'package:shop_app/layout/home_layout.dart';
 import 'package:shop_app/modules/Login/login.dart';
 import 'package:shop_app/shared/components/components.dart';
 

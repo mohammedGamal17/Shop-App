@@ -19,6 +19,7 @@ class Home extends StatelessWidget {
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
+          var cubit = AppCubit.get(context);
           return Scaffold(
             appBar: AppBar(actions: [
               IconButton(
@@ -36,15 +37,15 @@ class Home extends StatelessWidget {
                     });
                   },
                   icon: const Icon(Icons.logout_outlined)),
-            ]),
-            body: Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: const [
-                    Text('data'),
-                  ],
-                ),
-              ),
+            ], title: Text(cubit.title[cubit.currentIndex])),
+            body: cubit.screen[cubit.currentIndex],
+            bottomNavigationBar: BottomNavigationBar(
+              currentIndex: cubit.currentIndex,
+              type: BottomNavigationBarType.fixed,
+              items: cubit.navBarItem,
+              onTap: (index) {
+                cubit.navBarChange(index);
+              },
             ),
           );
         },

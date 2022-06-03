@@ -4,7 +4,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shop_app/layout/home.dart';
+import 'package:shop_app/layout/home_layout.dart';
 import 'package:shop_app/modules/first_screen/first_screen.dart';
 import 'package:shop_app/shared/cubit/bloc_observer.dart';
 import 'package:shop_app/shared/styles/theme_service.dart';
