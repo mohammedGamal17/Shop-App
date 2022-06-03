@@ -62,7 +62,8 @@ Widget textFormField({
               onPressed: () {
                 suffixOnTap!();
               },
-              icon: Icon(suffix))
+              icon: Icon(suffix),
+            )
           : null,
       suffixIconColor: Colors.white,
     ),
