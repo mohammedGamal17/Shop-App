@@ -2,13 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:shop_app/layout/home_layout.dart';
-import 'package:shop_app/models/home_model/HomeModel.dart';
 import 'package:shop_app/shared/cubit/states.dart';
 import 'package:shop_app/shared/network/endpoint/end_point.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 
-import '../../main.dart';
+import '../../models/home_model0/home_model.dart';
 import '../../modules/home_screens/account/account_screen.dart';
 import '../../modules/home_screens/category/category_screen.dart';
 import '../../modules/home_screens/favourite/favourite_screen.dart';
@@ -18,11 +16,12 @@ import '../components/constants.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInit());
-  late DioHelper dio;
 
   static AppCubit get(context) => BlocProvider.of(context);
 
+  DioHelper ?dio;
   int currentIndex = 0;
+  late HomeModel1 homeModel;
 
   List<Widget> screen = [
     const HomeScreen(),
@@ -81,20 +80,18 @@ class AppCubit extends Cubit<AppStates> {
     emit(BtmNavBarChangeItemState());
   }
 
-  late HomeModel homeModel;
-
   void getHomeData() {
     emit(HomeLoadingState());
     dio
-        .getDateFromApi(
+        ?.getDateFromApi(
       url: home,
       token: token,
     )
         .then((value) {
       emit(HomeSuccessState());
+      homeModel = HomeModel1.fromJson(value.data);
       if (kDebugMode) {
-        homeModel = HomeModel.fromJson(value.data);
-        print(homeModel.data?.products![0].image);
+        print(homeModel.data?.banners![0].image);
         print(homeModel.toString());
       }
     }).catchError((onError) {

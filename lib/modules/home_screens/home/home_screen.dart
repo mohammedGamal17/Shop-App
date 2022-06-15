@@ -14,9 +14,14 @@ class HomeScreen extends StatelessWidget {
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
+          AppCubit cubit = AppCubit.get(context);
           return Scaffold(
             body: Center(
-              child: Text('Home Screen',style: Theme.of(context).textTheme.bodyText1),
+              child: Column(
+                children: [
+                  Text('Home Screen',style: Theme.of(context).textTheme.bodyText1),
+                ],
+              ),
             ),
           );
         },

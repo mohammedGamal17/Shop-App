@@ -1,11 +1,11 @@
-class HomeModel {
+class HomeModel1 {
   bool? status;
   HomeDataModel? data;
 
-  HomeModel({this.status, this.data});
+  HomeModel1({this.status, this.data});
 
-  factory HomeModel.fromJson(Map<String, dynamic> json) {
-    return HomeModel(
+  factory HomeModel1.fromJson(Map<String, dynamic> json) {
+    return HomeModel1(
       data: json['data'] != null ? HomeDataModel.fromJson(json['data']) : null,
       status: json['status'],
     );

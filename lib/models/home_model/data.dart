@@ -1,5 +1,5 @@
-import 'Banner.dart';
-import 'Product.dart';
+import 'banner.dart';
+import 'product.dart';
 
 class Data {
   String? ad;
