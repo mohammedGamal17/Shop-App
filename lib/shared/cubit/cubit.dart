@@ -14,6 +14,7 @@ import '../../modules/home_screens/category/category_screen.dart';
 import '../../modules/home_screens/favourite/favourite_screen.dart';
 import '../../modules/home_screens/help/help_screen.dart';
 import '../../modules/home_screens/home/home_screen.dart';
+import '../components/constants.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInit());
@@ -84,7 +85,6 @@ class AppCubit extends Cubit<AppStates> {
 
   void getHomeData() {
     emit(HomeLoadingState());
-
     dio
         .getDateFromApi(
       url: home,
