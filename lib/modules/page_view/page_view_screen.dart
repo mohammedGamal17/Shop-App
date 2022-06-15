@@ -6,7 +6,8 @@ import 'package:shop_app/main.dart';
 import 'package:shop_app/modules/first_screen/first_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../models/boarding_model.dart';
+
+import '../../models/login_molel/boarding_model.dart';
 import '../../shared/components/components.dart';
 
 import '../../shared/styles/colors.dart';

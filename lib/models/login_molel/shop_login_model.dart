@@ -1,4 +1,5 @@
-import 'user_data.dart';
+import 'package:shop_app/models/login_molel/user_data.dart';
+
 
 class ShopLoginModel {
   UserData? data;
