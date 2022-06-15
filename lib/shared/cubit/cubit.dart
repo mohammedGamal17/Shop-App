@@ -7,7 +7,6 @@ import 'package:shop_app/shared/network/endpoint/end_point.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 
 import '../../models/home_model/home_model.dart';
-import '../../models/home_model0/home_model.dart';
 import '../../modules/home_screens/account/account_screen.dart';
 import '../../modules/home_screens/category/category_screen.dart';
 import '../../modules/home_screens/favourite/favourite_screen.dart';
@@ -83,7 +82,8 @@ class AppCubit extends Cubit<AppStates> {
 
   void getHomeData() {
     emit(HomeLoadingState());
-    dio.getDateFromApi(
+    dio
+        .getDateFromApi(
       url: home,
       token: token,
     )

@@ -1,14 +1,14 @@
 class Product {
   String? description;
-  int? discount;
+  dynamic discount;
   int? id;
   String? image;
   List<String>? images;
   bool? inCart;
   bool? inFavorites;
   String? name;
-  int? oldPrice;
-  int? price;
+  dynamic oldPrice;
+  dynamic price;
 
   Product(
       {this.description,
