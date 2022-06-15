@@ -10,7 +10,6 @@ class DioHelper {
     dio = Dio(
       BaseOptions(
         baseUrl: baseUrl,
-        headers: headers,
         receiveDataWhenStatusError: true,
         connectTimeout: 20 * 1000,
         receiveTimeout: 20 * 1000,
@@ -20,14 +19,15 @@ class DioHelper {
 
   Future getDateFromApi({
     required String url,
-    required Map<String, dynamic> query,
+    Map<String, dynamic>? query,
     String lang = 'ar',
     String? token,
   }) async {
     try {
       dio.options.headers = {
         'lang': lang,
-        'Authorization': token,
+        'Content-Type': 'application/json',
+        'Authorization': token ?? '',
       };
       return await dio.get(
         url,
@@ -51,7 +51,8 @@ class DioHelper {
     try {
       dio.options.headers = {
         'lang': lang,
-        'Authorization': token,
+        'Content-Type': 'application/json',
+        'Authorization': token ?? '',
       };
       return await dio.post(
         url,

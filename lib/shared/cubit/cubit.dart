@@ -1,9 +1,14 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shop_app/layout/home_layout.dart';
+import 'package:shop_app/models/home_model/HomeModel.dart';
 import 'package:shop_app/shared/cubit/states.dart';
+import 'package:shop_app/shared/network/endpoint/end_point.dart';
+import 'package:shop_app/shared/network/remote/dio_helper.dart';
 
+import '../../main.dart';
 import '../../modules/home_screens/account/account_screen.dart';
 import '../../modules/home_screens/category/category_screen.dart';
 import '../../modules/home_screens/favourite/favourite_screen.dart';
@@ -12,6 +17,7 @@ import '../../modules/home_screens/home/home_screen.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInit());
+  late DioHelper dio;
 
   static AppCubit get(context) => BlocProvider.of(context);
 
@@ -72,5 +78,30 @@ class AppCubit extends Cubit<AppStates> {
       const HelpScreen();
     }
     emit(BtmNavBarChangeItemState());
+  }
+
+  late HomeModel homeModel;
+
+  void getHomeData() {
+    emit(HomeLoadingState());
+
+    dio
+        .getDateFromApi(
+      url: home,
+      token: token,
+    )
+        .then((value) {
+      emit(HomeSuccessState());
+      if (kDebugMode) {
+        homeModel = HomeModel.fromJson(value.data);
+        print(homeModel.data?.products![0].image);
+        print(homeModel.toString());
+      }
+    }).catchError((onError) {
+      if (kDebugMode) {
+        emit(HomeErrorState());
+        print(onError.toString());
+      }
+    });
   }
 }
