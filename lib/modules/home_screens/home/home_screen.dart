@@ -17,11 +17,8 @@ class HomeScreen extends StatelessWidget {
           AppCubit cubit = AppCubit.get(context);
           return Scaffold(
             body: Center(
-              child: Column(
-                children: [
+              child:
                   Text('Home Screen',style: Theme.of(context).textTheme.bodyText1),
-                ],
-              ),
             ),
           );
         },
