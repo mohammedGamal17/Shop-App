@@ -22,8 +22,11 @@ class AccountScreen extends StatelessWidget{
           return Scaffold(
             body: Center(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('Account Screen',style: Theme.of(context).textTheme.bodyText1),
+                  const SizedBox(height: 10.0,),
                   IconButton(
                       onPressed: () {
                         sharedPreferences.remove('token').then((value) {
