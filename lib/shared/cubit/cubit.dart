@@ -56,7 +56,7 @@ class AppCubit extends Cubit<AppStates> {
 
   void navBarChange(int index) {
     currentIndex = index;
-    if(index == 0 ){
+    if (index == 0) {
       const HomeScreen();
     }
     if (index == 1) {

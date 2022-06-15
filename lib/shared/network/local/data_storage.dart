@@ -19,10 +19,3 @@ class DataStorage {
     return isNavigate() ? ThemeMode.dark : ThemeMode.light;
   }
 }
-/*
-CacheHelper.saveData(key: 'navigateAndSave', value: true).then((value) {
-    if(value){
-      navigateToAndReplace(context, const FirstScreen());
-    }
-  });
- */

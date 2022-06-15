@@ -76,17 +76,13 @@ class _PageViewScreenState extends State<PageViewScreen> {
               itemCount: boarding.length,
               onPageChanged: (int index) {
                 if (index == boarding.length - 1) {
-                  setState(() {
-                    isLast = true;
-                  });
-                  if (kDebugMode) {
-                    print('isLast');
-                  }
+                  setState(
+                    () {
+                      isLast = true;
+                    },
+                  );
                 } else {
                   isLast = false;
-                  if (kDebugMode) {
-                    print('isNotLast');
-                  }
                 }
               },
             ),
@@ -105,10 +101,11 @@ class _PageViewScreenState extends State<PageViewScreen> {
                         controller: pageController,
                         count: boarding.length,
                         effect: WormEffect(
-                            dotHeight: 10.3,
-                            dotWidth: 10.3,
-                            dotColor: iconColor,
-                            spacing: 16.0),
+                          dotHeight: 10.3,
+                          dotWidth: 10.3,
+                          dotColor: iconColor,
+                          spacing: 16.0,
+                        ),
                       ),
                     ),
                   ],

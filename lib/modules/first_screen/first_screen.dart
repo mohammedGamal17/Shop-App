@@ -36,25 +36,23 @@ class FirstScreen extends StatelessWidget {
               text: 'Log in',
             ),
             const SizedBox(height: 10.0),
-           /* decorationButton(
-              context,
-              pageRoute: const Home(),
-              text: 'Continue as a Guest',
-            ),*/
             TextButton(
-                onPressed: () {
-                  sharedPreferences.setInt('fakeId', 1).then((value) {
-                    navigateToAndReplace(context, const Home());
-                  }).catchError((onError) {
+              onPressed: () {
+                sharedPreferences.setInt('fakeId', 1).then((value) {
+                  navigateToAndReplace(context, const Home());
+                }).catchError(
+                  (onError) {
                     if (kDebugMode) {
                       print(onError.toString());
                     }
-                  });
-                },
-                child: Text(
-                  'Continue as A guest',
-                  style: Theme.of(context).textTheme.bodyText2,
-                ))
+                  },
+                );
+              },
+              child: Text(
+                'Continue as A guest',
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+            )
           ],
         ),
       ),

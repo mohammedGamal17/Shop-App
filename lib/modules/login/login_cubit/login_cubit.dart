@@ -28,7 +28,6 @@ class LoginCubit extends Cubit<LoginStates> {
         'password': password,
       },
     ).then((value) {
-
       if (kDebugMode) {
         loginModel = ShopLoginModel.fromJson(value.data);
         //print(value.data);

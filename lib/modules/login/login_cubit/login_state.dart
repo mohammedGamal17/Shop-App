@@ -8,7 +8,7 @@ class LoginInitial extends LoginStates {}
 class LoginLoadingState extends LoginStates {}
 
 class LoginSuccessState extends LoginStates {
-final ShopLoginModel shopLoginModel;
+  final ShopLoginModel shopLoginModel;
 
   LoginSuccessState(this.shopLoginModel);
 }
@@ -19,4 +19,4 @@ class LoginFailState extends LoginStates {
   LoginFailState(this.error);
 }
 
-class IsPasswordShowState extends LoginStates{}
+class IsPasswordShowState extends LoginStates {}

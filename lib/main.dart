@@ -18,11 +18,11 @@ late SharedPreferences sharedPreferences;
 bool? onBoarding = sharedPreferences.getBool('onBoarding');
 String? token = sharedPreferences.getString('token');
 int? fakeId = sharedPreferences.getInt('fakeId');
-Widget ?widget;
+Widget? widget;
 
 void main() {
   BlocOverrides.runZoned(
-        () async {
+    () async {
       WidgetsFlutterBinding.ensureInitialized();
       sharedPreferences = await SharedPreferences.getInstance();
       await GetStorage.init();

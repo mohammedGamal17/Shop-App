@@ -10,7 +10,7 @@ class ThemeService {
     scaffoldBackgroundColor: lightBackground,
     appBarTheme: AppBarTheme(
       backgroundColor: lightBackground,
-      actionsIconTheme:IconThemeData(
+      actionsIconTheme: IconThemeData(
         color: HexColor('FFFFFF'),
         size: 20.0,
       ),
@@ -59,16 +59,16 @@ class ThemeService {
   final ThemeData dark = ThemeData(
     scaffoldBackgroundColor: darkBackground,
     appBarTheme: AppBarTheme(
-        backgroundColor: darkBackground,
-        actionsIconTheme: const IconThemeData(
-          color: Colors.white,
-          size: 20.0,
-        ),
-        titleTextStyle: TextStyle(
-            color: HexColor('F8F9FA'),
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold),
-        titleSpacing: 10.0,
+      backgroundColor: darkBackground,
+      actionsIconTheme: const IconThemeData(
+        color: Colors.white,
+        size: 20.0,
+      ),
+      titleTextStyle: TextStyle(
+          color: HexColor('F8F9FA'),
+          fontSize: 18.0,
+          fontWeight: FontWeight.bold),
+      titleSpacing: 10.0,
       elevation: 0.0,
       iconTheme: IconThemeData(
         color: HexColor('F8F9FA'),

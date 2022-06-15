@@ -1,7 +1,8 @@
-class BoardingModel{
+class BoardingModel {
   final String imgUrl;
   final String title;
   final String body;
 
-  BoardingModel({required this.imgUrl,required this.title,required this.body});
+  BoardingModel(
+      {required this.imgUrl, required this.title, required this.body});
 }
