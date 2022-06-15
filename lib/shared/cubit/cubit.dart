@@ -91,14 +91,17 @@ class AppCubit extends Cubit<AppStates> {
       emit(HomeSuccessState());
       homeModel = HomeModel.fromJson(value.data);
       if (kDebugMode) {
-        //print(homeModel.data?.banners![0].image.toString());
+        print('**************************** Home Data Successfully come from Api ****************************');
+        print(homeModel.data?.banners![0].image.toString());
         print(homeModel.status);
-        print('555555555555555555');
+        print('**************************** Home Data Successfully come from Api ****************************');
       }
     }).catchError((onError) {
       if (kDebugMode) {
         emit(HomeErrorState());
-        print(onError.toString());
+        print('***********************************************************************************************');
+        print('Error From Home Api:  ${onError.toString()}');
+        print('***********************************************************************************************');
       }
     });
   }
