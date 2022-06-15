@@ -6,6 +6,7 @@ import 'package:shop_app/shared/cubit/states.dart';
 import 'package:shop_app/shared/network/endpoint/end_point.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 
+import '../../models/home_model/home_model.dart';
 import '../../models/home_model0/home_model.dart';
 import '../../modules/home_screens/account/account_screen.dart';
 import '../../modules/home_screens/category/category_screen.dart';
@@ -19,9 +20,9 @@ class AppCubit extends Cubit<AppStates> {
 
   static AppCubit get(context) => BlocProvider.of(context);
 
-  DioHelper ?dio;
+  DioHelper dio = DioHelper();
   int currentIndex = 0;
-  late HomeModel1 homeModel;
+  late HomeModel homeModel;
 
   List<Widget> screen = [
     const HomeScreen(),
@@ -82,17 +83,17 @@ class AppCubit extends Cubit<AppStates> {
 
   void getHomeData() {
     emit(HomeLoadingState());
-    dio
-        ?.getDateFromApi(
+    dio.getDateFromApi(
       url: home,
       token: token,
     )
         .then((value) {
       emit(HomeSuccessState());
-      homeModel = HomeModel1.fromJson(value.data);
+      homeModel = HomeModel.fromJson(value.data);
       if (kDebugMode) {
-        print(homeModel.data?.banners![0].image);
-        print(homeModel.toString());
+        //print(homeModel.data?.banners![0].image.toString());
+        print(homeModel.status);
+        print('555555555555555555');
       }
     }).catchError((onError) {
       if (kDebugMode) {

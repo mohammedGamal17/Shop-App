@@ -2,13 +2,9 @@ class HomeModel1 {
   bool? status;
   HomeDataModel? data;
 
-  HomeModel1({this.status, this.data});
-
-  factory HomeModel1.fromJson(Map<String, dynamic> json) {
-    return HomeModel1(
-      data: json['data'] != null ? HomeDataModel.fromJson(json['data']) : null,
-      status: json['status'],
-    );
+   HomeModel1.fromJson(Map<String, dynamic> json) {
+      data: json['data'] != null ? HomeDataModel.fromJson(json['data']) : null;
+      status: json['status'];
   }
 }
 
@@ -16,14 +12,12 @@ class HomeDataModel {
   List<Banners>? banners = [];
   List<Products>? products = [];
 
-  HomeDataModel({this.banners, this.products});
-
   HomeDataModel.fromJson(Map<String, dynamic> json) {
-    json['banners'].forEach((value) {
-      banners?.add(value);
+    json['banners'].forEach((element) {
+      banners?.add(element);
     });
-    json['products'].forEach((value) {
-      products?.add(value);
+    json['products'].forEach((element) {
+      products?.add(element);
     });
   }
 }
@@ -32,13 +26,9 @@ class Banners {
   int? id;
   String? image;
 
-  Banners({this.id, this.image});
-
-  factory Banners.fromJson(Map<String, dynamic> json) {
-    return Banners(
-      id: json['id'],
-      image: json['image'],
-    );
+   Banners.fromJson(Map<String, dynamic> json) {
+      id: json['id'];
+      image: json['image'];
   }
 }
 
@@ -52,26 +42,14 @@ class Products {
   bool? inFavorites;
   bool? inCart;
 
-  Products(
-      {this.id,
-      this.price,
-      this.oldPrice,
-      this.discount,
-      this.image,
-      this.name,
-      this.inFavorites,
-      this.inCart});
-
-  factory Products.fromJson(Map<String, dynamic> json) {
-    return Products(
-      id: json['id'],
-      price: json['price'],
-      oldPrice: json['old_price'],
-      discount: json['discount'],
-      image: json['image'],
-      name: json['name'],
-      inFavorites: json['in_favorites'],
-      inCart: json['in_cart'],
-    );
+   Products.fromJson(Map<String, dynamic> json) {
+      id: json['id'];
+      price: json['price'];
+      oldPrice: json['old_price'];
+      discount: json['discount'];
+      image: json['image'];
+      name: json['name'];
+      inFavorites: json['in_favorites'];
+      inCart: json['in_cart'];
   }
 }
