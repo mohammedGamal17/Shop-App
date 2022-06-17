@@ -11,17 +11,14 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AppCubit(),
+      create: (context) => AppCubit()..getHomeData(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
           AppCubit cubit = AppCubit.get(context);
-          return Scaffold(
-            body: cubit.homeModel != null
-                ? Center(
-                    child: Text('Home Screen',
-                        style: Theme.of(context).textTheme.bodyText1),
-                  )
+          return Container(
+            child: cubit.homeModel != null
+                ? homeScreen()
                 : circularProgressIndicator(),
           );
         },
@@ -30,4 +27,14 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-Widget homeScreen
+Widget homeScreen() {
+  return Column(
+    children: const [
+      Text('Home'),
+      SizedBox(
+        height: 10.0,
+      ),
+      Text('Screen'),
+    ],
+  );
+}
