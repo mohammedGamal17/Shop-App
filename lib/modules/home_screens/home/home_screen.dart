@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
           AppCubit cubit = AppCubit.get(context);
           return Scaffold(
             body: cubit.homeModel != null
-                ? homeScreen(cubit.homeModel!)
+                ? homeScreen(cubit.homeModel!) ///put ! after home model to avoid error
                 : circularProgressIndicator(),
           );
         },
