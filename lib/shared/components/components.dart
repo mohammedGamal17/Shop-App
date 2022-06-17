@@ -97,7 +97,7 @@ Widget separator() {
 Widget circularProgressIndicator() {
   return Center(
       child: CircularProgressIndicator(
-    backgroundColor: HexColor('023E8A'),
+    backgroundColor: HexColor('FFFFFF'),
     color: HexColor('0077B6'),
   ));
 }

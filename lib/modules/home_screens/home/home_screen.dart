@@ -21,51 +21,7 @@ class HomeScreen extends StatelessWidget {
           AppCubit cubit = AppCubit.get(context);
           return Scaffold(
             body: cubit.homeModel != null
-                ? Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      children: [
-                        CarouselSlider(
-                            items:cubit.homeModel?.data?.banners?.map((i) {
-                              return Builder(
-                                builder: (BuildContext context) {
-                                  return Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 5.0),
-                                    decoration: BoxDecoration(
-                                      color: HexColor('0096C7'),
-                                      image: DecorationImage(
-                                        image: NetworkImage('${i.image}'),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    child: Text('',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText1),
-                                  );
-                                },
-                              );
-                            }).toList(),
-                            options: CarouselOptions(
-                              height: 250.0,
-                              aspectRatio: 16 / 9,
-                              viewportFraction: 0.8,
-                              initialPage: 0,
-                              enableInfiniteScroll: true,
-                              reverse: false,
-                              autoPlay: true,
-                              autoPlayInterval: const Duration(seconds: 3),
-                              autoPlayAnimationDuration:
-                                  const Duration(milliseconds: 800),
-                              autoPlayCurve: Curves.fastOutSlowIn,
-                              enlargeCenterPage: true,
-                              scrollDirection: Axis.horizontal,
-                            ))
-                      ],
-                    ),
-                  )
+                ? homeScreen(cubit.homeModel!)
                 : circularProgressIndicator(),
           );
         },
@@ -74,4 +30,43 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-/*Widget homeScreen(HomeModel model) */
+Widget homeScreen(HomeModel model) {
+  return Padding(
+    padding: const EdgeInsets.all(10.0),
+    child: Column(
+      children: [
+        CarouselSlider(
+            items: model.data?.banners?.map((i) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: HexColor('0096C7'),
+                      image: DecorationImage(
+                        image: NetworkImage('${i.image}'),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  );
+                },
+              );
+            }).toList(),
+            options: CarouselOptions(
+              height: 250.0,
+              aspectRatio: 16 / 9,
+              viewportFraction: 0.8,
+              initialPage: 0,
+              enableInfiniteScroll: true,
+              reverse: false,
+              autoPlay: true,
+              autoPlayInterval: const Duration(seconds: 3),
+              autoPlayAnimationDuration: const Duration(milliseconds: 800),
+              autoPlayCurve: Curves.fastOutSlowIn,
+              enlargeCenterPage: true,
+              scrollDirection: Axis.horizontal,
+            ))
+      ],
+    ),
+  );
+}
