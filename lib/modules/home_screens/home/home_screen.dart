@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/shared/cubit/cubit.dart';
 
+import '../../../shared/components/components.dart';
 import '../../../shared/cubit/states.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -16,13 +17,17 @@ class HomeScreen extends StatelessWidget {
         builder: (context, state) {
           AppCubit cubit = AppCubit.get(context);
           return Scaffold(
-            body: Center(
-              child:
-                  Text('Home Screen',style: Theme.of(context).textTheme.bodyText1),
-            ),
+            body: cubit.homeModel != null
+                ? Center(
+                    child: Text('Home Screen',
+                        style: Theme.of(context).textTheme.bodyText1),
+                  )
+                : circularProgressIndicator(),
           );
         },
       ),
     );
   }
 }
+
+Widget homeScreen

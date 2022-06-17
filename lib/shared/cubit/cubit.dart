@@ -21,7 +21,7 @@ class AppCubit extends Cubit<AppStates> {
 
   DioHelper dio = DioHelper();
   int currentIndex = 0;
-  late HomeModel homeModel;
+   HomeModel? homeModel;
 
   List<Widget> screen = [
     const HomeScreen(),
@@ -92,8 +92,8 @@ class AppCubit extends Cubit<AppStates> {
       homeModel = HomeModel.fromJson(value.data);
       if (kDebugMode) {
         print('**************************** Home Data Successfully come from Api ****************************');
-        print(homeModel.data?.banners![0].image.toString());
-        print(homeModel.status);
+        print(homeModel?.data?.banners![0].image.toString());
+        print(homeModel?.status);
         print('**************************** Home Data Successfully come from Api ****************************');
       }
     }).catchError((onError) {
