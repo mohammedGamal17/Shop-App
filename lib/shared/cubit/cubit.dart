@@ -21,7 +21,7 @@ class AppCubit extends Cubit<AppStates> {
 
   DioHelper dio = DioHelper();
   int currentIndex = 0;
-   HomeModel? homeModel;
+  HomeModel? homeModel;
 
   List<Widget> screen = [
     const HomeScreen(),
