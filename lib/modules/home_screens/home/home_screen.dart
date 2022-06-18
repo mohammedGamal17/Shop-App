@@ -65,7 +65,7 @@ Widget homeScreen(HomeModel model) {
               autoPlayCurve: Curves.fastOutSlowIn,
               enlargeCenterPage: true,
               scrollDirection: Axis.horizontal,
-            ))
+            )),
       ],
     ),
   );
