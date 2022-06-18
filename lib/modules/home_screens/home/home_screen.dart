@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shop_app/models/home_model/home_model.dart';
+import 'package:shop_app/models/home_model/product.dart';
 import 'package:shop_app/shared/cubit/cubit.dart';
 
 import '../../../shared/components/components.dart';
@@ -21,52 +23,161 @@ class HomeScreen extends StatelessWidget {
           AppCubit cubit = AppCubit.get(context);
           return Scaffold(
             body: cubit.homeModel != null
-                ? homeScreen(cubit.homeModel!) ///put ! after home model to avoid error
+
+                ///put ! after home model to avoid error
+                ? homeScreen(cubit.homeModel!)
                 : circularProgressIndicator(),
           );
         },
       ),
     );
   }
-}
 
-Widget homeScreen(HomeModel model) {
-  return Padding(
-    padding: const EdgeInsets.all(10.0),
-    child: Column(
+  Widget homeScreen(HomeModel model) {
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          children: [
+            CarouselSlider(
+                items: model.data?.banners?.map((i) {
+                  return Builder(
+                    builder: (BuildContext context) {
+                      return Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: HexColor('0096C7'),
+                          image: DecorationImage(
+                            image: NetworkImage('${i.image}'),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }).toList(),
+                options: CarouselOptions(
+                  height: 200.0,
+                  aspectRatio: 16 / 9,
+                  viewportFraction: 0.8,
+                  initialPage: 0,
+                  enableInfiniteScroll: true,
+                  reverse: false,
+                  autoPlay: true,
+                  autoPlayInterval: const Duration(seconds: 3),
+                  autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                  enlargeCenterPage: true,
+                  scrollDirection: Axis.horizontal,
+                )),
+            const SizedBox(
+              height: 10.0,
+            ),
+            Container(
+              color: HexColor('16679a'),
+              child: GridView.count(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisCount: 2,
+                crossAxisSpacing: 2.0,
+                mainAxisSpacing: 2.0,
+                childAspectRatio: 1.0 / 1.27,
+                children: List.generate(
+                  model.data!.products!.length,
+                  (index) => productBuilder(model.data!.products![index]),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget productBuilder(Product model) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CarouselSlider(
-            items: model.data?.banners?.map((i) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: HexColor('0096C7'),
-                      image: DecorationImage(
-                        image: NetworkImage('${i.image}'),
-                        fit: BoxFit.fill,
+        Stack(
+          alignment: AlignmentDirectional.bottomStart,
+          children: [
+            Image(
+              image: NetworkImage('${model.image}'),
+              height: 130.0,
+              width: double.infinity,
+              fit: BoxFit.fill,
+            ),
+            Row(
+              children: [
+                model.discount != 0
+                    ? Container(
+                        color: Colors.red,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 7.0),
+                          child: Text(
+                            '% ${model.discount}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10.0,
+                            ),
+                          ),
+                        ),
+                      )
+                    : Container(),
+              ],
+            ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text('${model.name}',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Changa',
+                    fontSize: 12.0,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis),
+              ///if discount = 0 hide it
+              Text(
+                'EGP ${model.price}',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Changa',
+                  fontSize: 14.0,
+                ),
+              ),
+
+              Row(
+                children: [
+                  if (model.discount != 0)
+                    Text(
+                      'EGP ${model.oldPrice}',
+                      style: TextStyle(
+                        color: HexColor('CAF0F8'),
+                        fontFamily: 'Changa',
+                        fontSize: 10.0,
+                        decoration: TextDecoration.lineThrough,
                       ),
                     ),
-                  );
-                },
-              );
-            }).toList(),
-            options: CarouselOptions(
-              height: 250.0,
-              aspectRatio: 16 / 9,
-              viewportFraction: 0.8,
-              initialPage: 0,
-              enableInfiniteScroll: true,
-              reverse: false,
-              autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 3),
-              autoPlayAnimationDuration: const Duration(milliseconds: 800),
-              autoPlayCurve: Curves.fastOutSlowIn,
-              enlargeCenterPage: true,
-              scrollDirection: Axis.horizontal,
-            )),
+                  const Spacer(),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.favorite_border_outlined,
+                        color: HexColor('03045E')),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ],
-    ),
-  );
+    );
+  }
 }
