@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                       return Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: HexColor('0096C7'),
+                          color: HexColor('16679a'),
                           image: DecorationImage(
                             image: NetworkImage('${i.image}'),
                             fit: BoxFit.fill,
