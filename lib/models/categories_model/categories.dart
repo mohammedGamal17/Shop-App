@@ -1,13 +1,13 @@
 
-class Categories {
+class CategoriesModel {
   bool? status;
   dynamic message;
   Data? data;
 
-  Categories({this.status,this.message, this.data});
+  CategoriesModel({this.status,this.message, this.data});
 
-  factory Categories.fromJson(Map<String, dynamic> json) {
-    return Categories(
+  factory CategoriesModel.fromJson(Map<String, dynamic> json) {
+    return CategoriesModel(
         status: json['status'],
         message : json['message'],
         data : json['data'] != null ? Data.fromJson(json['data']) : null,
