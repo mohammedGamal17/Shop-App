@@ -41,6 +41,8 @@ class HomeScreen extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CarouselSlider(
                 items: model.data?.banners?.map((i) {
@@ -76,6 +78,7 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(
               height: 10.0,
             ),
+            Text('Categories',style: Theme.of(context).textTheme.headline5,),
             SizedBox(
               height: 80.0,
               child: ListView.separated(
@@ -89,6 +92,7 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(
               height: 10.0,
             ),
+            Text('Products',style: Theme.of(context).textTheme.headline5,),
             GridView.count(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
