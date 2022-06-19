@@ -54,6 +54,11 @@ class ThemeService {
         color: HexColor('FFFFFF'),
         fontFamily: 'Changa',
       ),
+      overline: TextStyle(
+        color: HexColor('FFFFFF'),
+        backgroundColor: HexColor('0077B6'),
+        fontFamily: 'Changa',
+      ),
     ),
   );
   final ThemeData dark = ThemeData(
@@ -104,6 +109,11 @@ class ThemeService {
       ),
       caption: TextStyle(
         color: HexColor('FFFFFF'),
+        fontFamily: 'Changa',
+      ),
+      overline: TextStyle(
+        color: HexColor('FFFFFF'),
+        backgroundColor: HexColor('0077B6'),
         fontFamily: 'Changa',
       ),
     ),

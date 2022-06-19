@@ -16,7 +16,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AppCubit()..getHomeData(),
+      create: (context) =>
+      AppCubit()
+        ..getHomeData(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -24,7 +26,7 @@ class HomeScreen extends StatelessWidget {
           return Scaffold(
             body: cubit.homeModel != null
 
-                ///put ! after home model to avoid error
+            ///put ! after home model to avoid error
                 ? homeScreen(cubit.homeModel!, context)
                 : circularProgressIndicator(),
           );
@@ -77,8 +79,10 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: 80.0,
               child: ListView.separated(
-                itemBuilder: (context, index) => categoriesBuilder(),
-                separatorBuilder: (context, index) => separatorVertical() ,
+                scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) => categoriesBuilder(context),
+                separatorBuilder: (context, index) => separatorVertical(),
                 itemCount: 10,
               ),
             ),
@@ -94,7 +98,7 @@ class HomeScreen extends StatelessWidget {
               childAspectRatio: 1.0 / 1.27,
               children: List.generate(
                 model.data!.products!.length,
-                (index) =>
+                    (index) =>
                     productBuilder(model.data!.products![index], context),
               ),
             ),
@@ -103,18 +107,31 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-Widget categoriesBuilder(){
+
+  Widget categoriesBuilder(context) {
     return Stack(
       alignment: AlignmentDirectional.bottomCenter,
-      children: const [
-        Image(image: NetworkImage('https://student.valuxapps.com/storage/uploads/categories/1644527120pTGA7.clothes.png'),width: 80,height: 80.0),
-        Text('data'),
+      children: [
+        const Image(image: NetworkImage(
+            'https://student.valuxapps.com/storage/uploads/categories/1644527120pTGA7.clothes.png'),
+            width: 80,
+            height: 80.0),
+        Container(
+          color: HexColor('0077B6'),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 7.0),
+            child: stackText(text: 'data',context),
+          ),
+        ),
       ],
     );
-}
+  }
+
   Widget productBuilder(Product model, context) {
     Icon favIcon = Icon(
-      AppCubit.get(context).icon,
+      AppCubit
+          .get(context)
+          .icon,
       color: HexColor('0077B6'),
     );
     return Container(
@@ -136,19 +153,19 @@ Widget categoriesBuilder(){
                 children: [
                   model.discount != 0
                       ? Container(
-                          color: Colors.red,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 7.0),
-                            child: Text(
-                              '% ${model.discount}',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 10.0,
-                              ),
-                            ),
-                          ),
-                        )
+                    color: Colors.red,
+                    child: Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 7.0),
+                      child: Text(
+                        '% ${model.discount}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 10.0,
+                        ),
+                      ),
+                    ),
+                  )
                       : Container(),
                 ],
               ),

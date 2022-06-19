@@ -39,7 +39,7 @@ class Home extends StatelessWidget {
                     },
                     icon: const Icon(Icons.add_shopping_cart_outlined)),
               ],
-              title: Text(cubit.title[cubit.currentIndex]),
+              title: Text(cubit.title[cubit.currentIndex],style: Theme.of(context).textTheme.headline5 ),
             ),
             body: cubit.screen[cubit.currentIndex],
             bottomNavigationBar: BottomNavigationBar(

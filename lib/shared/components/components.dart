@@ -98,7 +98,7 @@ Widget separatorVertical() {
   return Padding(
     padding: const EdgeInsets.all(10.0),
     child: Container(
-      width: 2.0,
+      width: 0.5,
       color: HexColor('DEE2E6'),
     ),
   );
@@ -162,4 +162,8 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> snack(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
     behavior: SnackBarBehavior.fixed,
   ));
+}
+
+Widget stackText(context, {required String text}) {
+  return Text(text, style: Theme.of(context).textTheme.overline,);
 }
