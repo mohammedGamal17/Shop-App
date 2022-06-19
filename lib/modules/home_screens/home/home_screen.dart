@@ -74,19 +74,16 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(
               height: 10.0,
             ),
-            Container(
-              color: HexColor('16679a'),
-              child: GridView.count(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: 2,
-                crossAxisSpacing: 2.0,
-                mainAxisSpacing: 2.0,
-                childAspectRatio: 1.0 / 1.27,
-                children: List.generate(
-                  model.data!.products!.length,
-                  (index) => productBuilder(model.data!.products![index]),
-                ),
+            GridView.count(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisCount: 2,
+              crossAxisSpacing: 2.0,
+              mainAxisSpacing: 2.0,
+              childAspectRatio: 1.0 / 1.27,
+              children: List.generate(
+                model.data!.products!.length,
+                (index) => productBuilder(model.data!.products![index]),
               ),
             ),
           ],
@@ -96,88 +93,93 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget productBuilder(Product model) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Stack(
-          alignment: AlignmentDirectional.bottomStart,
-          children: [
-            Image(
-              image: NetworkImage('${model.image}'),
-              height: 130.0,
-              width: double.infinity,
-              fit: BoxFit.fill,
-            ),
-            Row(
-              children: [
-                model.discount != 0
-                    ? Container(
-                        color: Colors.red,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 7.0),
-                          child: Text(
-                            '% ${model.discount}',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 10.0,
-                            ),
-                          ),
-                        ),
-                      )
-                    : Container(),
-              ],
-            ),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
+    return Container(
+      color: Colors.white,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            alignment: AlignmentDirectional.bottomStart,
             children: [
-              Text('${model.name}',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'Changa',
-                    fontSize: 12.0,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis),
-              ///if discount = 0 hide it
-              Text(
-                'EGP ${model.price}',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Changa',
-                  fontSize: 14.0,
-                ),
+              Image(
+                image: NetworkImage('${model.image}'),
+                height: 130.0,
+                width: double.infinity,
+                fit: BoxFit.fill,
               ),
-
               Row(
                 children: [
-                  if (model.discount != 0)
-                    Text(
-                      'EGP ${model.oldPrice}',
-                      style: TextStyle(
-                        color: HexColor('CAF0F8'),
-                        fontFamily: 'Changa',
-                        fontSize: 10.0,
-                        decoration: TextDecoration.lineThrough,
-                      ),
-                    ),
-                  const Spacer(),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.favorite_border_outlined,
-                        color: HexColor('03045E')),
-                  ),
+                  model.discount != 0
+                      ? Container(
+                          color: Colors.red,
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 7.0),
+                            child: Text(
+                              '% ${model.discount}',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 10.0,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Container(),
                 ],
               ),
             ],
           ),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text('${model.name}',
+                    style: TextStyle(
+                      color: HexColor('0077B6'),
+                      fontFamily: 'Changa',
+                      fontSize: 12.0,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis),
+
+                ///if discount = 0 hide it
+                Text(
+                  'EGP ${model.price}',
+                  style: TextStyle(
+                    color: HexColor('0077B6'),
+                    fontFamily: 'Changa',
+                    fontSize: 14.0,
+                  ),
+                ),
+
+                Row(
+                  children: [
+                    if (model.discount != 0)
+                      Text(
+                        'EGP ${model.oldPrice}',
+                        style: TextStyle(
+                          color: HexColor('90E0EF'),
+                          fontFamily: 'Changa',
+                          fontSize: 10.0,
+                          decoration: TextDecoration.lineThrough,
+                        ),
+                      ),
+                    const Spacer(),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.favorite_border_outlined,
+                          color: HexColor('0077B6')),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
