@@ -80,7 +80,7 @@ class HomeScreen extends StatelessWidget {
               height: 10.0,
             ),
             Text(
-              '${categoriesModel.data?.data}',
+              'Categories',
               style: Theme.of(context).textTheme.headline5,
             ),
             SizedBox(
