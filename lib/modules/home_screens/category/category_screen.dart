@@ -33,25 +33,20 @@ class CategoryScreen extends StatelessWidget {
   Widget bodyBuilder(CategoriesModel categoriesModel) {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              ListView.separated(
-                scrollDirection: Axis.vertical,
-                physics: const BouncingScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (context, index) =>
-                    categoriesList(categoriesModel.data!.data![index], context),
-                separatorBuilder: (context, index) => separatorHorizontal(),
-                itemCount: categoriesModel.data!.data!.length,
-              )
-            ],
-          ),
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          ListView.separated(
+            scrollDirection: Axis.vertical,
+            physics: const BouncingScrollPhysics(),
+            shrinkWrap: true,
+            itemBuilder: (context, index) =>
+                categoriesList(categoriesModel.data!.data![index], context),
+            separatorBuilder: (context, index) => separatorHorizontal(),
+            itemCount: categoriesModel.data!.data!.length,
+          )
+        ],
       ),
     );
   }
@@ -76,11 +71,12 @@ class CategoryScreen extends StatelessWidget {
           ),
           const Spacer(),
           IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.arrow_forward_ios_outlined,
-                color: Colors.white,
-              ))
+            onPressed: () {},
+            icon: const Icon(
+              Icons.arrow_forward_ios_outlined,
+              color: Colors.white,
+            ),
+          )
         ],
       ),
     );
