@@ -10,4 +10,8 @@ class HomeSuccessState extends AppStates {}
 
 class HomeErrorState extends AppStates {}
 
+class CategoriesSuccessState extends AppStates {}
+
+class CategoriesErrorState extends AppStates {}
+
 class IconFavoriteChangeState extends AppStates{}

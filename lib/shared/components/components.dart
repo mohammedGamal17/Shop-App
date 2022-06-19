@@ -84,11 +84,21 @@ Widget textFormField({
   );
 }
 
-Widget separator() {
+Widget separatorHorizontal() {
   return Padding(
     padding: const EdgeInsets.all(10.0),
     child: Container(
       height: 2.0,
+      color: HexColor('DEE2E6'),
+    ),
+  );
+}
+
+Widget separatorVertical() {
+  return Padding(
+    padding: const EdgeInsets.all(10.0),
+    child: Container(
+      width: 2.0,
       color: HexColor('DEE2E6'),
     ),
   );

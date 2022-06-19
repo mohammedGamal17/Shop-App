@@ -74,6 +74,17 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(
               height: 10.0,
             ),
+            SizedBox(
+              height: 80.0,
+              child: ListView.separated(
+                itemBuilder: (context, index) => categoriesBuilder(),
+                separatorBuilder: (context, index) => separatorVertical() ,
+                itemCount: 10,
+              ),
+            ),
+            const SizedBox(
+              height: 10.0,
+            ),
             GridView.count(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -92,7 +103,15 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-
+Widget categoriesBuilder(){
+    return Stack(
+      alignment: AlignmentDirectional.bottomCenter,
+      children: const [
+        Image(image: NetworkImage('https://student.valuxapps.com/storage/uploads/categories/1644527120pTGA7.clothes.png'),width: 80,height: 80.0),
+        Text('data'),
+      ],
+    );
+}
   Widget productBuilder(Product model, context) {
     Icon favIcon = Icon(
       AppCubit.get(context).icon,
