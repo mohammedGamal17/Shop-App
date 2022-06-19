@@ -128,7 +128,6 @@ class AppCubit extends Cubit<AppStates> {
         print(
             '**************************** Categories Data Successfully come from Api ****************************');
         print(categoriesModel?.status);
-        print(categoriesModel?.data?.data?[0].name);
         print(
             '**************************** Categories Data Successfully come from Api ****************************');
       }
