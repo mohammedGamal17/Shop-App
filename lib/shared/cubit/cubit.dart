@@ -22,7 +22,7 @@ class AppCubit extends Cubit<AppStates> {
 
   ///classes data model
   HomeModel? homeModel;
-  CategoriesModel? categories;
+  CategoriesModel? categoriesModel;
 
   DioHelper dio = DioHelper();
   int currentIndex = 0;
@@ -123,11 +123,12 @@ class AppCubit extends Cubit<AppStates> {
     )
         .then((value) {
       emit(CategoriesSuccessState());
-      categories = CategoriesModel.fromJson(value.data);
+      categoriesModel = CategoriesModel.fromJson(value.data);
       if (kDebugMode) {
         print(
             '**************************** Categories Data Successfully come from Api ****************************');
-        print(categories?.status);
+        print(categoriesModel?.status);
+        print(categoriesModel?.data?.data?[0].name);
         print(
             '**************************** Categories Data Successfully come from Api ****************************');
       }
