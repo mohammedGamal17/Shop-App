@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:hexcolor/hexcolor.dart';
+import 'package:shop_app/models/categories_model/categories.dart';
 import 'package:shop_app/models/home_model/home_model.dart';
 import 'package:shop_app/models/home_model/product.dart';
 import 'package:shop_app/shared/cubit/cubit.dart';
@@ -16,16 +17,18 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AppCubit()..getHomeData(),
+      create: (context) => AppCubit()
+        ..getHomeData()
+        ..getCategoriesData(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
           AppCubit cubit = AppCubit.get(context);
           return Scaffold(
-            body: cubit.homeModel != null
+            body: cubit.homeModel != null && cubit.categoriesModel != null
 
                 ///put ! after home model to avoid error
-                ? homeScreen(cubit.homeModel!, context)
+                ? homeScreen(cubit.homeModel!, cubit.categoriesModel!, context)
                 : circularProgressIndicator(),
           );
         },
@@ -33,7 +36,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget homeScreen(HomeModel model, context) {
+  Widget homeScreen(HomeModel model, CategoriesModel categoriesModel, context) {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Padding(
@@ -77,7 +80,7 @@ class HomeScreen extends StatelessWidget {
               height: 10.0,
             ),
             Text(
-              'Categories',
+              '${categoriesModel.data?.data}',
               style: Theme.of(context).textTheme.headline5,
             ),
             SizedBox(
@@ -85,9 +88,9 @@ class HomeScreen extends StatelessWidget {
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) => categoriesBuilder(context),
+                itemBuilder: (context, index) => categoriesBuilder(categoriesModel.data!.data![index],context),
                 separatorBuilder: (context, index) => separatorVertical(),
-                itemCount: 10,
+                itemCount: categoriesModel.data!.data!.length,
               ),
             ),
             const SizedBox(
@@ -116,22 +119,21 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget categoriesBuilder(context) {
+  Widget categoriesBuilder(DataX model ,context) {
     return Stack(
       alignment: AlignmentDirectional.bottomCenter,
       children: [
-        const Image(
+         Image(
           image: NetworkImage(
-              'https://student.valuxapps.com/storage/uploads/categories/1644527120pTGA7.clothes.png'),
-          width: 80,
+              '${model.image}'),
+          fit: BoxFit.fill,
+          width: 80.0,
           height: 80.0,
         ),
         Container(
-          color: HexColor('0077B6'),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 7.0),
-            child: stackText(text: 'data', context),
-          ),
+          color: HexColor('16679a'),
+          width: 80.0,
+          child: stackText(text: '${model.name}', context),
         ),
       ],
     );
