@@ -20,13 +20,14 @@ class AppCubit extends Cubit<AppStates> {
 
   static AppCubit get(context) => BlocProvider.of(context);
 
-  ///class data model
+  ///classes data model
   HomeModel? homeModel;
+  Categories? categories;
+
   DioHelper dio = DioHelper();
   int currentIndex = 0;
   bool isFav = false;
   IconData icon = Icons.favorite_border_outlined;
-  Categories? categories;
 
   List<Widget> screen = [
     const HomeScreen(),
@@ -113,6 +114,35 @@ class AppCubit extends Cubit<AppStates> {
       }
     });
   }
+
+  void getCategoriesData() {
+    dio
+        .getDateFromApi(
+      url: getCategories,
+      token: token,
+    )
+        .then((value) {
+      emit(CategoriesSuccessState());
+      categories = Categories.fromJson(value.data);
+      if (kDebugMode) {
+        print(
+            '**************************** Categories Data Successfully come from Api ****************************');
+        print(categories?.status);
+        print(
+            '**************************** Categories Data Successfully come from Api ****************************');
+      }
+    }).catchError((onError) {
+      if (kDebugMode) {
+        emit(CategoriesErrorState());
+        print(
+            '***********************************************************************************************');
+        print('Error From Categories Api:  ${onError.toString()}');
+        print(
+            '***********************************************************************************************');
+      }
+    });
+  }
+
 
   void changeIconFav() {
     isFav = !isFav;
