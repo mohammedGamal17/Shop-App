@@ -56,7 +56,7 @@ class ThemeService {
       ),
       overline: TextStyle(
         color: HexColor('FFFFFF'),
-        backgroundColor: HexColor('0077B6'),
+        backgroundColor: HexColor('16679a'),
         fontFamily: 'Changa',
       ),
     ),
