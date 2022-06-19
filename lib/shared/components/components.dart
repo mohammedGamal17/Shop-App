@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import '../styles/colors.dart';
@@ -165,5 +166,5 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> snack(
 }
 
 Widget stackText(context, {required String text}) {
-  return Text(text, style: Theme.of(context).textTheme.overline,maxLines: 1,overflow:TextOverflow.ellipsis ,textAlign: TextAlign.center,);
+  return Text(text.capitalize!, style: Theme.of(context).textTheme.overline,maxLines: 1,overflow:TextOverflow.ellipsis ,textAlign: TextAlign.center,);
 }
