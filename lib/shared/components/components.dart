@@ -165,5 +165,5 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> snack(
 }
 
 Widget stackText(context, {required String text}) {
-  return Text(text, style: Theme.of(context).textTheme.overline,);
+  return Text(text, style: Theme.of(context).textTheme.overline,maxLines: 1,overflow:TextOverflow.ellipsis ,);
 }
