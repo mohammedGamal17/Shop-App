@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
             body: cubit.homeModel != null
 
                 ///put ! after home model to avoid error
-                ? homeScreen(cubit.homeModel!)
+                ? homeScreen(cubit.homeModel!, context)
                 : circularProgressIndicator(),
           );
         },
@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget homeScreen(HomeModel model) {
+  Widget homeScreen(HomeModel model, context) {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Padding(
@@ -83,7 +83,8 @@ class HomeScreen extends StatelessWidget {
               childAspectRatio: 1.0 / 1.27,
               children: List.generate(
                 model.data!.products!.length,
-                (index) => productBuilder(model.data!.products![index]),
+                (index) =>
+                    productBuilder(model.data!.products![index], context),
               ),
             ),
           ],
@@ -92,7 +93,11 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget productBuilder(Product model) {
+  Widget productBuilder(Product model, context) {
+    Icon favIcon = Icon(
+      AppCubit.get(context).icon,
+      color: HexColor('0077B6'),
+    );
     return Container(
       color: Colors.white,
       child: Column(
@@ -169,9 +174,10 @@ class HomeScreen extends StatelessWidget {
                       ),
                     const Spacer(),
                     IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.favorite_border_outlined,
-                          color: HexColor('0077B6')),
+                      onPressed: () {
+                        AppCubit.get(context).changeIconFav();
+                      },
+                      icon: favIcon,
                     ),
                   ],
                 ),

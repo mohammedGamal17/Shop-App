@@ -19,9 +19,12 @@ class AppCubit extends Cubit<AppStates> {
 
   static AppCubit get(context) => BlocProvider.of(context);
 
+  ///class data model
+  HomeModel? homeModel;
   DioHelper dio = DioHelper();
   int currentIndex = 0;
-  HomeModel? homeModel;
+  bool isFav = false;
+  IconData icon = Icons.favorite_border_outlined;
 
   List<Widget> screen = [
     const HomeScreen(),
@@ -91,17 +94,27 @@ class AppCubit extends Cubit<AppStates> {
       emit(HomeSuccessState());
       homeModel = HomeModel.fromJson(value.data);
       if (kDebugMode) {
-        print('**************************** Home Data Successfully come from Api ****************************');
+        print(
+            '**************************** Home Data Successfully come from Api ****************************');
         print(homeModel?.status);
-        print('**************************** Home Data Successfully come from Api ****************************');
+        print(
+            '**************************** Home Data Successfully come from Api ****************************');
       }
     }).catchError((onError) {
       if (kDebugMode) {
         emit(HomeErrorState());
-        print('***********************************************************************************************');
+        print(
+            '***********************************************************************************************');
         print('Error From Home Api:  ${onError.toString()}');
-        print('***********************************************************************************************');
+        print(
+            '***********************************************************************************************');
       }
     });
+  }
+
+  void changeIconFav() {
+    isFav = !isFav;
+    icon = isFav ? Icons.favorite : Icons.favorite_border_outlined;
+    emit(IconFavoriteChangeState());
   }
 }

@@ -9,3 +9,5 @@ class HomeLoadingState extends AppStates {}
 class HomeSuccessState extends AppStates {}
 
 class HomeErrorState extends AppStates {}
+
+class IconFavoriteChangeState extends AppStates{}
