@@ -14,6 +14,10 @@ class CategoriesSuccessState extends AppStates {}
 
 class CategoriesErrorState extends AppStates {}
 
+class FavSuccessState extends AppStates {}
+
+class FavErrorState extends AppStates {}
+
 class IconFavoriteChangeState extends AppStates{}
 
 //class SearchChangeState extends AppStates{}
