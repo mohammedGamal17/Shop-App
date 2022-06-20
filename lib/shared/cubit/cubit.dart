@@ -163,14 +163,14 @@ class AppCubit extends Cubit<AppStates> {
         .postDateFromApi(
       url: favorites,
       data: {'product_id': productId},
-      token: token,
+
     )
         .then((value) {
       changeFavModel = ChangeFavModel.fromJson(value.data);
       if (!changeFavModel!.status!) {
         fav[productId] = !fav[productId]!;
       }
-      emit(FavSuccessState());
+      emit(FavSuccessState(changeFavModel!));
     }).catchError((onError) {
       fav[productId] = !fav[productId]!;
       if (kDebugMode) {
