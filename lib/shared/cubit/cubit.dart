@@ -109,6 +109,8 @@ class AppCubit extends Cubit<AppStates> {
         print(
             '**************************** Home Data Successfully come from Api ****************************');
         print(homeModel?.status);
+        print(fav.toString());
+
         print(
             '**************************** Home Data Successfully come from Api ****************************');
       }
