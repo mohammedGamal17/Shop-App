@@ -163,7 +163,7 @@ class AppCubit extends Cubit<AppStates> {
         .postDateFromApi(
       url: favorites,
       data: {'product_id': productId},
-
+      token: token,
     )
         .then((value) {
       changeFavModel = ChangeFavModel.fromJson(value.data);
