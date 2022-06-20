@@ -19,7 +19,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AppCubit()
+      create: (context) =>
+      AppCubit()
         ..getHomeData()
         ..getCategoriesData(),
       child: BlocConsumer<AppCubit, AppStates>(
@@ -29,7 +30,7 @@ class HomeScreen extends StatelessWidget {
           return Scaffold(
             body: cubit.homeModel != null && cubit.categoriesModel != null
 
-                ///put ! after home model to avoid error
+            ///put ! after home model to avoid error
                 ? homeScreen(cubit.homeModel!, cubit.categoriesModel!, context)
                 : circularProgressIndicator(),
           );
@@ -83,15 +84,19 @@ class HomeScreen extends StatelessWidget {
             ),
             Text(
               'Categories',
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .headline5,
             ),
             SizedBox(
               height: 80.0,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) => categoriesBuilder(
-                    categoriesModel.data!.data![index], context),
+                itemBuilder: (context, index) =>
+                    categoriesBuilder(
+                        categoriesModel.data!.data![index], context),
                 separatorBuilder: (context, index) => separatorVertical(),
                 itemCount: categoriesModel.data!.data!.length,
               ),
@@ -101,7 +106,10 @@ class HomeScreen extends StatelessWidget {
             ),
             Text(
               'Products',
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .headline5,
             ),
             GridView.count(
               shrinkWrap: true,
@@ -112,7 +120,7 @@ class HomeScreen extends StatelessWidget {
               childAspectRatio: 1.0 / 1.37,
               children: List.generate(
                 model.data!.products!.length,
-                (index) =>
+                    (index) =>
                     productBuilder(model.data!.products![index], context),
               ),
             ),
@@ -138,7 +146,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(0.0,4.0,0.0,0.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
         child: Stack(
           alignment: AlignmentDirectional.bottomCenter,
           children: [
@@ -172,12 +180,9 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget productBuilder(Product model, context) {
-    Icon favIcon = Icon(
-      AppCubit.get(context).icon,
-      color: HexColor('0077B6'),
-    );
+    AppCubit cubit = AppCubit.get(context);
     return InkWell(
-      onTap: (){
+      onTap: () {
         navigateTo(context, Widget);
       },
       child: Container(
@@ -215,19 +220,19 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       model.discount != 0
                           ? Container(
-                              color: Colors.red,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 7.0),
-                                child: Text(
-                                  '% ${model.discount}',
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 10.0,
-                                  ),
-                                ),
-                              ),
-                            )
+                        color: Colors.red,
+                        child: Padding(
+                          padding:
+                          const EdgeInsets.symmetric(horizontal: 7.0),
+                          child: Text(
+                            '% ${model.discount}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10.0,
+                            ),
+                          ),
+                        ),
+                      )
                           : Container(),
                     ],
                   ),
@@ -276,9 +281,15 @@ class HomeScreen extends StatelessWidget {
                         IconButton(
                           onPressed: () {
                             print(model.id);
-                            AppCubit.get(context).changeIconFav();
+                            AppCubit.get(context).postFav(model.id!);
                           },
-                          icon: favIcon,
+                          icon: AppCubit
+                              .get(context)
+                              .fav[model.id]!
+                              ? Icon(
+                            cubit.icon = Icons.favorite, color: HexColor('0077B6'),)
+                              : Icon(cubit.icon =
+                              Icons.favorite_border_outlined, color: HexColor('0077B6'),),
                         ),
                       ],
                     ),
