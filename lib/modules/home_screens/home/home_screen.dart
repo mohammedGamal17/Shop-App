@@ -11,6 +11,8 @@ import '../../../shared/components/components.dart';
 import '../../../shared/cubit/states.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
+import '../../../shared/styles/colors.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -88,7 +90,8 @@ class HomeScreen extends StatelessWidget {
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) => categoriesBuilder(categoriesModel.data!.data![index],context),
+                itemBuilder: (context, index) => categoriesBuilder(
+                    categoriesModel.data!.data![index], context),
                 separatorBuilder: (context, index) => separatorVertical(),
                 itemCount: categoriesModel.data!.data!.length,
               ),
@@ -106,7 +109,7 @@ class HomeScreen extends StatelessWidget {
               crossAxisCount: 2,
               crossAxisSpacing: 2.0,
               mainAxisSpacing: 2.0,
-              childAspectRatio: 1.0 / 1.27,
+              childAspectRatio: 1.0 / 1.37,
               children: List.generate(
                 model.data!.products!.length,
                 (index) =>
@@ -119,23 +122,52 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget categoriesBuilder(DataX model ,context) {
-    return Stack(
-      alignment: AlignmentDirectional.bottomCenter,
-      children: [
-         Image(
-          image: NetworkImage(
-              '${model.image}'),
-          fit: BoxFit.fill,
-          width: 80.0,
-          height: 80.0,
+  Widget categoriesBuilder(DataX model, context) {
+    return Container(
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        color: buttonColor,
+        gradient: LinearGradient(
+          begin: AlignmentDirectional.topStart,
+          end: AlignmentDirectional.bottomEnd,
+          colors: [
+            HexColor('FFFFFF'),
+            HexColor('FFFFFF'),
+          ],
         ),
-        Container(
-          color: HexColor('16679a'),
-          width: 80.0,
-          child: stackText(text: '${model.name}', context),
+      ),
+      child: Padding(
+        padding: const EdgeInsetsDirectional.fromSTEB(0.0,4.0,0.0,0.0),
+        child: Stack(
+          alignment: AlignmentDirectional.bottomCenter,
+          children: [
+            Image(
+              image: NetworkImage('${model.image}'),
+              fit: BoxFit.fill,
+              width: 80.0,
+              height: 80.0,
+            ),
+            Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: buttonColor,
+                gradient: LinearGradient(
+                  begin: AlignmentDirectional.topStart,
+                  end: AlignmentDirectional.bottomEnd,
+                  colors: [
+                    HexColor('0077B6'),
+                    HexColor('023E8A'),
+                  ],
+                ),
+              ),
+              height: 20.0,
+              width: 84.0,
+              child: stackText(text: '${model.name}', context),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 
@@ -144,93 +176,117 @@ class HomeScreen extends StatelessWidget {
       AppCubit.get(context).icon,
       color: HexColor('0077B6'),
     );
-    return Container(
-      color: Colors.white,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            alignment: AlignmentDirectional.bottomStart,
-            children: [
-              Image(
-                image: NetworkImage('${model.image}'),
-                height: 130.0,
-                width: double.infinity,
-                fit: BoxFit.fill,
-              ),
-              Row(
-                children: [
-                  model.discount != 0
-                      ? Container(
-                          color: Colors.red,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 7.0),
-                            child: Text(
-                              '% ${model.discount}',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 10.0,
-                              ),
-                            ),
-                          ),
-                        )
-                      : Container(),
-                ],
-              ),
+    return InkWell(
+      onTap: (){
+        navigateTo(context, Widget);
+      },
+      child: Container(
+        height: 150.0,
+        width: double.infinity,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          color: buttonColor,
+          gradient: LinearGradient(
+            begin: AlignmentDirectional.topStart,
+            end: AlignmentDirectional.bottomEnd,
+            colors: [
+              HexColor('FFFFFF'),
+              HexColor('FFFFFF'),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text('${model.name}',
-                    style: TextStyle(
-                      color: HexColor('0077B6'),
-                      fontFamily: 'Changa',
-                      fontSize: 12.0,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis),
-
-                ///if discount = 0 hide it
-                Text(
-                  'EGP ${model.price}',
-                  style: TextStyle(
-                    color: HexColor('0077B6'),
-                    fontFamily: 'Changa',
-                    fontSize: 14.0,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Stack(
+                alignment: AlignmentDirectional.bottomStart,
+                children: [
+                  Image(
+                    image: NetworkImage('${model.image}'),
+                    height: 125.0,
+                    width: double.infinity,
+                    fit: BoxFit.fill,
                   ),
-                ),
-
-                Row(
+                  Row(
+                    children: [
+                      model.discount != 0
+                          ? Container(
+                              color: Colors.red,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 7.0),
+                                child: Text(
+                                  '% ${model.discount}',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10.0,
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Container(),
+                    ],
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    if (model.discount != 0)
-                      Text(
-                        'EGP ${model.oldPrice}',
-                        style: TextStyle(
-                          color: HexColor('90E0EF'),
-                          fontFamily: 'Changa',
-                          fontSize: 10.0,
-                          decoration: TextDecoration.lineThrough,
-                        ),
+                    Text(
+                      '${model.name}',
+                      style: TextStyle(
+                        color: HexColor('0077B6'),
+                        fontFamily: 'Changa',
+                        fontSize: 12.0,
                       ),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () {
-                        AppCubit.get(context).changeIconFav();
-                      },
-                      icon: favIcon,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+
+                    ///if discount = 0 hide it
+                    Text(
+                      'EGP ${model.price}',
+                      style: TextStyle(
+                        color: HexColor('0077B6'),
+                        fontFamily: 'Changa',
+                        fontSize: 14.0,
+                      ),
+                    ),
+
+                    Row(
+                      children: [
+                        if (model.discount != 0)
+                          Text(
+                            'EGP ${model.oldPrice}',
+                            style: TextStyle(
+                              color: HexColor('90E0EF'),
+                              fontFamily: 'Changa',
+                              fontSize: 10.0,
+                              decoration: TextDecoration.lineThrough,
+                            ),
+                          ),
+                        const Spacer(),
+                        IconButton(
+                          onPressed: () {
+                            AppCubit.get(context).changeIconFav();
+                          },
+                          icon: favIcon,
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
