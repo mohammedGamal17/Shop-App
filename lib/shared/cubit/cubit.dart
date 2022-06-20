@@ -28,6 +28,8 @@ class AppCubit extends Cubit<AppStates> {
   int currentIndex = 0;
   bool isFav = false;
   IconData icon = Icons.favorite_border_outlined;
+  Map<int, bool> fav = {};
+
   //bool isSearchExpanded = false;
   //IconData searchIcon = Icons.search_outlined;
 
@@ -98,6 +100,11 @@ class AppCubit extends Cubit<AppStates> {
         .then((value) {
       emit(HomeSuccessState());
       homeModel = HomeModel.fromJson(value.data);
+      homeModel?.data?.products?.forEach((element) {
+        fav.addAll({
+          element.id!: element.inFavorites!,
+        });
+      });
       if (kDebugMode) {
         print(
             '**************************** Home Data Successfully come from Api ****************************');
@@ -145,14 +152,13 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-
   void changeIconFav() {
     isFav = !isFav;
     icon = isFav ? Icons.favorite : Icons.favorite_border_outlined;
     emit(IconFavoriteChangeState());
   }
 
-  /*void changeSearchState(){
+/*void changeSearchState(){
     isSearchExpanded = ! isSearchExpanded;
     searchIcon = isSearchExpanded ? Icons.close : Icons.search_outlined ;
     emit(SearchChangeState());
