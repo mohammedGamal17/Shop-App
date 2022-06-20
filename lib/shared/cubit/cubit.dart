@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shop_app/models/categories_model/categories.dart';
+import 'package:shop_app/models/change_fav_model/change_fav_model.dart';
 import 'package:shop_app/shared/cubit/states.dart';
 import 'package:shop_app/shared/network/endpoint/end_point.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
@@ -23,6 +24,7 @@ class AppCubit extends Cubit<AppStates> {
   ///classes data model
   HomeModel? homeModel;
   CategoriesModel? categoriesModel;
+  ChangeFavModel ?changeFavModel;
 
   DioHelper dio = DioHelper();
   int currentIndex = 0;
@@ -155,6 +157,8 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   void postFav(int productId) {
+    fav[productId]=!fav[productId]!;
+    emit(IconFavoriteChangeState());
     dio
         .postDateFromApi(
           url: favorites,
@@ -162,9 +166,11 @@ class AppCubit extends Cubit<AppStates> {
           token: token,
         )
         .then((value) {
+      changeFavModel= ChangeFavModel.fromJson(value.data);
       emit(FavSuccessState());
     })
         .catchError((onError) {
+      fav[productId]=!fav[productId]!;
       if (kDebugMode) {
         emit(FavErrorState());
         print(
@@ -175,16 +181,4 @@ class AppCubit extends Cubit<AppStates> {
       }
     });
   }
-
-  void changeIconFav() {
-    isFav = !isFav;
-    icon = isFav ? Icons.favorite : Icons.favorite_border_outlined;
-    emit(IconFavoriteChangeState());
-  }
-
-/*void changeSearchState(){
-    isSearchExpanded = ! isSearchExpanded;
-    searchIcon = isSearchExpanded ? Icons.close : Icons.search_outlined ;
-    emit(SearchChangeState());
-  }*/
 }
