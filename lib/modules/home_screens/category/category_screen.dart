@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:shop_app/shared/components/components.dart';
 
 import '../../../models/categories_model/categories.dart';
 import '../../../shared/cubit/cubit.dart';
 import '../../../shared/cubit/states.dart';
+import '../../../shared/styles/colors.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({Key? key}) : super(key: key);
@@ -22,7 +24,7 @@ class CategoryScreen extends StatelessWidget {
             body: cubit.categoriesModel != null
 
                 ///put ! after home model to avoid error
-                ? bodyBuilder(cubit.categoriesModel!)
+                ? bodyBuilder(cubit.categoriesModel!, context)
                 : circularProgressIndicator(),
           );
         },
@@ -30,22 +32,25 @@ class CategoryScreen extends StatelessWidget {
     );
   }
 
-  Widget bodyBuilder(CategoriesModel categoriesModel) {
+  Widget bodyBuilder(CategoriesModel categoriesModel, context) {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          ListView.separated(
-            scrollDirection: Axis.vertical,
-            physics: const BouncingScrollPhysics(),
+          GridView.count(
             shrinkWrap: true,
-            itemBuilder: (context, index) =>
-                categoriesList(categoriesModel.data!.data![index], context),
-            separatorBuilder: (context, index) => separatorHorizontal(),
-            itemCount: categoriesModel.data!.data!.length,
-          )
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisCount: 2,
+            crossAxisSpacing: 1.0,
+            mainAxisSpacing: 1.0,
+            children: List.generate(
+              categoriesModel.data!.data!.length,
+                  (index) =>
+                      categoriesList(categoriesModel.data!.data![index], context),
+            ),
+          ),
         ],
       ),
     );
@@ -54,30 +59,48 @@ class CategoryScreen extends StatelessWidget {
   Widget categoriesList(DataX model, context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Image(
-            image: NetworkImage('${model.image}'),
-            fit: BoxFit.fill,
-            height: 70.0,
-            width: 70.0,
-          ),
-          separatorVertical(),
-          Text(
-            '${model.name}'.capitalize!,
-            style: Theme.of(context).textTheme.bodyText1,
-          ),
-          const Spacer(),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.arrow_forward_ios_outlined,
-              color: Colors.white,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(10.0),
+        onTap: (){},
+        child: Container(
+          height: 128.0,
+          width: double.infinity,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15.0),
+            color: buttonColor,
+            gradient: LinearGradient(
+              begin: AlignmentDirectional.topStart,
+              end: AlignmentDirectional.bottomEnd,
+              colors: [
+                HexColor('0077B6'),
+                HexColor('023E8A'),
+              ],
             ),
-          )
-        ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image(
+                  image: NetworkImage('${model.image}'),
+                  fit: BoxFit.fill,
+                  height: 80.0,
+                  width: 80.0,
+                ),
+                //separatorVertical(),
+                Text(
+                  '${model.name}'.capitalize!,
+                  style: Theme.of(context).textTheme.bodyText1,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
