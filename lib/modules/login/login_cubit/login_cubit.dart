@@ -31,7 +31,7 @@ class LoginCubit extends Cubit<LoginStates> {
       if (kDebugMode) {
         print('**************************** login Data Successfully come from Api ****************************');
         loginModel = ShopLoginModel.fromJson(value.data);
-        //print(value.data);
+        print(loginModel?.data?.token);
         print('**************************** login Data Successfully come from Api ****************************');
       }
       emit(LoginSuccessState(loginModel!));
