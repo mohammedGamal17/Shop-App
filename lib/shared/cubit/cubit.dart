@@ -28,6 +28,8 @@ class AppCubit extends Cubit<AppStates> {
   int currentIndex = 0;
   bool isFav = false;
   IconData icon = Icons.favorite_border_outlined;
+  //bool isSearchExpanded = false;
+  //IconData searchIcon = Icons.search_outlined;
 
   List<Widget> screen = [
     const HomeScreen(),
@@ -149,4 +151,10 @@ class AppCubit extends Cubit<AppStates> {
     icon = isFav ? Icons.favorite : Icons.favorite_border_outlined;
     emit(IconFavoriteChangeState());
   }
+
+  /*void changeSearchState(){
+    isSearchExpanded = ! isSearchExpanded;
+    searchIcon = isSearchExpanded ? Icons.close : Icons.search_outlined ;
+    emit(SearchChangeState());
+  }*/
 }
