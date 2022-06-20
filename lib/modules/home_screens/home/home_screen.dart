@@ -275,6 +275,7 @@ class HomeScreen extends StatelessWidget {
                         const Spacer(),
                         IconButton(
                           onPressed: () {
+                            print(model.id);
                             AppCubit.get(context).changeIconFav();
                           },
                           icon: favIcon,
