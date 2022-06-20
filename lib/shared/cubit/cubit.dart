@@ -100,7 +100,7 @@ class AppCubit extends Cubit<AppStates> {
         .then((value) {
       emit(HomeSuccessState());
       homeModel = HomeModel.fromJson(value.data);
-      homeModel?.data?.products?.forEach((element) {
+      homeModel!.data!.products?.forEach((element) {
         fav.addAll({
           element.id!: element.inFavorites!,
         });
@@ -118,10 +118,10 @@ class AppCubit extends Cubit<AppStates> {
       if (kDebugMode) {
         emit(HomeErrorState());
         print(
-            '***********************************************************************************************');
+            '********************************** Error from Home API **********************************');
         print('Error From Home Api:  ${onError.toString()}');
         print(
-            '***********************************************************************************************');
+            '********************************** Error from Home API **********************************');
       }
     });
   }
@@ -146,10 +146,32 @@ class AppCubit extends Cubit<AppStates> {
       if (kDebugMode) {
         emit(CategoriesErrorState());
         print(
-            '***********************************************************************************************');
+            '********************************** Error from Categories API **********************************');
         print('Error From Categories Api:  ${onError.toString()}');
         print(
-            '***********************************************************************************************');
+            '********************************** Error from Categories API **********************************');
+      }
+    });
+  }
+
+  void postFav(int productId) {
+    dio
+        .postDateFromApi(
+          url: favorites,
+          data: {'product_id': productId},
+          token: token,
+        )
+        .then((value) {
+      emit(FavSuccessState());
+    })
+        .catchError((onError) {
+      if (kDebugMode) {
+        emit(FavErrorState());
+        print(
+            '********************************** Error from Fav API **********************************');
+        print('Error From Fav Api:  ${onError.toString()}');
+        print(
+            '********************************** Error from Fav API **********************************');
       }
     });
   }
