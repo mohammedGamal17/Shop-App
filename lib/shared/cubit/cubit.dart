@@ -24,7 +24,7 @@ class AppCubit extends Cubit<AppStates> {
   ///classes data model
   HomeModel? homeModel;
   CategoriesModel? categoriesModel;
-  ChangeFavModel ?changeFavModel;
+  ChangeFavModel? changeFavModel;
 
   DioHelper dio = DioHelper();
   int currentIndex = 0;
@@ -157,20 +157,22 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   void postFav(int productId) {
-    fav[productId]=!fav[productId]!;
+    fav[productId] = !fav[productId]!;
     emit(IconFavoriteChangeState());
     dio
         .postDateFromApi(
-          url: favorites,
-          data: {'product_id': productId},
-          token: token,
-        )
+      url: favorites,
+      data: {'product_id': productId},
+      token: token,
+    )
         .then((value) {
-      changeFavModel= ChangeFavModel.fromJson(value.data);
+      changeFavModel = ChangeFavModel.fromJson(value.data);
+      if (!changeFavModel!.status!) {
+        fav[productId] = !fav[productId]!;
+      }
       emit(FavSuccessState());
-    })
-        .catchError((onError) {
-      fav[productId]=!fav[productId]!;
+    }).catchError((onError) {
+      fav[productId] = !fav[productId]!;
       if (kDebugMode) {
         emit(FavErrorState());
         print(
