@@ -1,11 +1,11 @@
 class Product {
   String? description;
-  int? discount;
+  dynamic discount;
   int? id;
   String? image;
   String? name;
-  int? oldPrice;
-  int? price;
+  dynamic oldPrice;
+  dynamic price;
 
   Product(
       {this.description,
