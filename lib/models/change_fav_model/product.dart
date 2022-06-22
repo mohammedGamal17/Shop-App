@@ -2,8 +2,8 @@ class Product {
   int? discount;
   int? id;
   String? image;
-  int? oldPrice;
-  int? price;
+  dynamic oldPrice;
+  dynamic price;
 
   Product({this.discount, this.id, this.image, this.oldPrice, this.price});
 
