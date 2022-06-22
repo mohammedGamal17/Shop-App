@@ -1,4 +1,4 @@
-import 'package:shop_app/models/get_fav_model/Product.dart';
+import 'package:shop_app/models/get_fav_model/product.dart';
 
 class DataX {
   int? id;
