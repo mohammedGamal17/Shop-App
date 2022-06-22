@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:shop_app/models/get_fav_model/get_fav_model.dart';
 
 import '../../../models/get_fav_model/data_x.dart';
+import '../../../models/get_fav_model/get_fav_model.dart';
+
 import '../../../shared/components/components.dart';
 import '../../../shared/cubit/cubit.dart';
 import '../../../shared/cubit/states.dart';
@@ -21,20 +22,30 @@ class FavouriteScreen extends StatelessWidget {
         builder: (context, state) {
           AppCubit cubit = AppCubit.get(context);
           return Scaffold(
-            body: ListView.separated(
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) => itemBuilder(cubit.getFav!.data!.data![index],context),
-              separatorBuilder: (context, index) => const SizedBox(height: 0.0),
-              itemCount: 10,
-            ),
+            body: cubit.getFav != null
+
+                ///put ! after home model to avoid error
+                ? pageBuilder(cubit.getFav!, context)
+                : circularProgressIndicator(),
           );
         },
       ),
     );
   }
 
-  Widget itemBuilder(DataX model,context ) {
+  Widget pageBuilder(GetFavModel model, context) {
     AppCubit cubit = AppCubit.get(context);
+
+    return ListView.separated(
+      physics: const BouncingScrollPhysics(),
+      itemBuilder: (context, index) =>
+          itemBuilder(cubit.getFav!.data!.data![index], context),
+      separatorBuilder: (context, index) => const SizedBox(height: 0.0),
+      itemCount: cubit.getFav!.data!.data!.length,
+    );
+  }
+
+  Widget itemBuilder(DataX model, context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
@@ -61,29 +72,28 @@ class FavouriteScreen extends StatelessWidget {
                 alignment: AlignmentDirectional.bottomStart,
                 children: [
                   Image(
-                    image: NetworkImage(
-                        '${model.product?.image}'),
+                    image: NetworkImage('${model.product!.image}'),
                     height: 125.0,
                     width: 125.0,
                     fit: BoxFit.fill,
                   ),
                   Row(
                     children: [
-                      1 != 0
+                      model.product!.discount != 0
                           ? Container(
-                        color: Colors.red,
-                        child: Padding(
-                          padding:
-                          const EdgeInsets.symmetric(horizontal: 7.0),
-                          child: Text(
-                            '% 20',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 10.0,
-                            ),
-                          ),
-                        ),
-                      )
+                              color: Colors.red,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 7.0),
+                                child: Text(
+                                  '% ${model.product!.discount}',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10.0,
+                                  ),
+                                ),
+                              ),
+                            )
                           : Container(),
                     ],
                   ),
@@ -98,7 +108,7 @@ class FavouriteScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      'IPhone',
+                      '${model.product!.name}',
                       style: TextStyle(
                         color: HexColor('0077B6'),
                         fontFamily: 'Changa',
@@ -110,7 +120,7 @@ class FavouriteScreen extends StatelessWidget {
 
                     ///if discount = 0 hide it
                     Text(
-                      'EGP 2000',
+                      'EGP ${model.product!.oldPrice}',
                       style: TextStyle(
                         color: HexColor('0077B6'),
                         fontFamily: 'Changa',
@@ -120,7 +130,7 @@ class FavouriteScreen extends StatelessWidget {
                     const Spacer(),
                     Row(
                       children: [
-                        if (1 != 0)
+                        if (model.product!.discount != 0)
                           Text(
                             'EGP 2000',
                             style: TextStyle(
@@ -133,18 +143,18 @@ class FavouriteScreen extends StatelessWidget {
                         const Spacer(),
                         IconButton(
                           onPressed: () {
-                            //AppCubit.get(context).postFav(model.id!);
+                           AppCubit.get(context).postFav(model.product!.id!);
                           },
-                          icon: true
-                          //AppCubit.get(context).fav[model.id]!
+                          icon: AppCubit.get(context).fav[model.product?.id] == null
                               ? Icon(
-                            cubit.icon = Icons.favorite,
-                            color: HexColor('0077B6'),
-                          )
+                                  AppCubit.get(context).icon = Icons.favorite,
+                                  color: HexColor('0077B6'),
+                                )
                               : Icon(
-                            cubit.icon = Icons.favorite_border_outlined,
-                            color: HexColor('0077B6'),
-                          ),
+                                  AppCubit.get(context).icon =
+                                      Icons.favorite_border_outlined,
+                                  color: HexColor('0077B6'),
+                                ),
                         ),
                       ],
                     ),
