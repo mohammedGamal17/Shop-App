@@ -1,4 +1,5 @@
-import 'package:shop_app/models/get_fav_model/DataX.dart';
+import 'package:shop_app/models/get_fav_model/data_x.dart';
+
 
 class Data {
   List<DataX>? data;
