@@ -12,7 +12,7 @@ class Data {
   int? perPage;
   Object? prevPageUrl;
   int? to;
-  int? total;
+  dynamic total;
 
   Data(
       {this.data,
