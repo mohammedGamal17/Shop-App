@@ -12,18 +12,21 @@ class FavouriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AppCubit, AppStates>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        return Scaffold(
-          body: ListView.separated(
-            physics: const BouncingScrollPhysics(),
-            itemBuilder: (context, index) => itemBuilder(context),
-            separatorBuilder: (context, index) => const SizedBox(height: 0.0),
-            itemCount: 10,
-          ),
-        );
-      },
+    return BlocProvider(
+      create: (context) => AppCubit()..getFavData(),
+      child: BlocConsumer<AppCubit, AppStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return Scaffold(
+            body: ListView.separated(
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: (context, index) => itemBuilder(context),
+              separatorBuilder: (context, index) => const SizedBox(height: 0.0),
+              itemCount: 10,
+            ),
+          );
+        },
+      ),
     );
   }
 
@@ -65,19 +68,19 @@ class FavouriteScreen extends StatelessWidget {
                     children: [
                       1 != 0
                           ? Container(
-                              color: Colors.red,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 7.0),
-                                child: Text(
-                                  '% 20',
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 10.0,
-                                  ),
-                                ),
-                              ),
-                            )
+                        color: Colors.red,
+                        child: Padding(
+                          padding:
+                          const EdgeInsets.symmetric(horizontal: 7.0),
+                          child: Text(
+                            '% 20',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10.0,
+                            ),
+                          ),
+                        ),
+                      )
                           : Container(),
                     ],
                   ),
@@ -130,15 +133,15 @@ class FavouriteScreen extends StatelessWidget {
                             //AppCubit.get(context).postFav(model.id!);
                           },
                           icon: true
-                              //AppCubit.get(context).fav[model.id]!
+                          //AppCubit.get(context).fav[model.id]!
                               ? Icon(
-                                  cubit.icon = Icons.favorite,
-                                  color: HexColor('0077B6'),
-                                )
+                            cubit.icon = Icons.favorite,
+                            color: HexColor('0077B6'),
+                          )
                               : Icon(
-                                  cubit.icon = Icons.favorite_border_outlined,
-                                  color: HexColor('0077B6'),
-                                ),
+                            cubit.icon = Icons.favorite_border_outlined,
+                            color: HexColor('0077B6'),
+                          ),
                         ),
                       ],
                     ),
