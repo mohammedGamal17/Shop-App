@@ -1,6 +1,3 @@
-
-import 'package:shop_app/modules/Login/login_cubit/login_state.dart';
-
 import '../../../models/login_molel/shop_login_model.dart';
 
 abstract class LoginStates {}
