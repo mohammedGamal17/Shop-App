@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:shop_app/models/get_fav_model/get_fav_model.dart';
 
+import '../../../models/get_fav_model/data_x.dart';
 import '../../../shared/components/components.dart';
 import '../../../shared/cubit/cubit.dart';
 import '../../../shared/cubit/states.dart';
@@ -17,10 +19,11 @@ class FavouriteScreen extends StatelessWidget {
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
+          AppCubit cubit = AppCubit.get(context);
           return Scaffold(
             body: ListView.separated(
               physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) => itemBuilder(context),
+              itemBuilder: (context, index) => itemBuilder(cubit.getFav!.data!.data![index],context),
               separatorBuilder: (context, index) => const SizedBox(height: 0.0),
               itemCount: 10,
             ),
@@ -30,7 +33,7 @@ class FavouriteScreen extends StatelessWidget {
     );
   }
 
-  Widget itemBuilder(context) {
+  Widget itemBuilder(DataX model,context ) {
     AppCubit cubit = AppCubit.get(context);
     return Padding(
       padding: const EdgeInsets.all(10.0),
@@ -59,7 +62,7 @@ class FavouriteScreen extends StatelessWidget {
                 children: [
                   Image(
                     image: NetworkImage(
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwZ3KUJBqpbi9pHwj9-s8oHd-i7qJGoORMfw&usqp=CAU'),
+                        '${model.product?.image}'),
                     height: 125.0,
                     width: 125.0,
                     fit: BoxFit.fill,
