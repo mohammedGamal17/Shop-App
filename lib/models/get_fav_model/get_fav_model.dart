@@ -1,4 +1,4 @@
-import '../change_fav_model/data.dart';
+import 'package:shop_app/models/get_fav_model/Data.dart';
 
 class GetFavModel {
   Data? data;
