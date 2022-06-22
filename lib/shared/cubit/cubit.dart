@@ -198,7 +198,7 @@ class AppCubit extends Cubit<AppStates> {
       if (kDebugMode) {
         print(
             '**************************** Fav Data Successfully come from Api ****************************');
-        print(getFav?.data.);
+        print(getFav?.status);
         print(
             '**************************** Fav Data Successfully come from Api ****************************');
       }
