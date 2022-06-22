@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shop_app/models/categories_model/categories.dart';
 import 'package:shop_app/models/change_fav_model/change_fav_model.dart';
+import 'package:shop_app/models/get_fav_model/get_fav_model.dart';
 import 'package:shop_app/shared/cubit/states.dart';
 import 'package:shop_app/shared/network/endpoint/end_point.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
@@ -25,6 +26,7 @@ class AppCubit extends Cubit<AppStates> {
   HomeModel? homeModel;
   CategoriesModel? categoriesModel;
   ChangeFavModel? changeFavModel;
+  GetFavModel? getFav;
 
   DioHelper dio = DioHelper();
   int currentIndex = 0;
@@ -180,6 +182,34 @@ class AppCubit extends Cubit<AppStates> {
         print('Error From Fav Api:  ${onError.toString()}');
         print(
             '********************************** Error from Fav API **********************************');
+      }
+    });
+  }
+
+  void getFavData() {
+    dio
+        .getDateFromApi(
+      url: favorites,
+      token: token,
+    )
+        .then((value) {
+      getFav = GetFavModel.fromJson(value.data);
+      emit(GetFavSuccessState(getFav!));
+      if (kDebugMode) {
+        print(
+            '**************************** Fav Data Successfully come from Api ****************************');
+        print(getFav?.data.);
+        print(
+            '**************************** Fav Data Successfully come from Api ****************************');
+      }
+    }).catchError((onError) {
+      if (kDebugMode) {
+        emit(GetFavErrorState());
+        print(
+            '********************************** Error from FavGetFavData API **********************************');
+        print('Error From GetFavData ${onError.toString()}');
+        print(
+            '********************************** Error from FavGetFavData API **********************************');
       }
     });
   }
