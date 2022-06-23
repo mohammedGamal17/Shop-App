@@ -32,7 +32,7 @@ class AppCubit extends Cubit<AppStates> {
   int currentIndex = 0;
   bool isFav = false;
   IconData icon = Icons.favorite_border_outlined;
-  Map<int, bool> fav = {};
+  Map<int, bool> favMap = {};
 
   //bool isSearchExpanded = false;
   //IconData searchIcon = Icons.search_outlined;
@@ -105,7 +105,7 @@ class AppCubit extends Cubit<AppStates> {
       emit(HomeSuccessState());
       homeModel = HomeModel.fromJson(value.data);
       homeModel!.data!.products?.forEach((element) {
-        fav.addAll({
+        favMap.addAll({
           element.id!: element.inFavorites!,
         });
       });
@@ -113,7 +113,7 @@ class AppCubit extends Cubit<AppStates> {
         print(
             '**************************** Home Data Successfully come from Api ****************************');
         print(homeModel?.status);
-        print(fav.toString());
+        print(favMap.toString());
 
         print(
             '**************************** Home Data Successfully come from Api ****************************');
@@ -159,7 +159,7 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   void postFavData(int productId) {
-    fav[productId] = !fav[productId]!;
+    favMap[productId] = !favMap[productId]!;
     emit(IconFavoriteChangeState());
     dio
         .postDateFromApi(
@@ -170,11 +170,11 @@ class AppCubit extends Cubit<AppStates> {
         .then((value) {
       changeFavModel = ChangeFavModel.fromJson(value.data);
       if (!changeFavModel!.status!) {
-        fav[productId] = !fav[productId]!;
+        favMap[productId] = !favMap[productId]!;
       }
       emit(FavSuccessState(changeFavModel!));
     }).catchError((onError) {
-      fav[productId] = !fav[productId]!;
+      favMap[productId] = !favMap[productId]!;
       if (kDebugMode) {
         emit(FavErrorState());
         print(
