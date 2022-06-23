@@ -28,9 +28,7 @@ class FavErrorState extends AppStates {}
 class IconFavoriteChangeState extends AppStates{}
 
 class GetFavSuccessState extends AppStates {
-  final GetFavModel model;
 
-  GetFavSuccessState(this.model);
 
 }
 
