@@ -291,7 +291,7 @@ class HomeScreen extends StatelessWidget {
                           },
                           icon: AppCubit
                               .get(context)
-                              .fav[model.id]!
+                              .favMap[model.id]!
                               ? Icon(
                             cubit.icon = Icons.favorite, color: HexColor('0077B6'),)
                               : Icon(cubit.icon =
