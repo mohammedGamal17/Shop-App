@@ -22,26 +22,19 @@ class FavouriteScreen extends StatelessWidget {
         builder: (context, state) {
           AppCubit cubit = AppCubit.get(context);
           return Scaffold(
-            body: cubit.getFav != null
-
-                ///put ! after home model to avoid error
-                ? pageBuilder(cubit.getFav!, context)
+            body: cubit.getFavModel != null
+                ? ListView.separated(
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, index) =>
+                        itemBuilder(cubit.getFavModel!.data!.data![index], context),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 0.0),
+                    itemCount: cubit.getFavModel!.data!.data!.length,
+                  )
                 : circularProgressIndicator(),
           );
         },
       ),
-    );
-  }
-
-  Widget pageBuilder(GetFavModel model, context) {
-    AppCubit cubit = AppCubit.get(context);
-
-    return ListView.separated(
-      physics: const BouncingScrollPhysics(),
-      itemBuilder: (context, index) =>
-          itemBuilder(cubit.getFav!.data!.data![index], context),
-      separatorBuilder: (context, index) => const SizedBox(height: 0.0),
-      itemCount: cubit.getFav!.data!.data!.length,
     );
   }
 
@@ -143,9 +136,10 @@ class FavouriteScreen extends StatelessWidget {
                         const Spacer(),
                         IconButton(
                           onPressed: () {
-                           AppCubit.get(context).postFav(model.product!.id!);
+                            AppCubit.get(context).postFavData(model.product!.id!);
                           },
-                          icon: AppCubit.get(context).fav[model.product?.id] == null
+                          icon: AppCubit.get(context).fav[model.product?.id] ==
+                                  null
                               ? Icon(
                                   AppCubit.get(context).icon = Icons.favorite,
                                   color: HexColor('0077B6'),
