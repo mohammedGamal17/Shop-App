@@ -2,7 +2,7 @@ import 'package:shop_app/models/get_fav_model/data.dart';
 
 class GetFavModel {
   Data? data;
-  dynamic message;
+  String ?message;
   bool? status;
 
   GetFavModel({this.data, this.message, this.status});
@@ -11,6 +11,7 @@ class GetFavModel {
     return GetFavModel(
       data: json['data'] != null ? Data.fromJson(json['data']) : null,
       status: json['status'],
+      message: json['message'],
     );
   }
 }
