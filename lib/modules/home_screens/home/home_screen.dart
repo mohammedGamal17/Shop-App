@@ -287,7 +287,7 @@ class HomeScreen extends StatelessWidget {
                         IconButton(
                           onPressed: () {
                             print(model.id);
-                            AppCubit.get(context).postFav(model.id!);
+                            AppCubit.get(context).postFavData(model.id!);
                           },
                           icon: AppCubit
                               .get(context)
