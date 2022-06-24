@@ -1,8 +1,7 @@
 import 'package:shop_app/models/get_fav_model/data_x.dart';
 
-
 class Data {
-  List<DataX>? data;
+  List<DataX>? data = [];
   int? currentPage;
   String? firstPageUrl;
   int? from;
