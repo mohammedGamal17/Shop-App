@@ -158,10 +158,10 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  void postFavData(int productId) {
+  postFavData(int productId) async {
     favMap[productId] = !favMap[productId]!;
     emit(IconFavoriteChangeState());
-    dio
+    await dio
         .postDateFromApi(
       url: favorites,
       data: {'product_id': productId},
@@ -171,6 +171,8 @@ class AppCubit extends Cubit<AppStates> {
       changeFavModel = ChangeFavModel.fromJson(value.data);
       if (!changeFavModel!.status!) {
         favMap[productId] = !favMap[productId]!;
+      } else {
+        getFavData();
       }
       emit(FavSuccessState(changeFavModel!));
     }).catchError((onError) {
@@ -187,6 +189,7 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   void getFavData() {
+    emit(GetFavLoadingState());
     dio
         .getDateFromApi(
       url: favorites,
