@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shop_app/models/categories_model/categories.dart';
-import 'package:shop_app/models/change_fav_model/change_fav_model.dart';
-import 'package:shop_app/models/get_fav_model/get_fav_model.dart';
+
 import 'package:shop_app/shared/cubit/states.dart';
 import 'package:shop_app/shared/network/endpoint/end_point.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 
 import '../../models/home_model/home_model.dart';
+import '../../models/change_fav_model/change_favourite_model.dart';
+import '../../models/get_fav_model/get_favorite_data.dart';
 import '../../modules/home_screens/account/account_screen.dart';
 import '../../modules/home_screens/category/category_screen.dart';
 import '../../modules/home_screens/favourite/favourite_screen.dart';
@@ -25,8 +26,8 @@ class AppCubit extends Cubit<AppStates> {
   ///classes data model
   HomeModel? homeModel;
   CategoriesModel? categoriesModel;
-  ChangeFavModel? changeFavModel;
-  GetFavModel? getFavModel;
+  ChangeFavouriteModel? changeFavModel;
+  GetFavouriteData? getFavModel;
 
   DioHelper dio = DioHelper();
   int currentIndex = 0;
@@ -104,11 +105,11 @@ class AppCubit extends Cubit<AppStates> {
         .then((value) {
       emit(HomeSuccessState());
       homeModel = HomeModel.fromJson(value.data);
-      homeModel!.data!.products?.forEach((element) {
+      for (var element in homeModel!.data!.products!) {
         favMap.addAll({
-          element.id!: element.inFavorites!,
+          element.id: element.inFavorites,
         });
-      });
+      }
       if (kDebugMode) {
         print(
             '**************************** Home Data Successfully come from Api ****************************');
@@ -158,8 +159,13 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
+  IconData ?favIcon;
   postFavData(int productId) async {
-    favMap[productId] = !favMap[productId]!;
+    if (favMap[productId] == true) {
+      favMap[productId] = false;
+    } else {
+      favMap[productId] = true;
+    }
     emit(IconFavoriteChangeState());
     await dio
         .postDateFromApi(
@@ -168,14 +174,19 @@ class AppCubit extends Cubit<AppStates> {
       token: token,
     )
         .then((value) {
-      changeFavModel = ChangeFavModel.fromJson(value.data);
-      if (!changeFavModel!.status!) {
-        favMap[productId] = !favMap[productId]!;
-      } else {
-        getFavData();
-      }
-      emit(FavSuccessState(changeFavModel!));
+      changeFavModel = ChangeFavouriteModel.fromJson(value.data);
+
+      getFavData();
+
+      emit(FavSuccessState());
     }).catchError((onError) {
+      if (favMap[productId] == true) {
+        favMap[productId] = false;
+        favIcon = Icons.favorite;
+      } else {
+        favMap[productId] = true;
+        favIcon = Icons.favorite_border;
+      }
       favMap[productId] = !favMap[productId]!;
       if (kDebugMode) {
         emit(FavErrorState());
@@ -196,7 +207,7 @@ class AppCubit extends Cubit<AppStates> {
       token: token,
     )
         .then((value) {
-      getFavModel = GetFavModel.fromJson(value.data);
+      getFavModel = GetFavouriteData.fromJson(value.data);
       emit(GetFavSuccessState());
       if (kDebugMode) {
         print(
