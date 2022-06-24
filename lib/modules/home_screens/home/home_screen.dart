@@ -25,11 +25,11 @@ class HomeScreen extends StatelessWidget {
         ..getCategoriesData(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {
-          /*if(state is FavSuccessState){
-            if(!state.model.status){
-              snack(context, content:'${state.model.message}' );
+          if(state is FavSuccessState){
+            if(!state.model.status!){
+              snack(context, content: state.model.message!);
             }
-          }*/
+          }
         },
         builder: (context, state) {
           AppCubit cubit = AppCubit.get(context);
