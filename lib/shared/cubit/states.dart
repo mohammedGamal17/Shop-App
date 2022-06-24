@@ -1,4 +1,5 @@
 
+
 abstract class AppStates {}
 
 class AppInit extends AppStates {}
@@ -16,6 +17,9 @@ class CategoriesSuccessState extends AppStates {}
 class CategoriesErrorState extends AppStates {}
 
 class FavSuccessState extends AppStates {
+  //final GetFavModel model;
+
+  //FavSuccessState(this.model);
 }
 
 class FavErrorState extends AppStates {}
