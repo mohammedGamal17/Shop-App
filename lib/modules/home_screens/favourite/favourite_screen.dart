@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:shop_app/models/get_fav_model/data_x.dart';
 
-import '../../../models/get_fav_model/get_favorite_data.dart';
 import '../../../shared/components/components.dart';
 import '../../../shared/cubit/cubit.dart';
 import '../../../shared/cubit/states.dart';
 import '../../../shared/styles/colors.dart';
-import '../../Login/login.dart';
 
 class FavouriteScreen extends StatelessWidget {
   const FavouriteScreen({Key? key}) : super(key: key);
@@ -25,10 +24,10 @@ class FavouriteScreen extends StatelessWidget {
                 ? ListView.separated(
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) => itemBuilder(
-                        cubit.getFavModel!.data!.data[index], context),
+                        cubit.getFavModel!.data!.data![index], context),
                     separatorBuilder: (context, index) =>
                         const SizedBox(height: 0.0),
-                    itemCount: cubit.getFavModel!.data!.data.length,
+                    itemCount: cubit.getFavModel!.data!.data!.length,
                   )
                 : circularProgressIndicator()
           );
@@ -37,7 +36,7 @@ class FavouriteScreen extends StatelessWidget {
     );
   }
 
-  Widget itemBuilder(FavouriteData model, context) {
+  Widget itemBuilder(DataX model, context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
@@ -141,12 +140,12 @@ class FavouriteScreen extends StatelessWidget {
                               AppCubit.get(context).favMap[model.product!.id] !=
                                       true
                                   ? Icon(
-                                      AppCubit.get(context).favIcon =
+                                      AppCubit.get(context).icon =
                                           Icons.favorite,
                                       color: HexColor('0077B6'),
                                     )
                                   : Icon(
-                                      AppCubit.get(context).favIcon =
+                                      AppCubit.get(context).icon =
                                           Icons.favorite_border_outlined,
                                       color: HexColor('0077B6'),
                                     ),
