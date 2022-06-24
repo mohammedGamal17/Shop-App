@@ -136,7 +136,7 @@ class FavouriteScreen extends StatelessWidget {
                         const Spacer(),
                         IconButton(
                           onPressed: () {
-                             AppCubit.get(context).postFavData(model.product!.id!);
+                             AppCubit.get(context).postFavData(model.id!);
                           },
                           icon: AppCubit.get(context)
                                       .favMap[model.product?.id] ==
