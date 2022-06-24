@@ -8,9 +8,9 @@ import 'package:shop_app/shared/cubit/states.dart';
 import 'package:shop_app/shared/network/endpoint/end_point.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 
+import '../../models/change_fav_model/change_fav_model.dart';
+import '../../models/get_fav_model/get_fav_model.dart';
 import '../../models/home_model/home_model.dart';
-import '../../models/change_fav_model/change_favourite_model.dart';
-import '../../models/get_fav_model/get_favorite_data.dart';
 import '../../modules/home_screens/account/account_screen.dart';
 import '../../modules/home_screens/category/category_screen.dart';
 import '../../modules/home_screens/favourite/favourite_screen.dart';
@@ -26,8 +26,8 @@ class AppCubit extends Cubit<AppStates> {
   ///classes data model
   HomeModel? homeModel;
   CategoriesModel? categoriesModel;
-  ChangeFavouriteModel? changeFavModel;
-  GetFavouriteData? getFavModel;
+  ChangeFavModel? changeFavModel;
+  GetFavModel? getFavModel;
 
   DioHelper dio = DioHelper();
   int currentIndex = 0;
@@ -159,7 +159,6 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  IconData ?favIcon;
   postFavData(int productId) async {
     if (favMap[productId] == true) {
       favMap[productId] = false;
@@ -174,19 +173,15 @@ class AppCubit extends Cubit<AppStates> {
       token: token,
     )
         .then((value) {
-      changeFavModel = ChangeFavouriteModel.fromJson(value.data);
-
-      getFavData();
+      changeFavModel = ChangeFavModel.fromJson(value.data);
+      if (!changeFavModel!.status!) {
+        favMap[productId] = !favMap[productId]!;
+      } else {
+        getFavData();
+      }
 
       emit(FavSuccessState());
     }).catchError((onError) {
-      if (favMap[productId] == true) {
-        favMap[productId] = false;
-        favIcon = Icons.favorite;
-      } else {
-        favMap[productId] = true;
-        favIcon = Icons.favorite_border;
-      }
       favMap[productId] = !favMap[productId]!;
       if (kDebugMode) {
         emit(FavErrorState());
@@ -207,7 +202,7 @@ class AppCubit extends Cubit<AppStates> {
       token: token,
     )
         .then((value) {
-      getFavModel = GetFavouriteData.fromJson(value.data);
+      getFavModel = GetFavModel.fromJson(value.data);
       emit(GetFavSuccessState());
       if (kDebugMode) {
         print(
