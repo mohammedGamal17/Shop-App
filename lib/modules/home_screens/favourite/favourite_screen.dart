@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+
 import '../../../models/get_fav_model/data_x.dart';
-import '../../../models/get_fav_model/get_fav_model.dart';
 
 import '../../../shared/components/components.dart';
 import '../../../shared/cubit/cubit.dart';
@@ -22,11 +22,11 @@ class FavouriteScreen extends StatelessWidget {
         builder: (context, state) {
           AppCubit cubit = AppCubit.get(context);
           return Scaffold(
-            body: cubit.getFavModel != null
+            body: state is !GetFavLoadingState
                 ? ListView.separated(
                     physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context, index) =>
-                        itemBuilder(cubit.getFavModel!.data!.data![index], context),
+                    itemBuilder: (context, index) => itemBuilder(
+                        cubit.getFavModel!.data!.data![index], context),
                     separatorBuilder: (context, index) =>
                         const SizedBox(height: 0.0),
                     itemCount: cubit.getFavModel!.data!.data!.length,
@@ -39,12 +39,12 @@ class FavouriteScreen extends StatelessWidget {
   }
 
   Widget itemBuilder(DataX model, context) {
+
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
-        height: 150.0,
+        height: 130.0,
         width: double.infinity,
-        alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
           color: buttonColor,
@@ -58,28 +58,28 @@ class FavouriteScreen extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(5.0),
           child: Row(
             children: [
               Stack(
                 alignment: AlignmentDirectional.bottomStart,
                 children: [
                   Image(
-                    image: NetworkImage('${model.product!.image}'),
+                    image: NetworkImage('${model.product?.image}'),
                     height: 125.0,
                     width: 125.0,
                     fit: BoxFit.fill,
                   ),
                   Row(
                     children: [
-                      model.product!.discount != 0
+                      model.product?.discount != 0
                           ? Container(
                               color: Colors.red,
                               child: Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 7.0),
                                 child: Text(
-                                  '% ${model.product!.discount}',
+                                  '% ${model.product?.discount}',
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 10.0,
@@ -101,7 +101,7 @@ class FavouriteScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      '${model.product!.name}',
+                      '${model.product?.name}',
                       style: TextStyle(
                         color: HexColor('0077B6'),
                         fontFamily: 'Changa',
@@ -113,7 +113,7 @@ class FavouriteScreen extends StatelessWidget {
 
                     ///if discount = 0 hide it
                     Text(
-                      'EGP ${model.product!.oldPrice}',
+                      'EGP ${model.product?.oldPrice}',
                       style: TextStyle(
                         color: HexColor('0077B6'),
                         fontFamily: 'Changa',
@@ -123,7 +123,7 @@ class FavouriteScreen extends StatelessWidget {
                     const Spacer(),
                     Row(
                       children: [
-                        if (model.product!.discount != 0)
+                        if (model.product?.discount != 0)
                           Text(
                             'EGP 2000',
                             style: TextStyle(
@@ -136,9 +136,10 @@ class FavouriteScreen extends StatelessWidget {
                         const Spacer(),
                         IconButton(
                           onPressed: () {
-                            AppCubit.get(context).postFavData(model.product!.id!);
+                             AppCubit.get(context).postFavData(model.product!.id!);
                           },
-                          icon: AppCubit.get(context).fav[model.product?.id] ==
+                          icon: AppCubit.get(context)
+                                      .favMap[model.product?.id] ==
                                   null
                               ? Icon(
                                   AppCubit.get(context).icon = Icons.favorite,
