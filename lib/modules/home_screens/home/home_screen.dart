@@ -25,11 +25,11 @@ class HomeScreen extends StatelessWidget {
         ..getCategoriesData(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {
-          if(state is FavSuccessState){
-            if(!state.model.status!){
+          /*if(state is FavSuccessState){
+            if(!state.model.status){
               snack(context, content:'${state.model.message}' );
             }
-          }
+          }*/
         },
         builder: (context, state) {
           AppCubit cubit = AppCubit.get(context);
@@ -286,15 +286,14 @@ class HomeScreen extends StatelessWidget {
                         const Spacer(),
                         IconButton(
                           onPressed: () {
-                            print(model.id);
-                            AppCubit.get(context).postFavData(model.id!);
+                            AppCubit.get(context).postFavData(model.id);
                           },
                           icon: AppCubit
                               .get(context)
-                              .favMap[model.id]!
+                              .favMap[model.id]==true
                               ? Icon(
-                            cubit.icon = Icons.favorite, color: HexColor('0077B6'),)
-                              : Icon(cubit.icon =
+                            cubit.favIcon = Icons.favorite, color: HexColor('0077B6'),)
+                              : Icon(cubit.favIcon =
                               Icons.favorite_border_outlined, color: HexColor('0077B6'),),
                         ),
                       ],
