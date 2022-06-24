@@ -25,12 +25,11 @@ class FavSuccessState extends AppStates {
 
 class FavErrorState extends AppStates {}
 
-class IconFavoriteChangeState extends AppStates{}
+class IconFavoriteChangeState extends AppStates {}
 
-class GetFavSuccessState extends AppStates {
+class GetFavLoadingState extends AppStates{}
 
-
-}
+class GetFavSuccessState extends AppStates {}
 
 class GetFavErrorState extends AppStates {}
 
