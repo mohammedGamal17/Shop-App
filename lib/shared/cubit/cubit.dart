@@ -26,7 +26,7 @@ class AppCubit extends Cubit<AppStates> {
   ///classes data model
   HomeModel? homeModel;
   CategoriesModel? categoriesModel;
-  ChangeFavModel? changeFavModel;
+  late ChangeFavModel changeFavModel;
   GetFavModel? getFavModel;
 
   DioHelper dio = DioHelper();
@@ -34,9 +34,6 @@ class AppCubit extends Cubit<AppStates> {
   bool isFav = false;
   IconData icon = Icons.favorite_border_outlined;
   Map<int, bool> favMap = {};
-
-  //bool isSearchExpanded = false;
-  //IconData searchIcon = Icons.search_outlined;
 
   List<Widget> screen = [
     const HomeScreen(),
@@ -174,13 +171,13 @@ class AppCubit extends Cubit<AppStates> {
     )
         .then((value) {
       changeFavModel = ChangeFavModel.fromJson(value.data);
-      if (!changeFavModel!.status!) {
+      if (!changeFavModel.status!) {
         favMap[productId] = !favMap[productId]!;
       } else {
         getFavData();
       }
 
-      emit(FavSuccessState());
+      emit(FavSuccessState(changeFavModel));
     }).catchError((onError) {
       favMap[productId] = !favMap[productId]!;
       if (kDebugMode) {
