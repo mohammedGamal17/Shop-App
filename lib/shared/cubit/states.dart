@@ -1,5 +1,3 @@
-import 'package:shop_app/models/change_fav_model/change_fav_model.dart';
-import 'package:shop_app/models/get_fav_model/get_fav_model.dart';
 
 abstract class AppStates {}
 
@@ -18,9 +16,6 @@ class CategoriesSuccessState extends AppStates {}
 class CategoriesErrorState extends AppStates {}
 
 class FavSuccessState extends AppStates {
-  final ChangeFavModel model;
-
-  FavSuccessState(this.model);
 }
 
 class FavErrorState extends AppStates {}
