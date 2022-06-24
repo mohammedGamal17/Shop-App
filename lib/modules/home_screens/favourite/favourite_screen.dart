@@ -16,7 +16,13 @@ class FavouriteScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => AppCubit()..getFavData(),
       child: BlocConsumer<AppCubit, AppStates>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if(state is FavSuccessState){
+            if(!state.model.status!){
+              snack(context, content: state.model.message!);
+            }
+          }
+        },
         builder: (context, state) {
           AppCubit cubit = AppCubit.get(context);
           return Scaffold(
