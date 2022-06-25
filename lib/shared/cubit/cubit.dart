@@ -12,6 +12,7 @@ import 'package:shop_app/shared/network/remote/dio_helper.dart';
 import '../../models/favorites/change_fav_model/change_fav_model.dart';
 import '../../models/favorites/get_fav_model/get_fav_model.dart';
 import '../../models/home_model/home_model.dart';
+import '../../models/user/logout/logout.dart';
 import '../../models/user/profile/get_profile/get_profile.dart';
 import '../../modules/home_screens/account/account_screen.dart';
 import '../../modules/home_screens/category/category_screen.dart';
@@ -30,14 +31,13 @@ class AppCubit extends Cubit<AppStates> {
   CategoriesModel? categoriesModel;
   late ChangeFavModel changeFavModel;
   GetFavModel? getFavModel;
-   GetProfile? getProfile;
+  GetProfile? getProfile;
 
   DioHelper dio = DioHelper();
   int currentIndex = 0;
   bool isFav = false;
   IconData icon = Icons.favorite_border_outlined;
   Map<int, bool> favMap = {};
-
 
   List<Widget> screen = [
     const HomeScreen(),
@@ -254,7 +254,35 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  void logout(){
+  Logout? logoutModel;
 
+  logoutFromApi(String token) async {
+    await dio
+        .postDateFromApi(
+      url: logout,
+      data: {'fcm_token': token},
+      token: token,
+    )
+        .then((value) {
+      logoutModel = Logout.fromJson(value.data);
+      if (kDebugMode) {
+        print(
+            '**************************** Logout Successfully come from Api ****************************');
+        print(logoutModel?.message);
+        print(
+            '**************************** Logout Successfully come from Api ****************************');
+      }
+
+      emit(LogoutSuccessState(logoutModel!));
+    }).catchError((onError) {
+      emit(LogoutFailState());
+      if (kDebugMode) {
+        print(
+            '********************************** Error from FavGetFavData API **********************************');
+        print('Error From GetFavData ${onError.toString()}');
+        print(
+            '********************************** Error from FavGetFavData API **********************************');
+      }
+    });
   }
 }
