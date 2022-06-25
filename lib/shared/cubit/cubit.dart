@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:shop_app/main.dart';
 import 'package:shop_app/models/categories_model/categories.dart';
 
 import 'package:shop_app/shared/cubit/states.dart';
