@@ -37,3 +37,6 @@ class GetFavErrorState extends AppStates {}
 class GetProfileSuccessState extends AppStates {}
 
 class GetProfileErrorState extends AppStates {}
+
+class LogoutSuccessState extends AppStates{}
+
