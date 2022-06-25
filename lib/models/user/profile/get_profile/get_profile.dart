@@ -1,4 +1,4 @@
-import '../Data.dart';
+import 'package:shop_app/models/user/profile/get_profile/data.dart';
 
 class GetProfile {
   Data? data;
@@ -8,7 +8,7 @@ class GetProfile {
 
   factory GetProfile.fromJson(Map<String, dynamic> json) {
     return GetProfile(
-      data: json['`data`'] != null ? Data.fromJson(json['`data`']) : null,
+      data: json['data'] != null ? Data.fromJson(json['data']) : null,
       status: json['status'],
     );
   }
