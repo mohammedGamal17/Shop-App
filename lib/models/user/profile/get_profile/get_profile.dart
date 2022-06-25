@@ -1,4 +1,4 @@
-import 'Data.dart';
+import '../Data.dart';
 
 class GetProfile {
   Data? data;
