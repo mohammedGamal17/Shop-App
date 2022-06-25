@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/modules/Login/login.dart';
 import 'package:shop_app/shared/cubit/cubit.dart';
+import '../../../layout/home_layout.dart';
 import '../../../main.dart';
 import '../../../shared/components/components.dart';
+import '../../../shared/components/constants.dart';
 import '../../../shared/cubit/states.dart';
 import '../../first_screen/first_screen.dart';
 
@@ -18,7 +20,21 @@ class HelpScreen extends StatelessWidget {
       create: (context) => AppCubit(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {
-
+          if(state is LogoutSuccessState){
+            if(state.logoutModel.status!){
+              sharedPreferences.remove('token');
+              token = '';
+              snack(context, content: '${state.logoutModel.message}');
+              navigateToAndReplace(context, const Home());
+            }
+            else {
+              snack(
+                context,
+                content: '${state.logoutModel.message}',
+                bgColor: Colors.red,
+              );
+            }
+          }
         },
         builder: (context, state) {
           return Scaffold(
@@ -36,11 +52,13 @@ class HelpScreen extends StatelessWidget {
                                       .remove('fakeId')
                                       .then((value) async {
                                     sharedPreferences.remove('token');
+                                    AppCubit.get(context).logoutFromApi(token!).then((value) {
+                                    }).catchError((onError) {
+                                    });
                                     navigateToAndReplace(
                                       context,
                                       const FirstScreen(),
                                     );
-
                                   }).catchError((onError) {
                                     if (kDebugMode) {
                                       print(onError.toString());
