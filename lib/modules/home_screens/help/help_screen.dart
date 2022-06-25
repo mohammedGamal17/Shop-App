@@ -1,8 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/shared/cubit/cubit.dart';
 
+import '../../../main.dart';
+import '../../../shared/components/components.dart';
 import '../../../shared/cubit/states.dart';
+import '../../first_screen/first_screen.dart';
 
 class HelpScreen extends StatelessWidget {
   const HelpScreen({Key? key}) : super(key: key);
@@ -16,7 +20,26 @@ class HelpScreen extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             body: Center(
-              child: Text('Help Screen',style: Theme.of(context).textTheme.bodyText1),
+              child: Column(
+                children: [
+                  Text('Help Screen',style: Theme.of(context).textTheme.bodyText1),
+                  IconButton(
+                      onPressed: () {
+                        sharedPreferences.remove('token').then((value) {
+                          sharedPreferences.remove('fakeId');
+                          navigateToAndReplace(
+                            context,
+                            const FirstScreen(),
+                          );
+                        }).catchError((onError) {
+                          if (kDebugMode) {
+                            print(onError.toString());
+                          }
+                        });
+                      },
+                      icon: const Icon(Icons.logout_outlined)),
+                ],
+              ),
             ),
           );
         },
