@@ -85,11 +85,13 @@ Widget textFormField({
   );
 }
 
-Widget separatorHorizontal() {
+Widget separatorHorizontal({
+  double height = 2.0,
+}) {
   return Padding(
     padding: const EdgeInsets.all(10.0),
     child: Container(
-      height: 2.0,
+      height: height,
       color: HexColor('DEE2E6'),
     ),
   );
@@ -166,5 +168,11 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> snack(
 }
 
 Widget stackText(context, {required String text}) {
-  return Text(text.capitalize!, style: Theme.of(context).textTheme.overline,maxLines: 1,overflow:TextOverflow.ellipsis ,textAlign: TextAlign.center,);
+  return Text(
+    text.capitalize!,
+    style: Theme.of(context).textTheme.overline,
+    maxLines: 1,
+    overflow: TextOverflow.ellipsis,
+    textAlign: TextAlign.center,
+  );
 }
