@@ -1,10 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/home_layout.dart';
 import 'package:shop_app/modules/Login/login.dart';
+import 'package:shop_app/modules/Login/login_cubit/login_cubit.dart';
 import 'package:shop_app/shared/components/components.dart';
 
 import '../../main.dart';
+import '../Login/login_cubit/login_state.dart';
 
 class FirstScreen extends StatelessWidget {
   const FirstScreen({Key? key}) : super(key: key);
