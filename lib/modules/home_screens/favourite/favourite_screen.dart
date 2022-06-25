@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:shop_app/models/get_fav_model/data_x.dart';
+import 'package:shop_app/models/favorites/get_fav_model/data_x.dart';
 
 import '../../../shared/components/components.dart';
 import '../../../shared/cubit/cubit.dart';
