@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:shop_app/models/user/profile/get_profile/get_profile.dart';
+import 'package:shop_app/modules/home_screens/account/update/update_account.dart';
 
 import '../../../shared/components/components.dart';
 import '../../../shared/cubit/cubit.dart';
@@ -47,7 +48,7 @@ class AccountScreen extends StatelessWidget {
                   image: DecorationImage(
                     image: NetworkImage('${model.data?.image}'),
                     opacity: 0.1,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
                   )),
               child: Stack(
                 alignment: AlignmentDirectional.bottomCenter,
@@ -115,6 +116,8 @@ class AccountScreen extends StatelessWidget {
                 style: bodyText1,
               ),
             ),
+            const SizedBox(height: 50.0),
+            decorationButton(context,text: 'up data your profile'.capitalize!,pageRoute: const UpdateAccountScreen()),
           ],
         ),
       ),
