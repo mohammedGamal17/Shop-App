@@ -1,7 +1,7 @@
 
 
-import '../../models/change_fav_model/change_fav_model.dart';
-import '../../models/get_fav_model/get_fav_model.dart';
+import '../../models/favorites/change_fav_model/change_fav_model.dart';
+import '../../models/favorites/get_fav_model/get_fav_model.dart';
 
 abstract class AppStates {}
 
