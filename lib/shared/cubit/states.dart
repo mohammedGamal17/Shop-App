@@ -1,7 +1,4 @@
-
-
 import '../../models/favorites/change_fav_model/change_fav_model.dart';
-import '../../models/favorites/get_fav_model/get_fav_model.dart';
 
 abstract class AppStates {}
 
@@ -29,10 +26,14 @@ class FavErrorState extends AppStates {}
 
 class IconFavoriteChangeState extends AppStates {}
 
-class GetFavLoadingState extends AppStates{}
+class GetFavLoadingState extends AppStates {}
 
 class GetFavSuccessState extends AppStates {}
 
 class GetFavErrorState extends AppStates {}
 
-//class SearchChangeState extends AppStates{}
+ class GetProfileLoadingState extends AppStates {}
+
+class GetProfileSuccessState extends AppStates {}
+
+class GetProfileErrorState extends AppStates {}
