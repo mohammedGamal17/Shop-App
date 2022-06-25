@@ -8,8 +8,8 @@ import 'package:shop_app/shared/cubit/states.dart';
 import 'package:shop_app/shared/network/endpoint/end_point.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 
-import '../../models/change_fav_model/change_fav_model.dart';
-import '../../models/get_fav_model/get_fav_model.dart';
+import '../../models/favorites/change_fav_model/change_fav_model.dart';
+import '../../models/favorites/get_fav_model/get_fav_model.dart';
 import '../../models/home_model/home_model.dart';
 import '../../modules/home_screens/account/account_screen.dart';
 import '../../modules/home_screens/category/category_screen.dart';
