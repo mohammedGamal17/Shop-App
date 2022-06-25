@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../models/login_molel/shop_login_model.dart';
+import '../../../models/user/login_molel/shop_login_model.dart';
 import '../../../shared/network/endpoint/end_point.dart';
 import '../../../shared/network/remote/dio_helper.dart';
 import 'login_state.dart';
