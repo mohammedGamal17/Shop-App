@@ -1,3 +1,5 @@
+import 'package:shop_app/models/user/logout/logout.dart';
+
 import '../../models/favorites/change_fav_model/change_fav_model.dart';
 
 abstract class AppStates {}
@@ -38,5 +40,12 @@ class GetProfileSuccessState extends AppStates {}
 
 class GetProfileErrorState extends AppStates {}
 
-class LogoutSuccessState extends AppStates{}
+class LogoutSuccessState extends AppStates{
+  final Logout logoutModel;
+
+  LogoutSuccessState(this.logoutModel);
+}
+
+class LogoutFailState extends AppStates{
+}
 
