@@ -34,18 +34,16 @@ class GetFavSuccessState extends AppStates {}
 
 class GetFavErrorState extends AppStates {}
 
- class GetProfileLoadingState extends AppStates {}
+class GetProfileLoadingState extends AppStates {}
 
 class GetProfileSuccessState extends AppStates {}
 
 class GetProfileErrorState extends AppStates {}
 
-class LogoutSuccessState extends AppStates{
+class LogoutSuccessState extends AppStates {
   final Logout logoutModel;
 
   LogoutSuccessState(this.logoutModel);
 }
 
-class LogoutFailState extends AppStates{
-}
-
+class LogoutFailState extends AppStates {}

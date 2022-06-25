@@ -20,14 +20,13 @@ class HelpScreen extends StatelessWidget {
       create: (context) => AppCubit(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {
-          if(state is LogoutSuccessState){
-            if(state.logoutModel.status!){
+          if (state is LogoutSuccessState) {
+            if (state.logoutModel.status!) {
               sharedPreferences.remove('token');
               token = '';
               snack(context, content: '${state.logoutModel.message}');
               navigateToAndReplace(context, const Home());
-            }
-            else {
+            } else {
               snack(
                 context,
                 content: '${state.logoutModel.message}',
@@ -52,9 +51,10 @@ class HelpScreen extends StatelessWidget {
                                       .remove('fakeId')
                                       .then((value) async {
                                     sharedPreferences.remove('token');
-                                    AppCubit.get(context).logoutFromApi(token!).then((value) {
-                                    }).catchError((onError) {
-                                    });
+                                    AppCubit.get(context)
+                                        .logoutFromApi(token!)
+                                        .then((value) {})
+                                        .catchError((onError) {});
                                     navigateToAndReplace(
                                       context,
                                       const FirstScreen(),

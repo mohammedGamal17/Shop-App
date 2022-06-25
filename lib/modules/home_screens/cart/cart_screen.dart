@@ -16,7 +16,8 @@ class CartScreen extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             body: Center(
-              child: Text('Cart Screen',style: Theme.of(context).textTheme.bodyText1),
+              child: Text('Cart Screen',
+                  style: Theme.of(context).textTheme.bodyText1),
             ),
           );
         },

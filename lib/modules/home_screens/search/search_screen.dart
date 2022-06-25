@@ -16,7 +16,8 @@ class SearchScreen extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             body: Center(
-              child: Text('Search Screen',style: Theme.of(context).textTheme.bodyText1),
+              child: Text('Search Screen',
+                  style: Theme.of(context).textTheme.bodyText1),
             ),
           );
         },

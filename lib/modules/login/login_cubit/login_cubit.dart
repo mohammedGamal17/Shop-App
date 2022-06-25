@@ -29,18 +29,22 @@ class LoginCubit extends Cubit<LoginStates> {
       },
     ).then((value) {
       if (kDebugMode) {
-        print('**************************** login Data Successfully come from Api ****************************');
+        print(
+            '**************************** login Data Successfully come from Api ****************************');
         loginModel = ShopLoginModel.fromJson(value.data);
         print('Token : ${loginModel?.data?.token}');
-        print('**************************** login Data Successfully come from Api ****************************');
+        print(
+            '**************************** login Data Successfully come from Api ****************************');
       }
       emit(LoginSuccessState(loginModel!));
     }).catchError((onError) {
       emit(LoginFailState(onError.toString()));
       if (kDebugMode) {
-        print('***********************************************************************************************');
+        print(
+            '***********************************************************************************************');
         print('Error From login Api:  ${onError.toString()}');
-        print('***********************************************************************************************');
+        print(
+            '***********************************************************************************************');
       }
     });
   }

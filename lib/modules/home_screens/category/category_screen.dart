@@ -47,8 +47,8 @@ class CategoryScreen extends StatelessWidget {
             mainAxisSpacing: 1.0,
             children: List.generate(
               categoriesModel.data!.data!.length,
-                  (index) =>
-                      categoriesList(categoriesModel.data!.data![index], context),
+              (index) =>
+                  categoriesList(categoriesModel.data!.data![index], context),
             ),
           ),
         ],
@@ -61,7 +61,7 @@ class CategoryScreen extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       child: InkWell(
         borderRadius: BorderRadius.circular(10.0),
-        onTap: (){},
+        onTap: () {},
         child: Container(
           height: 128.0,
           width: double.infinity,

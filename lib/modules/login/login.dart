@@ -30,7 +30,7 @@ class Login extends StatelessWidget {
               sharedPreferences
                   .setString('token', '${state.shopLoginModel.data?.token}')
                   .then((value) {
-                    token = state.shopLoginModel.data?.token;
+                token = state.shopLoginModel.data?.token;
                 navigateToAndReplace(context, const Home());
               }).catchError((onError) {
                 if (kDebugMode) {

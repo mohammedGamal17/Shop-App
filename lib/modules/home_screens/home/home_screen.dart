@@ -19,14 +19,13 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-      AppCubit()
+      create: (context) => AppCubit()
         ..getHomeData()
         ..getCategoriesData(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {
-          if(state is FavSuccessState){
-            if(!state.model.status!){
+          if (state is FavSuccessState) {
+            if (!state.model.status!) {
               snack(context, content: state.model.message!);
             }
           }
@@ -36,7 +35,7 @@ class HomeScreen extends StatelessWidget {
           return Scaffold(
             body: cubit.homeModel != null && cubit.categoriesModel != null
 
-            ///put ! after home model to avoid error
+                ///put ! after home model to avoid error
                 ? homeScreen(cubit.homeModel!, cubit.categoriesModel!, context)
                 : circularProgressIndicator(),
           );
@@ -90,19 +89,15 @@ class HomeScreen extends StatelessWidget {
             ),
             Text(
               'Categories',
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .headline5,
+              style: Theme.of(context).textTheme.headline5,
             ),
             SizedBox(
               height: 80.0,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) =>
-                    categoriesBuilder(
-                        categoriesModel.data!.data![index], context),
+                itemBuilder: (context, index) => categoriesBuilder(
+                    categoriesModel.data!.data![index], context),
                 separatorBuilder: (context, index) => separatorVertical(),
                 itemCount: categoriesModel.data!.data!.length,
               ),
@@ -112,10 +107,7 @@ class HomeScreen extends StatelessWidget {
             ),
             Text(
               'Products',
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .headline5,
+              style: Theme.of(context).textTheme.headline5,
             ),
             GridView.count(
               shrinkWrap: true,
@@ -126,7 +118,7 @@ class HomeScreen extends StatelessWidget {
               childAspectRatio: 1.0 / 1.37,
               children: List.generate(
                 model.data!.products!.length,
-                    (index) =>
+                (index) =>
                     productBuilder(model.data!.products![index], context),
               ),
             ),
@@ -226,19 +218,19 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       model.discount != 0
                           ? Container(
-                        color: Colors.red,
-                        child: Padding(
-                          padding:
-                          const EdgeInsets.symmetric(horizontal: 7.0),
-                          child: Text(
-                            '% ${model.discount}',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 10.0,
-                            ),
-                          ),
-                        ),
-                      )
+                              color: Colors.red,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 7.0),
+                                child: Text(
+                                  '% ${model.discount}',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10.0,
+                                  ),
+                                ),
+                              ),
+                            )
                           : Container(),
                     ],
                   ),
@@ -288,13 +280,15 @@ class HomeScreen extends StatelessWidget {
                           onPressed: () {
                             AppCubit.get(context).postFavData(model.id);
                           },
-                          icon: AppCubit
-                              .get(context)
-                              .favMap[model.id]==true
+                          icon: AppCubit.get(context).favMap[model.id] == true
                               ? Icon(
-                            cubit.icon = Icons.favorite, color: HexColor('0077B6'),)
-                              : Icon(cubit.icon =
-                              Icons.favorite_border_outlined, color: HexColor('0077B6'),),
+                                  cubit.icon = Icons.favorite,
+                                  color: HexColor('0077B6'),
+                                )
+                              : Icon(
+                                  cubit.icon = Icons.favorite_border_outlined,
+                                  color: HexColor('0077B6'),
+                                ),
                         ),
                       ],
                     ),

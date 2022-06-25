@@ -16,7 +16,8 @@ class UpdateAccountScreen extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             body: Center(
-              child: Text('Update Page',style: Theme.of(context).textTheme.bodyText1),
+              child: Text('Update Page',
+                  style: Theme.of(context).textTheme.bodyText1),
             ),
           );
         },

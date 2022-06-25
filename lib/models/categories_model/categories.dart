@@ -1,16 +1,15 @@
-
 class CategoriesModel {
   bool? status;
   dynamic message;
   Data? data;
 
-  CategoriesModel({this.status,this.message, this.data});
+  CategoriesModel({this.status, this.message, this.data});
 
   factory CategoriesModel.fromJson(Map<String, dynamic> json) {
     return CategoriesModel(
-        status: json['status'],
-        message : json['message'],
-        data : json['data'] != null ? Data.fromJson(json['data']) : null,
+      status: json['status'],
+      message: json['message'],
+      data: json['data'] != null ? Data.fromJson(json['data']) : null,
     );
   }
 }
@@ -31,17 +30,17 @@ class Data {
 
   Data(
       {this.currentPage,
-        this.data,
-        this.firstPageUrl,
-        this.from,
-        this.lastPage,
-        this.lastPageUrl,
-        this.nextPageUrl,
-        this.path,
-        this.perPage,
-        this.prevPageUrl,
-        this.to,
-        this.total});
+      this.data,
+      this.firstPageUrl,
+      this.from,
+      this.lastPage,
+      this.lastPageUrl,
+      this.nextPageUrl,
+      this.path,
+      this.perPage,
+      this.prevPageUrl,
+      this.to,
+      this.total});
 
   Data.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
@@ -73,9 +72,9 @@ class DataX {
 
   factory DataX.fromJson(Map<String, dynamic> json) {
     return DataX(
-      id : json['id'],
-      name : json['name'],
-      image : json['image'],
+      id: json['id'],
+      name: json['name'],
+      image: json['image'],
     );
   }
 }

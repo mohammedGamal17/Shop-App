@@ -2,7 +2,7 @@ import 'package:shop_app/models/favorites/get_fav_model/data.dart';
 
 class GetFavModel {
   Data? data;
-  String ?message;
+  String? message;
   bool? status;
 
   GetFavModel({this.data, this.message, this.status});
