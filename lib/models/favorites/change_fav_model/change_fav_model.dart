@@ -1,4 +1,4 @@
-import 'package:shop_app/models/change_fav_model/data.dart';
+import 'package:shop_app/models/favorites/change_fav_model/data.dart';
 
 class ChangeFavModel {
   Data? data;
