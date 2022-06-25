@@ -7,6 +7,7 @@ import 'package:shop_app/main.dart';
 import 'package:shop_app/modules/signup/signup.dart';
 
 import 'package:shop_app/shared/components/components.dart';
+import 'package:shop_app/shared/components/constants.dart';
 
 import '../../shared/styles/colors.dart';
 import 'login_cubit/login_cubit.dart';
@@ -29,6 +30,7 @@ class Login extends StatelessWidget {
               sharedPreferences
                   .setString('token', '${state.shopLoginModel.data?.token}')
                   .then((value) {
+                    token = state.shopLoginModel.data?.token;
                 navigateToAndReplace(context, const Home());
               }).catchError((onError) {
                 if (kDebugMode) {
