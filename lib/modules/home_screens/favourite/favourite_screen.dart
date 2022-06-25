@@ -28,16 +28,17 @@ class FavouriteScreen extends StatelessWidget {
         builder: (context, state) {
           AppCubit cubit = AppCubit.get(context);
           return Scaffold(
-              body: state is! GetFavLoadingState
-                  ? ListView.separated(
-                      physics: const BouncingScrollPhysics(),
-                      itemBuilder: (context, index) => itemBuilder(
-                          cubit.getFavModel!.data!.data![index], context),
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: 0.0),
-                      itemCount: cubit.getFavModel!.data!.data!.length,
-                    )
-                  : noItemFounded(context));
+            body: state is! GetFavLoadingState
+                ? ListView.separated(
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, index) => itemBuilder(
+                        cubit.getFavModel!.data!.data![index], context),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 0.0),
+                    itemCount: cubit.getFavModel!.data!.data!.length,
+                  )
+                : circularProgressIndicator(),
+          );
         },
       ),
     );
