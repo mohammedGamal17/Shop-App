@@ -17,3 +17,5 @@ class SignUpFailState extends SignUpStates {
 
   SignUpFailState(this.error);
 }
+
+class IsPasswordShowState extends SignUpStates {}
