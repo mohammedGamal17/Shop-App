@@ -23,7 +23,7 @@ class SignUpCubit extends Cubit<SignUpStates> {
     required String phone,
   }) {
     emit(SignUpLoadingState());
-    dio.postDateFromApi(
+    dio.postDataFromApi(
       url: register,
       data: {
         "name": name,

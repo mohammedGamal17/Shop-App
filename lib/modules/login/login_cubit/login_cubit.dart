@@ -21,7 +21,7 @@ class LoginCubit extends Cubit<LoginStates> {
     required String password,
   }) {
     emit(LoginLoadingState());
-    dio.postDateFromApi(
+    dio.postDataFromApi(
       url: login,
       data: {
         'email': email,
