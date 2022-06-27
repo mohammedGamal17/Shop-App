@@ -1,13 +1,13 @@
 import '../search/data.dart';
 
-class Search {
+class SearchModel {
   Data? data;
   bool? status;
 
-  Search({this.data, this.status});
+  SearchModel({this.data, this.status});
 
-  factory Search.fromJson(Map<String, dynamic> json) {
-    return Search(
+  factory SearchModel.fromJson(Map<String, dynamic> json) {
+    return SearchModel(
       data: json['data'] != null ? Data.fromJson(json['data']) : null,
       status: json['status'],
     );
