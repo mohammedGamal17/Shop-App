@@ -58,3 +58,5 @@ class UpdateSuccessState extends AppStates {
 }
 
 class UpdateFailState extends AppStates {}
+
+class IsPasswordShowState extends AppStates {}
