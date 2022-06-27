@@ -59,10 +59,4 @@ class UpdateSuccessState extends AppStates {
 
 class UpdateFailState extends AppStates {}
 
-class SearchLoadingState extends AppStates {}
-
-class SearchSuccessState extends AppStates {}
-
-class SearchErrorState extends AppStates {}
-
 class IsPasswordShowState extends AppStates {}
