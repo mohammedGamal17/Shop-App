@@ -67,7 +67,7 @@ class Home extends StatelessWidget {
                     onPressed: () {
                       navigateTo(
                         context,
-                        const SearchScreen(),
+                         SearchScreen(),
                       );
                     },
                     icon: const Icon(Icons.search_outlined)),
