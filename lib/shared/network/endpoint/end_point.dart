@@ -13,3 +13,5 @@ const String logout = 'logout';
 const String register = 'register';
 
 const String updateProfile = 'update-profile';
+
+const String productsSearch = 'products/search';
