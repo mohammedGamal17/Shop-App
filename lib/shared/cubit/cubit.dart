@@ -42,6 +42,7 @@ class AppCubit extends Cubit<AppStates> {
   bool isPassword = true;
   IconData suffix = Icons.visibility_outlined;
   Map<int, bool> favMap = {};
+  List <dynamic> search=[];
 
   List<Widget> screen = [
     const HomeScreen(),
@@ -83,7 +84,7 @@ class AppCubit extends Cubit<AppStates> {
   void changePasswordVisibility() {
     isPassword = !isPassword;
     suffix =
-    isPassword ? Icons.visibility_off_outlined : Icons.visibility_outlined;
+        isPassword ? Icons.visibility_off_outlined : Icons.visibility_outlined;
     emit(IsPasswordShowState());
   }
 
@@ -302,7 +303,8 @@ class AppCubit extends Cubit<AppStates> {
     required String phone,
   }) {
     emit(UpdateLoadingState());
-    dio.putDataToApi(
+    dio
+        .putDataToApi(
       url: updateProfile,
       data: {
         "name": name,
@@ -310,7 +312,8 @@ class AppCubit extends Cubit<AppStates> {
         "email": email,
       },
       token: token,
-    ).then((value) {
+    )
+        .then((value) {
       updateUserModel = UpdateUserModel.fromJson(value.data);
       if (kDebugMode) {
         print(
@@ -332,4 +335,6 @@ class AppCubit extends Cubit<AppStates> {
       }
     });
   }
+
+
 }
