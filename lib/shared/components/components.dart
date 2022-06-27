@@ -22,10 +22,13 @@ void navigateToAndReplace(context, widget) => Navigator.pushAndRemoveUntil(
 Widget textFormField({
   required TextEditingController controller,
   required Function validate,
-  required String labelText,
+  String? labelText,
   required IconData prefix,
   required TextInputType textInputType,
   double borderRadius = 10.0,
+  String? hintText,
+  String? counterText,
+  String? helperText,
   bool autoFocus = false,
   bool isPassword = false,
   IconData? suffix,
@@ -53,10 +56,17 @@ Widget textFormField({
         borderRadius: BorderRadius.circular(borderRadius),
       ),
       labelText: labelText,
+      hintText: hintText,
+
+      helperText: helperText,
+      counterText: counterText,
       hoverColor: HexColor('023E8A'),
       focusColor: HexColor('03045E'),
       filled: true,
       labelStyle: const TextStyle(color: Colors.white),
+      hintStyle: const TextStyle(color: Colors.white),
+      counterStyle: const TextStyle(color: Colors.white),
+      helperStyle: const TextStyle(color: Colors.white),
       prefixIcon: Icon(prefix, color: Colors.white),
       suffixIcon: suffix != null
           ? IconButton(
