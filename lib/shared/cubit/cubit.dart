@@ -39,6 +39,8 @@ class AppCubit extends Cubit<AppStates> {
   int currentIndex = 0;
   bool isFav = false;
   IconData icon = Icons.favorite_border_outlined;
+  bool isPassword = true;
+  IconData suffix = Icons.visibility_outlined;
   Map<int, bool> favMap = {};
 
   List<Widget> screen = [
@@ -77,6 +79,13 @@ class AppCubit extends Cubit<AppStates> {
       label: 'Help',
     ),
   ];
+
+  void changePasswordVisibility() {
+    isPassword = !isPassword;
+    suffix =
+    isPassword ? Icons.visibility_off_outlined : Icons.visibility_outlined;
+    emit(IsPasswordShowState());
+  }
 
   void navBarChange(int index) {
     currentIndex = index;
@@ -289,9 +298,7 @@ class AppCubit extends Cubit<AppStates> {
   void updateUserData({
     required String name,
     required String email,
-    required String password,
     required String phone,
-    required String image,
   }) {
     emit(UpdateLoadingState());
     dio.putDataToApi(
@@ -300,9 +307,8 @@ class AppCubit extends Cubit<AppStates> {
         "name": name,
         "phone": phone,
         "email": email,
-        "password": phone,
-        "image": image,
       },
+      token: token,
     ).then((value) {
       updateUserModel = UpdateUserModel.fromJson(value.data);
       if (kDebugMode) {
