@@ -1,4 +1,5 @@
 import 'package:shop_app/models/user/logout/logout.dart';
+import 'package:shop_app/models/user/update/update_user_model.dart';
 
 import '../../models/favorites/change_fav_model/change_fav_model.dart';
 
@@ -47,3 +48,13 @@ class LogoutSuccessState extends AppStates {
 }
 
 class LogoutFailState extends AppStates {}
+
+class UpdateLoadingState extends AppStates {}
+
+class UpdateSuccessState extends AppStates {
+  final UpdateUserModel updateUserModel;
+
+  UpdateSuccessState(this.updateUserModel);
+}
+
+class UpdateFailState extends AppStates {}
