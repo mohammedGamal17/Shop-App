@@ -1,14 +1,14 @@
 import '../register/data.dart';
 
-class Register {
+class RegisterModel {
   Data? data;
   String message;
   bool status;
 
-  Register({required this.data, required this.message, required this.status});
+  RegisterModel({required this.data, required this.message, required this.status});
 
-  factory Register.fromJson(Map<String, dynamic> json) {
-    return Register(
+  factory RegisterModel.fromJson(Map<String, dynamic> json) {
+    return RegisterModel(
       data: json['data'] != null ? Data.fromJson(json['data']) : null,
       message: json['message'],
       status: json['status'],
