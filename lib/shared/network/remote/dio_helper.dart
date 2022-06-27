@@ -17,7 +17,7 @@ class DioHelper {
     );
   }
 
-  Future getDateFromApi({
+  Future getDataFromApi({
     required String url,
     Map<String, dynamic>? query,
     String lang = 'en',
@@ -41,7 +41,7 @@ class DioHelper {
     }
   }
 
-  Future postDateFromApi({
+  Future postDataToApi({
     required String url,
     required Map<String, dynamic> data,
     Map<String, dynamic>? query,
@@ -62,6 +62,32 @@ class DioHelper {
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());
+      }
+    }
+  }
+
+  Future putDataToApi({
+    required String url,
+    required Map<String, dynamic> data,
+    Map<String, dynamic>? query,
+    String lang = 'ar',
+    String? token,
+  }) async {
+    try {
+      dio.options.headers = {
+        'lang': lang,
+        'Content-Type': 'application/json',
+        'Authorization': token ?? '',
+      };
+      return await dio.put(
+        url,
+        queryParameters: query,
+        data: data,
+      );
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+        return [];
       }
     }
   }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shop_app/models/categories_model/categories.dart';
+import 'package:shop_app/models/user/update/update_user_model.dart';
 
 import 'package:shop_app/shared/cubit/states.dart';
 import 'package:shop_app/shared/network/endpoint/end_point.dart';
@@ -31,6 +32,8 @@ class AppCubit extends Cubit<AppStates> {
   late ChangeFavModel changeFavModel;
   GetFavModel? getFavModel;
   GetProfile? getProfile;
+  Logout? logoutModel;
+  UpdateUserModel? updateUserModel;
 
   DioHelper dio = DioHelper();
   int currentIndex = 0;
@@ -98,7 +101,7 @@ class AppCubit extends Cubit<AppStates> {
   void getHomeData() {
     emit(HomeLoadingState());
     dio
-        .getDateFromApi(
+        .getDataFromApi(
       url: home,
       token: token,
     )
@@ -133,7 +136,7 @@ class AppCubit extends Cubit<AppStates> {
 
   void getCategoriesData() {
     dio
-        .getDateFromApi(
+        .getDataFromApi(
       url: getCategories,
       token: token,
     )
@@ -167,7 +170,7 @@ class AppCubit extends Cubit<AppStates> {
     }
     emit(IconFavoriteChangeState());
     await dio
-        .postDateFromApi(
+        .postDataToApi(
       url: favorites,
       data: {'product_id': productId},
       token: token,
@@ -197,7 +200,7 @@ class AppCubit extends Cubit<AppStates> {
   void getFavData() {
     emit(GetFavLoadingState());
     dio
-        .getDateFromApi(
+        .getDataFromApi(
       url: favorites,
       token: token,
     )
@@ -223,10 +226,10 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  void getProfileDate() {
+  void getProfileData() {
     emit(GetProfileLoadingState());
     dio
-        .getDateFromApi(
+        .getDataFromApi(
       url: profile,
       token: token,
     )
@@ -253,11 +256,9 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  Logout? logoutModel;
-
   logoutFromApi(String token) async {
     await dio
-        .postDateFromApi(
+        .postDataToApi(
       url: logout,
       data: {'fcm_token': token},
       token: token,
@@ -281,6 +282,45 @@ class AppCubit extends Cubit<AppStates> {
         print('Error From GetFavData ${onError.toString()}');
         print(
             '********************************** Error from FavGetFavData API **********************************');
+      }
+    });
+  }
+
+  void updateUserData({
+    required String name,
+    required String email,
+    required String password,
+    required String phone,
+    required String image,
+  }) {
+    emit(UpdateLoadingState());
+    dio.putDataToApi(
+      url: updateProfile,
+      data: {
+        "name": name,
+        "phone": phone,
+        "email": email,
+        "password": phone,
+        "image": image,
+      },
+    ).then((value) {
+      updateUserModel = UpdateUserModel.fromJson(value.data);
+      if (kDebugMode) {
+        print(
+            '**************************** Update Acc Data Successfully To Api ****************************');
+        print(updateUserModel?.data?.name);
+        print(
+            '**************************** Update Acc Data Successfully To Api ****************************');
+      }
+      emit(UpdateSuccessState(updateUserModel!));
+    }).catchError((onError) {
+      emit(UpdateFailState());
+      if (kDebugMode) {
+        print(
+            '********************************** Error from Update Acc Data To API **********************************');
+        print('Error From Update Acc Data ${onError.toString()}');
+        print(
+            '********************************** Error from Update Acc Data To API **********************************');
       }
     });
   }

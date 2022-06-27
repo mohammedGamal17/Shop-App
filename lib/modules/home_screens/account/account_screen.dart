@@ -124,7 +124,7 @@ class AccountScreen extends StatelessWidget {
                   decorationButton(
                     context,
                     text: 'up data your profile'.capitalize!,
-                    pageRoute: const UpdateAccountScreen(),
+                    pageRoute:  UpdateAccountScreen(),
                   ),
                 ],
               ),
