@@ -1,14 +1,14 @@
 class DataX {
   late String description;
-  late int discount;
+  late dynamic discount;
   late int id;
   late String image;
   List<String>? images;
   late bool inCart;
   late bool inFavorites;
   late String name;
-  late int oldPrice;
-  late int price;
+  late dynamic oldPrice;
+   dynamic price;
 
   DataX(
       {required this.description,
