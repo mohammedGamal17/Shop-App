@@ -249,6 +249,7 @@ class AppCubit extends Cubit<AppStates> {
         print(
             '**************************** Profile Data Successfully come from Api ****************************');
         print(getProfile?.data?.name);
+        print(getProfile?.data?.token);
         print(
             '**************************** Profile Data Successfully come from Api ****************************');
       }
@@ -315,6 +316,7 @@ class AppCubit extends Cubit<AppStates> {
         print(
             '**************************** Update Acc Data Successfully To Api ****************************');
         print(updateUserModel?.data?.name);
+        print(updateUserModel?.data?.token);
         print(
             '**************************** Update Acc Data Successfully To Api ****************************');
       }
