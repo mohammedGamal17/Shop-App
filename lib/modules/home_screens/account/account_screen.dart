@@ -23,6 +23,7 @@ class AccountScreen extends StatelessWidget {
           AppCubit cubit = AppCubit.get(context);
 
           return Scaffold(
+            appBar: AppBar(),
               body: cubit.getProfile != null
                   ? bodyBuilder(cubit.getProfile!, context)
                   : circularProgressIndicator());
