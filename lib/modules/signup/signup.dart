@@ -4,12 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shop_app/main.dart';
 import 'package:shop_app/modules/Login/login.dart';
-import 'package:shop_app/modules/signup/signup_cubit/signup_cubit.dart';
-import 'package:shop_app/modules/signup/signup_cubit/signup_state.dart';
+import 'package:shop_app/shared/cubit/auth_cubit/signup_cubit.dart';
 
 import '../../layout/home_layout.dart';
 import '../../shared/components/components.dart';
 import '../../shared/components/constants.dart';
+import '../../shared/cubit/auth_cubit/auth_cubit.dart';
+import '../../shared/cubit/auth_cubit/auth_state.dart';
 import '../../shared/styles/colors.dart';
 
 class SignUp extends StatelessWidget {
@@ -28,7 +29,7 @@ class SignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SignUpCubit(),
-      child: BlocConsumer<SignUpCubit, SignUpStates>(
+      child: BlocConsumer<AuthCubit, AuthStates>(
         listener: (context, state) {
           if (state is SignUpSuccessState) {
             if (state.registerModel.status) {
