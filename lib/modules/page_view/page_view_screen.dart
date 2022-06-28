@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shop_app/main.dart';
 import 'package:shop_app/modules/first_screen/first_screen.dart';
@@ -24,18 +25,18 @@ class _PageViewScreenState extends State<PageViewScreen> {
   final List<BoardingModel> boarding = [
     BoardingModel(
       imgUrl: 'assets/Images/pageview.png',
-      title: 'Page1',
-      body: 'body1',
+      title: 'Sales Market'.capitalize!,
+      body: 'Your Online Shop'.capitalize!,
     ),
     BoardingModel(
-      imgUrl: 'assets/Images/pageview.png',
-      title: 'Page2',
-      body: 'body2',
+      imgUrl: 'assets/Images/pageview2.png',
+      title: 'Keep your retention safe'.capitalize!,
+      body: 'You can do your money translation safety'.capitalize!,
     ),
     BoardingModel(
-      imgUrl: 'assets/Images/pageview.png',
-      title: 'Page3',
-      body: 'body3',
+      imgUrl: 'assets/Images/pageview3.png',
+      title: 'best offer'.capitalize!,
+      body: 'You can find the best offer on your favourite goods'.capitalize!,
     ),
   ];
 
