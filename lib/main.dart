@@ -24,6 +24,7 @@ void main() {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
       sharedPreferences = await SharedPreferences.getInstance();
+
       await GetStorage.init();
       if (onBoarding != null) {
         if (token != null || fakeId != null) {
