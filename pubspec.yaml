@@ -69,6 +69,7 @@ flutter:
   assets:
     - assets/Images/logo.png
     - assets/Images/logo2.png
+    - assets/Images/logo3.png
     - assets/Images/pageview.png
     - assets/Images/pageview2.png
     - assets/Images/pageview3.png
