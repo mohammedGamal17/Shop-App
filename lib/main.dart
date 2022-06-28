@@ -7,9 +7,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop_app/layout/home_layout.dart';
 import 'package:shop_app/modules/first_screen/first_screen.dart';
 import 'package:shop_app/shared/components/constants.dart';
+import 'package:shop_app/shared/cubit/app_cubit/states.dart';
 import 'package:shop_app/shared/cubit/bloc_observer.dart';
-import 'package:shop_app/shared/cubit/cubit.dart';
-import 'package:shop_app/shared/cubit/states.dart';
+import 'package:shop_app/shared/cubit/app_cubit/cubit.dart';
+
 import 'package:shop_app/shared/styles/theme_service.dart';
 
 import 'modules/page_view/page_view_screen.dart';
