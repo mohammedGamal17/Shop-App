@@ -6,8 +6,8 @@ import 'package:shop_app/models/favorites/get_fav_model/data_x.dart';
 import 'package:shop_app/modules/Login/login.dart';
 
 import '../../../shared/components/components.dart';
-import '../../../shared/cubit/cubit.dart';
-import '../../../shared/cubit/states.dart';
+import '../../../shared/cubit/app_cubit/cubit.dart';
+import '../../../shared/cubit/app_cubit/states.dart';
 import '../../../shared/styles/colors.dart';
 
 class FavouriteScreen extends StatelessWidget {
