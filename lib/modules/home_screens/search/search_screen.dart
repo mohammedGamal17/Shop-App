@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shop_app/shared/components/components.dart';
-import 'package:shop_app/shared/cubit/cubit.dart';
+import 'package:shop_app/shared/cubit/app_cubit/cubit.dart';
 
 import '../../../models/search/dataX.dart';
-import '../../../shared/cubit/states.dart';
+import '../../../shared/cubit/app_cubit/states.dart';
 import '../../../shared/styles/colors.dart';
 
 class SearchScreen extends StatelessWidget {
