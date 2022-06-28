@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shop_app/main.dart';
 import 'package:shop_app/modules/Login/login.dart';
-import 'package:shop_app/shared/cubit/auth_cubit/signup_cubit.dart';
 
 import '../../layout/home_layout.dart';
 import '../../shared/components/components.dart';
@@ -28,7 +27,7 @@ class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SignUpCubit(),
+      create: (context) =>AuthCubit(),
       child: BlocConsumer<AuthCubit, AuthStates>(
         listener: (context, state) {
           if (state is SignUpSuccessState) {
@@ -54,7 +53,7 @@ class SignUp extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          SignUpCubit cubit = SignUpCubit.get(context);
+          AuthCubit cubit = AuthCubit.get(context);
           return Scaffold(
             appBar: AppBar(),
             body: Center(
