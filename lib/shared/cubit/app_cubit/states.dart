@@ -1,7 +1,8 @@
 import 'package:shop_app/models/user/logout/logout.dart';
 import 'package:shop_app/models/user/update/update_user_model.dart';
 
-import '../../models/favorites/change_fav_model/change_fav_model.dart';
+import '../../../models/favorites/change_fav_model/change_fav_model.dart';
+
 
 abstract class AppStates {}
 

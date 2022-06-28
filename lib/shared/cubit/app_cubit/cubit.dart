@@ -4,23 +4,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shop_app/models/categories_model/categories.dart';
 import 'package:shop_app/models/user/update/update_user_model.dart';
+import 'package:shop_app/shared/cubit/app_cubit/states.dart';
 
-import 'package:shop_app/shared/cubit/states.dart';
 import 'package:shop_app/shared/network/endpoint/end_point.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 
-import '../../models/favorites/change_fav_model/change_fav_model.dart';
-import '../../models/favorites/get_fav_model/get_fav_model.dart';
-import '../../models/home_model/home_model.dart';
-import '../../models/search/search.dart';
-import '../../models/user/logout/logout.dart';
-import '../../models/user/profile/get_profile/get_profile.dart';
-import '../../modules/home_screens/account/account_screen.dart';
-import '../../modules/home_screens/category/category_screen.dart';
-import '../../modules/home_screens/favourite/favourite_screen.dart';
-import '../../modules/home_screens/help/help_screen.dart';
-import '../../modules/home_screens/home/home_screen.dart';
-import '../components/constants.dart';
+import '../../../models/favorites/change_fav_model/change_fav_model.dart';
+import '../../../models/favorites/get_fav_model/get_fav_model.dart';
+import '../../../models/home_model/home_model.dart';
+import '../../../models/search/search.dart';
+import '../../../models/user/logout/logout.dart';
+import '../../../models/user/profile/get_profile/get_profile.dart';
+import '../../../modules/home_screens/account/account_screen.dart';
+import '../../../modules/home_screens/category/category_screen.dart';
+import '../../../modules/home_screens/favourite/favourite_screen.dart';
+import '../../../modules/home_screens/help/help_screen.dart';
+import '../../../modules/home_screens/home/home_screen.dart';
+import '../../components/constants.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInit());
