@@ -9,9 +9,9 @@ import 'package:shop_app/modules/signup/signup.dart';
 import 'package:shop_app/shared/components/components.dart';
 import 'package:shop_app/shared/components/constants.dart';
 
+import '../../shared/cubit/auth_cubit/auth_state.dart';
 import '../../shared/styles/colors.dart';
-import 'login_cubit/login_cubit.dart';
-import 'login_cubit/login_state.dart';
+import '../../shared/cubit/auth_cubit/auth_cubit.dart';
 
 class Login extends StatelessWidget {
   Login({Key? key}) : super(key: key);
@@ -22,8 +22,8 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoginCubit(),
-      child: BlocConsumer<LoginCubit, LoginStates>(
+      create: (context) => AuthCubit(),
+      child: BlocConsumer<AuthCubit, AuthStates>(
         listener: (context, state) {
           if (state is LoginSuccessState) {
             if (state.shopLoginModel.status!) {
@@ -48,7 +48,7 @@ class Login extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          var cubit = LoginCubit.get(context);
+          var cubit = AuthCubit.get(context);
           return Scaffold(
             appBar: AppBar(),
             body: Center(
