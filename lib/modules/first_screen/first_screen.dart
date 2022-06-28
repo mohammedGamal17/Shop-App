@@ -27,7 +27,7 @@ class FirstScreen extends StatelessWidget {
             const SizedBox(height: 30.0),
             const Expanded(
               child: Image(
-                image: AssetImage('assets/Images/logo2.png'),
+                image: AssetImage('assets/Images/logo3.png'),
               ),
             ),
             const SizedBox(height: 10.0),
