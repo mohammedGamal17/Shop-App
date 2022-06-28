@@ -5,10 +5,10 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:shop_app/models/categories_model/categories.dart';
 import 'package:shop_app/models/home_model/home_model.dart';
 import 'package:shop_app/models/home_model/product.dart';
-import 'package:shop_app/shared/cubit/cubit.dart';
+import 'package:shop_app/shared/cubit/app_cubit/cubit.dart';
 
 import '../../../shared/components/components.dart';
-import '../../../shared/cubit/states.dart';
+import '../../../shared/cubit/app_cubit/states.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import '../../../shared/styles/colors.dart';
