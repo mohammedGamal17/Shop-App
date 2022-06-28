@@ -6,8 +6,8 @@ import 'package:shop_app/models/user/profile/get_profile/get_profile.dart';
 import 'package:shop_app/modules/home_screens/account/update/update_account.dart';
 
 import '../../../shared/components/components.dart';
-import '../../../shared/cubit/cubit.dart';
-import '../../../shared/cubit/states.dart';
+import '../../../shared/cubit/app_cubit/cubit.dart';
+import '../../../shared/cubit/app_cubit/states.dart';
 import '../../Login/login.dart';
 
 class AccountScreen extends StatelessWidget {
