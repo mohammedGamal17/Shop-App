@@ -5,8 +5,8 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:shop_app/shared/components/components.dart';
 
 import '../../../models/categories_model/categories.dart';
-import '../../../shared/cubit/cubit.dart';
-import '../../../shared/cubit/states.dart';
+import '../../../shared/cubit/app_cubit/cubit.dart';
+import '../../../shared/cubit/app_cubit/states.dart';
 import '../../../shared/styles/colors.dart';
 
 class CategoryScreen extends StatelessWidget {
