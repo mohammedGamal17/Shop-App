@@ -12,6 +12,7 @@ import 'package:shop_app/shared/network/remote/dio_helper.dart';
 import '../../models/favorites/change_fav_model/change_fav_model.dart';
 import '../../models/favorites/get_fav_model/get_fav_model.dart';
 import '../../models/home_model/home_model.dart';
+import '../../models/search/search.dart';
 import '../../models/user/logout/logout.dart';
 import '../../models/user/profile/get_profile/get_profile.dart';
 import '../../modules/home_screens/account/account_screen.dart';
@@ -34,6 +35,7 @@ class AppCubit extends Cubit<AppStates> {
   GetProfile? getProfile;
   Logout? logoutModel;
   UpdateUserModel? updateUserModel;
+  SearchModel? searchModel;
 
   DioHelper dio = DioHelper();
   int currentIndex = 0;
@@ -336,5 +338,33 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-
+  void searchProduct(String product) {
+    emit(SearchLoadingState());
+    dio.postDataToApi(
+      url: productsSearch,
+      token: token,
+      data: {
+        "text": product,
+      },
+    ).then((value) {
+      searchModel = SearchModel.fromJson(value.data);
+      if (kDebugMode) {
+        print(
+            '**************************** Search Acc Data Successfully To Api ****************************');
+        print(searchModel?.status);
+        print(
+            '**************************** Search Acc Data Successfully To Api ****************************');
+      }
+      emit(SearchSuccessState());
+    }).catchError((onError) {
+      emit(SearchFailState());
+      if (kDebugMode) {
+        print(
+            '********************************** Error from Search API **********************************');
+        print('Error From Search ${onError.toString()}');
+        print(
+            '********************************** Error from Search API **********************************');
+      }
+    });
+  }
 }
