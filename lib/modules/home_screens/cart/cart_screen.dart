@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shop_app/shared/cubit/cubit.dart';
+import 'package:shop_app/shared/cubit/app_cubit/cubit.dart';
 
-import '../../../shared/cubit/states.dart';
+import '../../../shared/cubit/app_cubit/states.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({Key? key}) : super(key: key);
