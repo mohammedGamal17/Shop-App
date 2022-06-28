@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:shop_app/modules/home_screens/cart/cart_screen.dart';
 import 'package:shop_app/shared/components/components.dart';
-import 'package:shop_app/shared/cubit/cubit.dart';
+import 'package:shop_app/shared/cubit/app_cubit/cubit.dart';
 
 import '../modules/home_screens/search/search_screen.dart';
-import '../shared/cubit/states.dart';
+import '../../../shared/cubit/app_cubit/states.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -22,47 +22,6 @@ class Home extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               actions: [
-                /*AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  width: cubit.isSearchExpanded
-                      ? 200
-                      : 70,
-                  height: 70,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20.0),
-                    boxShadow: kElevationToShadow[7],
-                  ),
-                  child: Row(
-                    children: [
-                      Material(
-                        type: MaterialType.transparency,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconButton(
-                            onPressed: () {
-                              cubit.changeSearchState();
-                            },
-                            icon: Icon(cubit.searchIcon),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          child: cubit.isSearchExpanded? TextField(
-                            style: Theme.of(context).textTheme.bodyText1,
-                            onSubmitted: (value){},
-                            onTap: (){navigateTo(context, const SearchScreen());},
-                            decoration: const InputDecoration(
-                              hintText: 'Search',
-                              border: InputBorder.none,
-                              fillColor: Colors.white,
-                            ),
-                          ):null,
-                        ),
-                      )
-                    ],
-                  ),
-                ),*/
                 IconButton(
                     onPressed: () {
                       navigateTo(
