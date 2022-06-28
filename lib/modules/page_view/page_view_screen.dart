@@ -176,7 +176,7 @@ class _PageViewScreenState extends State<PageViewScreen> {
                   ),
                   Text(
                     boarding.body,
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.caption,
                   ),
                 ],
               ),
