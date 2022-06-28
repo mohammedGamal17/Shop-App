@@ -20,7 +20,7 @@ class FirstScreen extends StatelessWidget {
           children: [
             Center(
               child: Text(
-                'Welcome To Shop',
+                'Welcome To Sales Market',
                 style: Theme.of(context).textTheme.headline5,
               ),
             ),
