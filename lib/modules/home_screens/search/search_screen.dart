@@ -5,9 +5,8 @@ import 'package:shop_app/shared/components/components.dart';
 import 'package:shop_app/shared/cubit/cubit.dart';
 
 import '../../../models/search/dataX.dart';
+import '../../../shared/cubit/states.dart';
 import '../../../shared/styles/colors.dart';
-import 'cubit/search_cubit.dart';
-import 'cubit/search_states.dart';
 
 class SearchScreen extends StatelessWidget {
   SearchScreen({Key? key}) : super(key: key);
@@ -17,11 +16,11 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SearchCubit(),
-      child: BlocConsumer<SearchCubit, SearchStates>(
+      create: (context) => AppCubit(),
+      child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          SearchCubit cubit = SearchCubit.get(context);
+          AppCubit cubit = AppCubit.get(context);
           return Scaffold(
             appBar: AppBar(),
             body: Padding(
