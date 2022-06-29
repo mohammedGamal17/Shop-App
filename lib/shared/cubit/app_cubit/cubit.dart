@@ -51,7 +51,7 @@ class AppCubit extends Cubit<AppStates> {
     const CategoryScreen(),
     const FavouriteScreen(),
     const AccountScreen(),
-    const HelpScreen(),
+    HelpScreen(),
   ];
   List<String> title = [
     'Home',
@@ -105,7 +105,7 @@ class AppCubit extends Cubit<AppStates> {
       const AccountScreen();
     }
     if (index == 4) {
-      const HelpScreen();
+       HelpScreen();
     }
     emit(BtmNavBarChangeItemState());
   }
