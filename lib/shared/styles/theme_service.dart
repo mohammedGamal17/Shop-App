@@ -59,6 +59,10 @@ class ThemeService {
         fontFamily: 'Changa',
       ),
     ),
+    iconTheme: IconThemeData(
+      color: Colors.white,
+    ),
+
   );
   final ThemeData dark = ThemeData(
     scaffoldBackgroundColor: darkBackground,
@@ -80,7 +84,7 @@ class ThemeService {
       ),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: HexColor('212529'),
+      backgroundColor: darkBackground,
       selectedIconTheme: IconThemeData(color: HexColor('f8f9fa'), size: 20.0),
       showUnselectedLabels: false,
       unselectedIconTheme: IconThemeData(
@@ -89,6 +93,7 @@ class ThemeService {
       ),
       selectedItemColor: HexColor('f8f9fa'),
       selectedLabelStyle: const TextStyle(fontSize: 11.0),
+      elevation: 0.0
     ),
     progressIndicatorTheme: ProgressIndicatorThemeData(
       circularTrackColor: HexColor('dee2e6'),
@@ -115,6 +120,9 @@ class ThemeService {
         backgroundColor: HexColor('0077B6'),
         fontFamily: 'Changa',
       ),
+    ),
+    iconTheme: IconThemeData(
+      color: Colors.white,
     ),
   );
 
