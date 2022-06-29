@@ -9,11 +9,12 @@ import '../../../main.dart';
 import '../../../shared/components/components.dart';
 import '../../../shared/components/constants.dart';
 import '../../../shared/cubit/app_cubit/states.dart';
+import '../../../shared/styles/theme_service.dart';
 import '../../first_screen/first_screen.dart';
 
 class HelpScreen extends StatelessWidget {
-  const HelpScreen({Key? key}) : super(key: key);
-
+   HelpScreen({Key? key}) : super(key: key);
+ final ThemeService _themeService = ThemeService();
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -88,7 +89,8 @@ class HelpScreen extends StatelessWidget {
                               style: Theme.of(context).textTheme.bodyText1,
                             )
                           ],
-                        )
+                        ),
+                  IconButton(onPressed: (){_themeService.changeTheme();}, icon: Icon(Icons.dark_mode_outlined),),
                 ],
               ),
             ),
