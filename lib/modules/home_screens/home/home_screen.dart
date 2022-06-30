@@ -21,12 +21,19 @@ class HomeScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => AppCubit()
         ..getHomeData()
-        ..getCategoriesData(),
+        ..getCategoriesData()..getCart(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {
           if (state is FavSuccessState) {
             if (!state.model.status!) {
               snack(context, content: state.model.message!);
+            }
+          }
+          if (state is AddCartSuccessState) {
+            if(!state.addCartModel.status!){
+              snack(context, content: state.addCartModel.message!);
+            }else{
+              snack(context, content: state.addCartModel.message!);
             }
           }
         },
@@ -113,9 +120,9 @@ class HomeScreen extends StatelessWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               crossAxisCount: 2,
-              crossAxisSpacing: 2.0,
-              mainAxisSpacing: 2.0,
-              childAspectRatio: 1.0 / 1.37,
+              crossAxisSpacing: 1.0,
+              mainAxisSpacing: 1.0,
+              childAspectRatio: 1.0 / 1.38,
               children: List.generate(
                 model.data!.products!.length,
                 (index) =>
@@ -200,7 +207,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(5.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -210,7 +217,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Image(
                     image: NetworkImage('${model.image}'),
-                    height: 125.0,
+                    height: 135.0,
                     width: double.infinity,
                     fit: BoxFit.fill,
                   ),
@@ -237,7 +244,7 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(5.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -290,6 +297,22 @@ class HomeScreen extends StatelessWidget {
                                   color: HexColor('0077B6'),
                                 ),
                         ),
+                        IconButton(
+                          onPressed: () {
+                            AppCubit.get(context).addToCart(model.id);
+                          },
+                          icon: AppCubit.get(context).cartMap[model.id] == true
+                              ? Icon(
+                                  cubit.cartIcon =
+                                      Icons.remove_shopping_cart_outlined,
+                                  color: HexColor('0077B6'),
+                                )
+                              : Icon(
+                                  cubit.cartIcon =
+                                      Icons.add_shopping_cart_outlined,
+                                  color: HexColor('0077B6'),
+                                ),
+                        )
                       ],
                     ),
                   ],
