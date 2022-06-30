@@ -31,6 +31,8 @@ class FavErrorState extends AppStates {}
 
 class IconFavoriteChangeState extends AppStates {}
 
+class IconCartChangeState extends AppStates {}
+
 class GetFavLoadingState extends AppStates {}
 
 class GetFavSuccessState extends AppStates {}
