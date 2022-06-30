@@ -2,6 +2,7 @@ import 'package:shop_app/models/user/logout/logout.dart';
 import 'package:shop_app/models/user/update/update_user_model.dart';
 
 import '../../../models/cart/add_cart/add_cart_model.dart';
+import '../../../models/cart/get_cart/get_cart_model.dart';
 import '../../../models/favorites/change_fav_model/change_fav_model.dart';
 
 abstract class AppStates {}
@@ -78,6 +79,20 @@ class AddCartFailState extends AppStates {
   final AddCartModel addCartModel;
 
   AddCartFailState(this.addCartModel);
+}
+
+class GetCartLoadingState extends AppStates {}
+
+class GetCartSuccessState extends AppStates {
+  final GetCartModel getCartModel;
+
+  GetCartSuccessState(this.getCartModel);
+}
+
+class GetCartFailState extends AppStates {
+  final GetCartModel getCartModel;
+
+  GetCartFailState(this.getCartModel);
 }
 
 class IsPasswordShowState extends AppStates {}
