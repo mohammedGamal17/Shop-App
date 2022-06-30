@@ -2,13 +2,13 @@ import 'package:shop_app/models/cart/add_cart/data.dart';
 
 class AddCartModel {
   Data? data;
-  late String message;
-  late bool status;
+  String? message;
+  bool? status;
 
   AddCartModel({
     this.data,
-    required this.message,
-    required this.status,
+    this.message,
+    this.status,
   });
 
   factory AddCartModel.fromJson(Map<String, dynamic> json) {
