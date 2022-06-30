@@ -1,20 +1,20 @@
 class Product {
-  late String description;
-  late int discount;
-  late int id;
-  late String image;
-  late String name;
-  late int old_price;
-  late int price;
+  int? id;
+  String? image;
+  String? name;
+  String? description;
+  dynamic discount;
+  dynamic old_price;
+  dynamic price;
 
   Product({
-    required this.description,
-    required this.discount,
-    required this.id,
-    required this.image,
-    required this.name,
-    required this.old_price,
-    required this.price,
+    this.description,
+    this.discount,
+    this.id,
+    this.image,
+    this.name,
+    this.old_price,
+    this.price,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
