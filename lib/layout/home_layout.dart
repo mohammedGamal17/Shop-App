@@ -23,24 +23,28 @@ class Home extends StatelessWidget {
             appBar: AppBar(
               actions: [
                 IconButton(
-                    onPressed: () {
-                      navigateTo(
-                        context,
-                         SearchScreen(),
-                      );
-                    },
-                    icon: const Icon(Icons.search_outlined)),
+                  onPressed: () {
+                    navigateTo(
+                      context,
+                      SearchScreen(),
+                    );
+                  },
+                  icon: const Icon(Icons.search_outlined),
+                ),
                 IconButton(
-                    onPressed: () {
-                      navigateTo(
-                        context,
-                        const CartScreen(),
-                      );
-                    },
-                    icon: const Icon(Icons.add_shopping_cart_outlined)),
+                  onPressed: () {
+                    navigateTo(
+                      context,
+                      const CartScreen(),
+                    );
+                  },
+                  icon: const Icon(Icons.add_shopping_cart_outlined),
+                ),
               ],
-              title: Text(cubit.title[cubit.currentIndex],
-                  style: Theme.of(context).textTheme.headline5),
+              title: Text(
+                cubit.title[cubit.currentIndex],
+                style: Theme.of(context).textTheme.headline5,
+              ),
             ),
             body: cubit.screen[cubit.currentIndex],
             bottomNavigationBar: BottomNavigationBar(
