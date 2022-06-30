@@ -9,6 +9,8 @@ import 'package:shop_app/shared/cubit/app_cubit/states.dart';
 import 'package:shop_app/shared/network/endpoint/end_point.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 
+import '../../../models/cart/add_cart/add_cart_model.dart';
+import '../../../models/cart/get_cart/get_cart_model.dart';
 import '../../../models/favorites/change_fav_model/change_fav_model.dart';
 import '../../../models/favorites/get_fav_model/get_fav_model.dart';
 import '../../../models/home_model/home_model.dart';
@@ -36,15 +38,19 @@ class AppCubit extends Cubit<AppStates> {
   Logout? logoutModel;
   UpdateUserModel? updateUserModel;
   SearchModel? searchModel;
+  late AddCartModel addCartModel;
+  GetCartModel? getCartModel;
 
   DioHelper dio = DioHelper();
   int currentIndex = 0;
   bool isFav = false;
   IconData icon = Icons.favorite_border_outlined;
+  IconData cartIcon = Icons.remove_shopping_cart_outlined;
   bool isPassword = true;
   IconData suffix = Icons.visibility_outlined;
   Map<int, bool> favMap = {};
-  List <dynamic> search=[];
+  Map<dynamic, dynamic> cartMap = {};
+  List<dynamic> search = [];
 
   List<Widget> screen = [
     const HomeScreen(),
@@ -105,7 +111,7 @@ class AppCubit extends Cubit<AppStates> {
       const AccountScreen();
     }
     if (index == 4) {
-       HelpScreen();
+      HelpScreen();
     }
     emit(BtmNavBarChangeItemState());
   }
@@ -125,11 +131,17 @@ class AppCubit extends Cubit<AppStates> {
           element.id: element.inFavorites,
         });
       }
+      for (var element in getCartModel!.data!.cart_items!) {
+        cartMap.addAll({
+          element.product?.id: element.product?.inCart,
+        });
+      }
       if (kDebugMode) {
         print(
             '**************************** Home Data Successfully come from Api ****************************');
         print(homeModel?.status);
         print(favMap.toString());
+        print(getProfile?.data?.token);
 
         print(
             '**************************** Home Data Successfully come from Api ****************************');
@@ -159,6 +171,7 @@ class AppCubit extends Cubit<AppStates> {
         print(
             '**************************** Categories Data Successfully come from Api ****************************');
         print(categoriesModel?.status);
+        print(getProfile?.data?.token);
         print(
             '**************************** Categories Data Successfully come from Api ****************************');
       }
@@ -189,12 +202,18 @@ class AppCubit extends Cubit<AppStates> {
     )
         .then((value) {
       changeFavModel = ChangeFavModel.fromJson(value.data);
-      if (!changeFavModel.status!) {
-        favMap[productId] = !favMap[productId]!;
-      } else {
-        getFavData();
+      if (kDebugMode) {
+        print(
+            '**************************** Fav Data Successfully come from Api ****************************');
+        if (!changeFavModel.status!) {
+          favMap[productId] = !favMap[productId]!;
+        } else {
+          getFavData();
+        }
+        print(getProfile?.data?.token);
+        print(
+            '**************************** Fav Data Successfully come from Api ****************************');
       }
-
       emit(FavSuccessState(changeFavModel));
     }).catchError((onError) {
       favMap[productId] = !favMap[productId]!;
@@ -211,6 +230,7 @@ class AppCubit extends Cubit<AppStates> {
 
   void getFavData() {
     emit(GetFavLoadingState());
+    getCart();
     dio
         .getDataFromApi(
       url: favorites,
@@ -223,6 +243,7 @@ class AppCubit extends Cubit<AppStates> {
         print(
             '**************************** Fav Data Successfully come from Api ****************************');
         print(getFavModel?.status);
+        print(getProfile?.data?.token);
         print(
             '**************************** Fav Data Successfully come from Api ****************************');
       }
@@ -282,6 +303,7 @@ class AppCubit extends Cubit<AppStates> {
         print(
             '**************************** Logout Successfully come from Api ****************************');
         print(logoutModel?.message);
+        print(getProfile?.data?.token);
         print(
             '**************************** Logout Successfully come from Api ****************************');
       }
@@ -352,6 +374,7 @@ class AppCubit extends Cubit<AppStates> {
         print(
             '**************************** Search Acc Data Successfully To Api ****************************');
         print(searchModel?.status);
+        print(getProfile?.data?.token);
         print(
             '**************************** Search Acc Data Successfully To Api ****************************');
       }
@@ -364,6 +387,75 @@ class AppCubit extends Cubit<AppStates> {
         print('Error From Search ${onError.toString()}');
         print(
             '********************************** Error from Search API **********************************');
+      }
+    });
+  }
+
+  void addToCart(int productId) async {
+    if (cartMap[productId] == true) {
+      cartMap[productId] = false;
+    } else {
+      cartMap[productId] = true;
+    }
+    emit(IconCartChangeState());
+    await dio
+        .postDataToApi(
+      url: carts,
+      data: {'product_id': productId},
+      token: token,
+    )
+        .then((value) {
+      addCartModel = AddCartModel.fromJson(value.data);
+      if (!addCartModel.status!) {
+        cartMap[productId] = !cartMap[productId]!;
+      } else {
+        getCart();
+      }
+      print(
+          '********************************** Add to Cart API Success **********************************');
+      print(addCartModel.message.toString());
+      print(getProfile?.data?.token);
+      print(
+          '********************************** Add to Cart API Success **********************************');
+      emit(AddCartSuccessState(addCartModel));
+    }).catchError((onError) {
+      cartMap[productId] = !cartMap[productId]!;
+      if (kDebugMode) {
+        emit(AddCartFailState(addCartModel));
+        print(
+            '********************************** Error from add to cart API **********************************');
+        print('Error From add to cart Api:  ${onError.toString()}');
+        print(
+            '********************************** Error from add to cart API **********************************');
+      }
+    });
+  }
+
+  void getCart() {
+    emit(GetCartLoadingState());
+    dio
+        .getDataFromApi(
+      url: carts,
+      token: token,
+    )
+        .then((value) {
+      getCartModel = GetCartModel.fromJson(value.data);
+
+      print(
+          '********************************** Get Cart API Success **********************************');
+      print(getCartModel!.data!.cart_items?.length);
+      print(cartMap.length);
+      print(
+          '********************************** Get Cart API Success **********************************');
+      emit(GetCartSuccessState(getCartModel!));
+    }).catchError((onError) {
+      if (kDebugMode) {
+        emit(GetCartFailState(getCartModel!));
+        print(
+            '********************************** Error from Get Cart API **********************************');
+        print('Error From Get cart Api:  ${onError.toString()}');
+        print(
+            '********************************** Error from Get Cart API **********************************');
       }
     });
   }
