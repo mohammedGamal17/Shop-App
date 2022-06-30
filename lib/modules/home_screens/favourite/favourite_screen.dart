@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shop_app/models/favorites/get_fav_model/data_x.dart';
-import 'package:shop_app/modules/Login/login.dart';
 
 import '../../../shared/components/components.dart';
 import '../../../shared/cubit/app_cubit/cubit.dart';
@@ -22,6 +20,13 @@ class FavouriteScreen extends StatelessWidget {
           if (state is FavSuccessState) {
             if (!state.model.status!) {
               snack(context, content: state.model.message!);
+            }
+          }
+          if (state is AddCartSuccessState) {
+            if(state.addCartModel.status){
+              snack(context, content: state.addCartModel.message);
+            }else{
+              snack(context, content: state.addCartModel.message);
             }
           }
         },
@@ -157,6 +162,12 @@ class FavouriteScreen extends StatelessWidget {
                                   color: HexColor('0077B6'),
                                 ),
                         ),
+                        IconButton(
+                          onPressed: () {
+                            AppCubit.get(context).addToCart(model.product!.id);
+                          },
+                          icon: Icon(Icons.add_shopping_cart_outlined,color: HexColor('0077B6'),),
+                        )
                       ],
                     ),
                   ],
@@ -165,32 +176,6 @@ class FavouriteScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget noItemFounded(context) {
-    return Center(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          IconButton(
-              onPressed: () {
-                navigateToAndReplace(context, Login());
-              },
-              icon: Icon(
-                Icons.login,
-                color: Colors.grey[200],
-              )),
-          const SizedBox(
-            height: 10.0,
-          ),
-          Text(
-            'please login ${Login()}'.capitalize!,
-            style: Theme.of(context).textTheme.bodyText1,
-          )
-        ],
       ),
     );
   }
