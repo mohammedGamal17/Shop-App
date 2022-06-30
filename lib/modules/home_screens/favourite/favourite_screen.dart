@@ -14,7 +14,7 @@ class FavouriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AppCubit()..getFavData(),
+      create: (context) => AppCubit()..getFavData()..getCart(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {
           if (state is FavSuccessState) {
@@ -23,17 +23,17 @@ class FavouriteScreen extends StatelessWidget {
             }
           }
           if (state is AddCartSuccessState) {
-            if(state.addCartModel.status){
-              snack(context, content: state.addCartModel.message);
-            }else{
-              snack(context, content: state.addCartModel.message);
+            if (!state.addCartModel.status!) {
+              snack(context, content: state.addCartModel.message!);
+            } else {
+              snack(context, content: state.addCartModel.message!);
             }
           }
         },
         builder: (context, state) {
           AppCubit cubit = AppCubit.get(context);
           return Scaffold(
-            body: state is! GetFavLoadingState
+            body: state is! GetFavLoadingState && state is! GetCartLoadingState
                 ? ListView.separated(
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (context, index) => itemBuilder(
@@ -166,7 +166,19 @@ class FavouriteScreen extends StatelessWidget {
                           onPressed: () {
                             AppCubit.get(context).addToCart(model.product!.id);
                           },
-                          icon: Icon(Icons.add_shopping_cart_outlined,color: HexColor('0077B6'),),
+                          icon: AppCubit.get(context)
+                                      .cartMap[model.product!.id] ==
+                                  true
+                              ? Icon(
+                                  AppCubit.get(context).cartIcon =
+                                      Icons.remove_shopping_cart_outlined,
+                                  color: HexColor('0077B6'),
+                                )
+                              : Icon(
+                                  AppCubit.get(context).cartIcon =
+                                      Icons.add_shopping_cart_outlined,
+                                  color: HexColor('0077B6'),
+                                ),
                         )
                       ],
                     ),
