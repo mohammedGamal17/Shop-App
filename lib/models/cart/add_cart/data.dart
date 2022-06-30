@@ -1,14 +1,14 @@
 import 'package:shop_app/models/cart/add_cart/product.dart';
 
 class Data {
-  late int id;
+  int? id;
   Product? product;
-  late int quantity;
+  int? quantity;
 
   Data({
     required this.id,
     this.product,
-    required this.quantity,
+    this.quantity,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) {
