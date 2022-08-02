@@ -24,7 +24,7 @@ class HelpScreen extends StatelessWidget {
           if (state is LogoutSuccessState) {
             if (state.logoutModel.status!) {
               sharedPreferences.remove('token');
-              token = '';
+              TOKEN = '';
               snack(context, content: '${state.logoutModel.message}');
               navigateToAndReplace(context, const Home());
             } else {
@@ -53,7 +53,7 @@ class HelpScreen extends StatelessWidget {
                                       .then((value) async {
                                     sharedPreferences.remove('token');
                                     AppCubit.get(context)
-                                        .logoutFromApi(token!)
+                                        .logoutFromApi(TOKEN!)
                                         .then((value) {})
                                         .catchError((onError) {});
                                     navigateToAndReplace(
