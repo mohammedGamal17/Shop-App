@@ -26,8 +26,8 @@ void main() {
       sharedPreferences = await SharedPreferences.getInstance();
 
       await GetStorage.init();
-      if (onBoarding != null) {
-        if (token != null || fakeId != null) {
+      if (BOARDING != null) {
+        if (TOKEN != null || FAKEID != null) {
           widget = const Home();
         } else {
           widget = const FirstScreen();
