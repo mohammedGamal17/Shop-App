@@ -1,16 +1,16 @@
 import '../../main.dart';
 
-const baseUrl = 'https://student.valuxapps.com/api/';
+const BASEURL = 'https://student.valuxapps.com/api/';
 
-Map<String, dynamic> headers = {
+Map<String, dynamic> HEADERS = {
   'Content-Type': 'application/json',
 };
 
 //token is in login.dart
-String? token = sharedPreferences.getString('token');
+String? TOKEN = sharedPreferences.getString('token');
 
 //onBoarding is in PageViewScreen.dart
-bool? onBoarding = sharedPreferences.getBool('onBoarding');
+bool? BOARDING = sharedPreferences.getBool('onBoarding');
 
 //fakeId is in FirstScreen.dart
-int? fakeId = sharedPreferences.getInt('fakeId');
+int? FAKEID = sharedPreferences.getInt('fakeId');
