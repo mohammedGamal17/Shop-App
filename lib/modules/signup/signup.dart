@@ -35,7 +35,7 @@ class SignUp extends StatelessWidget {
               sharedPreferences
                   .setString('token', state.registerModel.data!.token)
                   .then((value) {
-                token = state.registerModel.data?.token;
+                TOKEN = state.registerModel.data?.token;
                 navigateToAndReplace(context, const Home());
               }).catchError((onError) {
                 if (kDebugMode) {
