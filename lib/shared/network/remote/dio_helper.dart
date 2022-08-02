@@ -9,7 +9,7 @@ class DioHelper {
   DioHelper() {
     dio = Dio(
       BaseOptions(
-        baseUrl: baseUrl,
+        baseUrl: BASEURL,
         receiveDataWhenStatusError: true,
         connectTimeout: 20 * 1000,
         receiveTimeout: 20 * 1000,
