@@ -121,7 +121,7 @@ class AppCubit extends Cubit<AppStates> {
     dio
         .getDataFromApi(
       url: home,
-      token: token,
+      token: TOKEN,
     )
         .then((value) {
       emit(HomeSuccessState());
@@ -162,7 +162,7 @@ class AppCubit extends Cubit<AppStates> {
     dio
         .getDataFromApi(
       url: getCategories,
-      token: token,
+      token: TOKEN,
     )
         .then((value) {
       emit(CategoriesSuccessState());
@@ -198,7 +198,7 @@ class AppCubit extends Cubit<AppStates> {
         .postDataToApi(
       url: favorites,
       data: {'product_id': productId},
-      token: token,
+      token: TOKEN,
     )
         .then((value) {
       changeFavModel = ChangeFavModel.fromJson(value.data);
@@ -234,7 +234,7 @@ class AppCubit extends Cubit<AppStates> {
     dio
         .getDataFromApi(
       url: favorites,
-      token: token,
+      token: TOKEN,
     )
         .then((value) {
       getFavModel = GetFavModel.fromJson(value.data);
@@ -264,7 +264,7 @@ class AppCubit extends Cubit<AppStates> {
     dio
         .getDataFromApi(
       url: profile,
-      token: token,
+      token: TOKEN,
     )
         .then((value) {
       emit(GetFavSuccessState());
@@ -335,7 +335,7 @@ class AppCubit extends Cubit<AppStates> {
         "phone": phone,
         "email": email,
       },
-      token: token,
+      token: TOKEN,
     )
         .then((value) {
       updateUserModel = UpdateUserModel.fromJson(value.data);
@@ -364,7 +364,7 @@ class AppCubit extends Cubit<AppStates> {
     emit(SearchLoadingState());
     dio.postDataToApi(
       url: productsSearch,
-      token: token,
+      token: TOKEN,
       data: {
         "text": product,
       },
@@ -402,7 +402,7 @@ class AppCubit extends Cubit<AppStates> {
         .postDataToApi(
       url: carts,
       data: {'product_id': productId},
-      token: token,
+      token: TOKEN,
     )
         .then((value) {
       addCartModel = AddCartModel.fromJson(value.data);
@@ -436,7 +436,7 @@ class AppCubit extends Cubit<AppStates> {
     dio
         .getDataFromApi(
       url: carts,
-      token: token,
+      token: TOKEN,
     )
         .then((value) {
       getCartModel = GetCartModel.fromJson(value.data);
