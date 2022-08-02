@@ -33,7 +33,7 @@ class UpdateAccountScreen extends StatelessWidget {
               sharedPreferences
                   .setString('token', state.updateUserModel.data!.token)
                   .then((value) {
-                token = state.updateUserModel.data?.token;
+                TOKEN = state.updateUserModel.data?.token;
                 navigateTo(context, const AccountScreen());
               }).catchError((onError) {
                 if (kDebugMode) {
