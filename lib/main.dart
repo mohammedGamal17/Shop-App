@@ -10,6 +10,7 @@ import 'package:shop_app/shared/components/constants.dart';
 import 'package:shop_app/shared/cubit/app_cubit/states.dart';
 import 'package:shop_app/shared/cubit/bloc_observer.dart';
 import 'package:shop_app/shared/cubit/app_cubit/cubit.dart';
+import 'package:flutter/services.dart';
 
 import 'package:shop_app/shared/styles/theme_service.dart';
 
@@ -23,6 +24,9 @@ void main() {
   BlocOverrides.runZoned(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
+      SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
+      );
       sharedPreferences = await SharedPreferences.getInstance();
 
       await GetStorage.init();
