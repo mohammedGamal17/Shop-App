@@ -18,7 +18,7 @@ class HelpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AppCubit(),
+      create: (context) => AppCubit()..checkConnection(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {
           if (state is LogoutSuccessState) {
